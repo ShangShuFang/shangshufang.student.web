@@ -1,0 +1,84 @@
+{
+  "StoreService": {
+    "host": "localhost",
+    "port": 8081,
+    "path": {
+      "login": "/api/v1/account/teacher/login",
+
+      "universityList": "/api/v1/customer/university/list",
+      "schoolList": "/api/v1/customer/school/list",
+
+      "universityAccount": "/api/v1/account/teacher/add",
+      "approveAccount": "/api/v1/account/teacher/client",
+      "waitApprove": "/api/v1/account/teacher/client/waitApprove",
+      "checkCellphone4Register": "/api/v1/account/teacher/check/cellphone/register",
+      "checkCellphone4ChangePassword": "/api/v1/account/teacher/check/cellphone/change_password",
+      "changeUniversityAccountStatus": "/api/v1/account/teacher/change/status",
+      "changePassword": "/api/v1/account/teacher/change/password",
+
+      "technologyList": "/api/v1/technology/client",
+      "technology": "/api/v1/technology/any",
+      "technologySimple": "/api/v1/technology/simple",
+      "learningTechnology": "/api/v1/technology/learning",
+
+      "developmentDirections": "/api/v1/develop_direction/list/direction",
+
+      "knowledgeList": "/api/v1/knowledge/list",
+      "knowledgeSimpleList": "/api/v1/knowledge/list/simple",
+
+      "learningPhase": "/api/v1/sys_parm/learning_phase/list",
+
+      "usingLearningPhase": "/api/v1/sys_parm/learning_phase/list/has_knowledge",
+
+      "knowledgeExercises": "/api/v1/knowledge/exercises/list/assigned",
+
+      "checkVerificationCode": "/api/v1/verification_code/any",
+      "addVerificationCode": "/api/v1/verification_code/add",
+
+      "courseList": "/api/v1/course/list",
+      "courseDetail": "/api/v1/course/any",
+      "addCourse": "/api/v1/course/add",
+      "courseSimpleList": "/api/v1/course/list/simple",
+      "changeCourseStatus": "/api/v1/course/change/status",
+      "changeCourseBaseInfo": "/api/v1/course/change",
+      "checkCourse": "/api/v1/course/check/course",
+      "changeCourseSchedule": "/api/v1/course/schedule/change",
+      "coursePlanList": "/api/v1/course/plan/list",
+      "changeCoursePlan": "/api/v1/course/plan/change",
+      "finishClass": "/api/v1/course/plan/finish",
+      "signUp4Technology": "/api/v1/course/sign_up/list/student",
+      "signUp4Student": "/api/v1/course/sign_up/list/student",
+      "signUp4Course": "/api/v1/course/sign_up/list/course",
+      "courseQuestionList": "/api/v1/course/question/list",
+      "addCourseQuestionLeaveMessage": "/api/v1/course/answer/add",
+      "classExercises": "/api/v1/course/exercises/list",
+      "assignClassExercises": "/api/v1/course/exercises/assign",
+      "classExercisesReviewList": "/api/v1/course/exercises/review/list",
+      "addClassExercisesReview": "/api/v1/course/exercises/review/add",
+      "changeClassExercisesReview": "/api/v1/course/exercises/review/change",
+      "codeStandard": "/api/v1/code_standard/list",
+
+      "teachersList": "/api/v1/user/teacher/list",
+      "changeTeacher": "/api/v1/user/teacher/change",
+      "checkCustomerEmail": "/api/v1/user/teacher/check/email",
+      "changeAssistant": "/api/v1/user/student/change/assistant",
+
+      "businessAnalyseLog": "/api/v1/burying_point/add",
+
+      "suggestType": "/api/v1/sys_parm/suggest_type/list",
+      "addSuggest": "/api/v1/suggest/add",
+
+      "company": "/api/v1/customer/company/client",
+      "companyUsingTechnology": "/api/v1/customer/company/list/using/technology",
+      "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client",
+
+      "studentAbilityResultList": "/api/v1/analysis/ability/student/list",
+      "studentAbilityResultSummary": "/api/v1/analysis/ability/student/any/student_summary",
+      "studentLearningTechnologyAbilityResultSummary": "/api/v1/analysis/ability/student/list/learning_technology",
+      "studentAbility4knowledge": "/api/v1/analysis/ability/student/any/knowledge_summary",
+      "studentAbility4codeStandard": "/api/v1/analysis/ability/student/any/code_guideline",
+      "exerciseAnalysis": "/api/v1/analysis/ability/student/list/exercise_number",
+      "exercisePercentAnalysis": "/api/v1/analysis/ability/student/list/exercise_percent"
+    }
+  }
+}
