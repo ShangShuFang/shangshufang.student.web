@@ -7,6 +7,8 @@ const login = new Vue({
     errorMessage: '111'
   },
   methods: {
+    //测试注册内容11111
+    //111
     checkData: function () {
       return true;
     },
