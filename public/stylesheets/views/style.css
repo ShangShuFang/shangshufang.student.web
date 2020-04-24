@@ -144,7 +144,7 @@ a.no-hand{
   max-height: 56px;
 }
 .shs-login-left{
-  background-image: url(/images/banner_login.png);
+  background-image: url(/media/banner/banner_login.png);
   background-size:100% 100% !important;
   -moz-background-size:100% 100% !important;
 }
@@ -183,6 +183,11 @@ a.no-hand{
 }
 .position-site {
   color: #e71d62;
+}
+
+.container-head {
+  display: -webkit-inline-box !important;
+  justify-content: left  !important;
 }
 
 .btn-login {

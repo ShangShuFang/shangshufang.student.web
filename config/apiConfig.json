@@ -1,9 +1,9 @@
 {
-  "StoreService": {
+  "shs": {
     "host": "localhost",
     "port": 8081,
     "path": {
-      "login": "/api/v1/account/teacher/login",
+      "login": "api/v1/user/student/login",
 
       "universityList": "/api/v1/customer/university/list",
       "schoolList": "/api/v1/customer/school/list",
