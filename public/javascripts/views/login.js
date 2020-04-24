@@ -7,7 +7,7 @@ const login = new Vue({
     errorMessage: '111'
   },
   methods: {
-    //数据校验
+    //数据校验的内容
     checkData: function () {
       return true;
     },
