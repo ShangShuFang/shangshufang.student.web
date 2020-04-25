@@ -1,5 +1,6 @@
 const localMessage = {};
 localMessage.NETWORK_ERROR = '网络异常，请检查网络设置';
+localMessage.PASSWORD_EMPTY = '请输入登陆密码！';
 localMessage.NO_ACCOUNT = '您输入的用户名或密码不存在！';
 
 localMessage.UPLOAD_SUCCESS = '文件上传成功！';

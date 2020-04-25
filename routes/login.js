@@ -1,6 +1,7 @@
 let express = require('express');
 let axios = require('axios');
 let buildUtils = require('../common/buildUtils');
+let customerMessage = require('../config/customerMessage');
 let router = express.Router();
 
 router.get('/', function (req, res, next) {
@@ -24,9 +25,9 @@ router.post('/', function (req, res, next) {
     })
     .catch(error => {
       res.json({
-        err: false,
-        code: error.response.status,
-        msg: error.response.data.message
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
       });
     });
 });

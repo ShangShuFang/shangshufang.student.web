@@ -9,6 +9,21 @@ const login = new Vue({
   methods: {
     //数据校验的内容
     checkData: function () {
+      if (commonUtility.isEmpty(this.cellphone)) {
+        this.showError = true;
+        this.errorMessage = localMessage.CELLPHONE_EMPTY;
+        return false;
+      }
+      if (!commonUtility.isCellphoneNumber(this.cellphone)) {
+        this.showError = true;
+        this.errorMessage = localMessage.CELLPHONE_INVALID;
+        return false;
+      }
+      if (commonUtility.isEmpty(this.password)) {
+        this.showError = true;
+        this.errorMessage = localMessage.PASSWORD_EMPTY;
+        return false;
+      }
       return true;
     },
     onLogin: function () {
@@ -23,7 +38,7 @@ const login = new Vue({
       .then(function (res) {
         if (res.data.err) {
           _this.showError = true;
-          _this.errorMessage = res.msg;
+          _this.errorMessage = res.data.msg;
           return false;
         }
         if (!res.data.accountValid) {
