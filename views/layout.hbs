@@ -92,61 +92,58 @@
               <div class="kt-header__topbar-item kt-header__topbar-item--user">
                 <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
                   <a href="javascript:">
-                    你好，<span>张强</span>同学
+                    你好，<span v-text="userName"></span>同学
                   </a>
                 </div>
 
-<!--                <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">-->
-<!--                  <div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">-->
-<!--                    <div class="kt-user-card__avatar">-->
-<!--                      <img alt="pic" ng-src="\{{model.loginUser.photo}}" class="img-circle" style="border-radius: 50%"-->
-<!--                           ng-if="model.loginUser.photo !== ''"/>-->
-<!--                      <img alt="pic" src="/media/users/teacher_default.png" class="img-circle"-->
-<!--                           style="border-radius: 50%" ng-if="model.loginUser.photo == ''"/>-->
-<!--                    </div>-->
-<!--                    <div class="kt-user-card__name">-->
-<!--                      <div>-->
-<!--                        <span ng-bind="model.loginUser.customerName"></span>-->
-<!--                      </div>-->
-<!--                      <div style="font-size: 12px">-->
-<!--                        <span ng-bind="model.loginUser.universityName"></span>-->
-<!--                        <span ng-bind="model.loginUser.schoolName"></span>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="kt-notification">-->
-<!--                    <a href="/user" class="kt-notification__item">-->
-<!--                      <div class="kt-notification__item-icon">-->
-<!--                        <i class="flaticon2-calendar-3 kt-font-success"></i>-->
-<!--                      </div>-->
-<!--                      <div class="kt-notification__item-details">-->
-<!--                        <div class="kt-notification__item-title kt-font-bold">-->
-<!--                          我的信息-->
-<!--                        </div>-->
-<!--                        <div class="kt-notification__item-time">-->
-<!--                          修改我的电话、照片等个人信息-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </a>-->
-<!--                    <a href="/changePassword" class="kt-notification__item">-->
-<!--                      <div class="kt-notification__item-icon">-->
-<!--                        <i class="fa fa-key kt-font-warning"></i>-->
-<!--                      </div>-->
-<!--                      <div class="kt-notification__item-details">-->
-<!--                        <div class="kt-notification__item-title kt-font-bold">-->
-<!--                          密码修改-->
-<!--                        </div>-->
-<!--                        <div class="kt-notification__item-time">-->
-<!--                          修改我的登陆密码-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </a>-->
-<!--                    <div class="kt-notification__custom kt-space-between">-->
-<!--                      <a href="javascript:;" class="btn btn-label btn-label-brand btn-sm btn-bold"-->
-<!--                         ng-click="onSignOut()">退出登陆</a>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
+                <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                  <div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">
+                    <div class="kt-user-card__avatar">
+                      <img alt="pic" :src="userPhoto" class="img-circle" style="border-radius: 50%"/>
+                    </div>
+                    <div class="kt-user-card__name">
+                      <div>
+                        <span v-text="userName"></span>
+                      </div>
+                      <div style="font-size: 12px">
+                        <span v-text="universityName"></span>
+                        <span v-text="majorName"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kt-notification">
+                    <a href="/user" class="kt-notification__item">
+                      <div class="kt-notification__item-icon">
+                        <i class="flaticon2-calendar-3 kt-font-success"></i>
+                      </div>
+                      <div class="kt-notification__item-details">
+                        <div class="kt-notification__item-title kt-font-bold">
+                          我的信息
+                        </div>
+                        <div class="kt-notification__item-time">
+                          修改我的电话、照片等个人信息
+                        </div>
+                      </div>
+                    </a>
+                    <a href="/changePassword" class="kt-notification__item">
+                      <div class="kt-notification__item-icon">
+                        <i class="fa fa-key kt-font-warning"></i>
+                      </div>
+                      <div class="kt-notification__item-details">
+                        <div class="kt-notification__item-title kt-font-bold">
+                          密码修改
+                        </div>
+                        <div class="kt-notification__item-time">
+                          修改我的登陆密码
+                        </div>
+                      </div>
+                    </a>
+                    <div class="kt-notification__custom kt-space-between">
+                      <a href="javascript:;" class="btn btn-label btn-label-brand btn-sm btn-bold"
+                         ng-click="onSignOut()">退出登陆</a>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="kt-header__topbar-item" style="border-right: 1px solid #cccccc; height: 15px"></div>

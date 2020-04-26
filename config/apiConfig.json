@@ -5,15 +5,12 @@
     "path": {
       "login": "api/v1/user/student/login",
 
-      "universityList": "/api/v1/customer/university/list",
-      "schoolList": "/api/v1/customer/school/list",
+      "universityList": "api/v1/customer/university/list",
+      "schoolList": "api/v1/customer/school/list",
+      "majorList": "api/v1/major/list",
 
-      "universityAccount": "/api/v1/account/teacher/add",
-      "approveAccount": "/api/v1/account/teacher/client",
-      "waitApprove": "/api/v1/account/teacher/client/waitApprove",
       "checkCellphone4Register": "/api/v1/account/teacher/check/cellphone/register",
       "checkCellphone4ChangePassword": "/api/v1/account/teacher/check/cellphone/change_password",
-      "changeUniversityAccountStatus": "/api/v1/account/teacher/change/status",
       "changePassword": "/api/v1/account/teacher/change/password",
 
       "technologyList": "/api/v1/technology/client",
@@ -33,7 +30,7 @@
       "knowledgeExercises": "/api/v1/knowledge/exercises/list/assigned",
 
       "checkVerificationCode": "/api/v1/verification_code/any",
-      "addVerificationCode": "/api/v1/verification_code/add",
+      "saveVerificationCode": "/api/v1/verification_code/add",
 
       "courseList": "/api/v1/course/list",
       "courseDetail": "/api/v1/course/any",
@@ -63,7 +60,7 @@
       "checkCustomerEmail": "/api/v1/user/teacher/check/email",
       "changeAssistant": "/api/v1/user/student/change/assistant",
 
-      "businessAnalyseLog": "/api/v1/burying_point/add",
+      "buryingPoint": "/api/v1/burying_point/add",
 
       "suggestType": "/api/v1/sys_parm/suggest_type/list",
       "addSuggest": "/api/v1/suggest/add",

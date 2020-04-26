@@ -4,7 +4,7 @@ const login = new Vue({
     cellphone: '',
     password: '',
     showError: false,
-    errorMessage: '111'
+    errorMessage: ''
   },
   methods: {
     //数据校验的内容
