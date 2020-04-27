@@ -171,8 +171,8 @@ router.get('/verificationCode/check', (req, res, next) => {
     .then(result => {
       let checkResult = false;
       let checkResultMessage = '您输入的验证码不正确';
-      if (result.content.responseData !== null) {
-        let createTime = result.content.responseData.createTime;
+      if (result.data.responseData !== null) {
+        let createTime = result.data.responseData.createTime;
         let now = dateUtils.currentTime();
         let expiredTime = dateUtils.addMinutes(createTime, 5);
         let compareResult = dateUtils.compare(Date.parse(expiredTime), Date.parse(now));
@@ -186,7 +186,7 @@ router.get('/verificationCode/check', (req, res, next) => {
       }
       res.json({
         err: false,
-        code: result.code,
+        code: result.data.responseCode,
         msg: checkResultMessage,
         result: checkResult
       });

@@ -7,7 +7,6 @@ const login = new Vue({
     errorMessage: ''
   },
   methods: {
-    //数据校验的内容
     checkData: function () {
       if (commonUtility.isEmpty(this.cellphone)) {
         this.showError = true;
@@ -37,20 +36,19 @@ const login = new Vue({
       })
       .then(function (res) {
         if (res.data.err) {
-          _this.showError = true;
-          _this.errorMessage = res.data.msg;
+          message.error(localMessage.exception(res.data.code, res.data.msg));
           return false;
         }
         if (!res.data.accountValid) {
           _this.showError = true;
-          _this.errorMessage = '您输入的账号和密码不匹配';
+          _this.errorMessage = localMessage.NO_ACCOUNT;
           return false;
         }
         commonUtility.setCookie(Constants.COOKIE_LOGIN_USER, JSON.stringify(res.data.userInfo));
         location.href = '/index';
       })
       .catch(function (error) {
-        console.log(error);
+        message.error(localMessage.NETWORK_ERROR);
       });
     }
   }

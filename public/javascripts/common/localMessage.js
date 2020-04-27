@@ -1,7 +1,20 @@
 const localMessage = {};
-localMessage.NETWORK_ERROR = '网络异常，请检查网络设置';
+localMessage.NETWORK_ERROR = '网络异常，请检查网络设置！';
+localMessage.SYSTEM_ERROR = '非常抱歉，系统异常，请稍后再试！';
 localMessage.PASSWORD_EMPTY = '请输入登陆密码！';
-localMessage.NO_ACCOUNT = '您输入的用户名或密码不存在！';
+localMessage.NO_ACCOUNT = '您输入的账号和密码不匹配';
+
+localMessage.NO_SELECT_UNIVERSITY = '请选择就读高校';
+localMessage.NO_SELECT_SCHOOL = '请选择所在二级学院';
+localMessage.NO_SELECT_MAJOR = '请选择所学专业';
+localMessage.STUDENT_NAME_EMPTY = '请输入姓名';
+localMessage.CELLPHONE_EMPTY = '请输入手机号码';
+localMessage.CELLPHONE_INVALID = '请输入的不是正确的手机号码';
+localMessage.CELLPHONE_REGISTERED = '您输入的手机号码已注册';
+localMessage.VALID_CODE_EMPTY = '请输入验证码';
+localMessage.PASSWORD_EMPTY = '请输入密码';
+localMessage.CONFIRM_PASSWORD_EMPTY = '请再次输入密码';
+localMessage.CONFIRM_PASSWORD_ERROR = '两次输入的密码不一致，请重新输入';
 
 localMessage.UPLOAD_SUCCESS = '文件上传成功！';
 localMessage.SAVE_SUCCESS = '数据保存成功！';
@@ -26,10 +39,6 @@ localMessage.ACCOUNT_WAITING = '您的账户正在等待所在院校的管理员
 localMessage.ACCOUNT_NO_PASS = '您的账户审批未通过，请联系所在院校的管理员。';
 localMessage.ACCOUNT_DISABLED = '您的账户已被冻结，请联系所在院校的管理员或我公司客服。';
 
-localMessage.CELLPHONE_INVALID = '您输入的内容不是有效的手机号码。';
-localMessage.CELLPHONE_EMPTY = '请输入您的手机号码。';
-localMessage.CELLPHONE_REGISTERED = '您输入的手机号码已注册。';
-localMessage.VERIFICATION_CODE_INVALID = '您输入的验证码不正确。';
 
 localMessage.EMAIL_INVALID = '您输入的内容不是有效的电子邮件地址。';
 localMessage.EMAIL_ERROR = '您输入的内容不是有效的电子邮件地址。';
@@ -48,6 +57,6 @@ localMessage.COURSE_NOT_FOUND = '该课程已被删除';
 localMessage.COURSE_PLAN_NOT_FOUND = '该课程计划已被删除';
 
 
-localMessage.formatMessage = function (code, msg) {
+localMessage.exception = function (code, msg) {
   return `<strong>抱歉，系统发生异常，请联系我们</strong> </br>状态码:&nbsp ${code} </br> 详细信息:&nbsp ${msg}`;
 };

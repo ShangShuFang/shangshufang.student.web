@@ -1,11 +1,14 @@
 body {
-  font: 14px "Microsoft YaHei" !important;, "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-.invalid-feedback{
-  margin-top: 5px !important;
+  font-size: 14px;
+  font-family: "Microsoft YaHei" "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid{
+.invalid-feedback {
+  margin-top: 5px !important;
+  font-size: 14px !important;
+}
+
+.is-invalid {
   border: 1px solid #fd27eb !important;
 }
 .kt-header__brand-logo {
@@ -15,36 +18,36 @@ body {
 .kt-header__top {
   height: 80px !important;
 }
-.shs-banner img{
+.shs-banner img {
   width: 100%;
 }
 
-.shs-banner{
+.shs-banner {
   width: 100%;
 }
-.space-10{
+.space-10 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.space-5{
+.space-5 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.refresh{
+.refresh {
   cursor: pointer;
 }
-.star-selected{
+.star-selected {
   color: #f1b86f;
 }
 /* begin： 查询表单的下拉列表*/
-.width-full{
+.width-full {
   width: 100%;
 }
-.search-form-dropdown button{
+.search-form-dropdown button {
   width: 100%;
 }
 
-.search-form-dropdown button span{
+.search-form-dropdown button span {
   float: left
 }
 

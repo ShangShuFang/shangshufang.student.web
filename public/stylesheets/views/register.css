@@ -52,3 +52,7 @@
   width: 29% !important;
 }
 /* end: 表单的手机验证码*/
+
+.kt-login__actions {
+  margin: 1.5rem 0 !important;
+}

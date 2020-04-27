@@ -9,9 +9,12 @@
       "schoolList": "api/v1/customer/school/list",
       "majorList": "api/v1/major/list",
 
-      "checkCellphone4Register": "/api/v1/account/teacher/check/cellphone/register",
+      "checkCellphone4Register": "api/v1/user/student/check/cellphone",
+      "register": "api/v1/user/student/add",
+
       "checkCellphone4ChangePassword": "/api/v1/account/teacher/check/cellphone/change_password",
       "changePassword": "/api/v1/account/teacher/change/password",
+
 
       "technologyList": "/api/v1/technology/client",
       "technology": "/api/v1/technology/any",
@@ -29,8 +32,8 @@
 
       "knowledgeExercises": "/api/v1/knowledge/exercises/list/assigned",
 
-      "checkVerificationCode": "/api/v1/verification_code/any",
-      "saveVerificationCode": "/api/v1/verification_code/add",
+      "checkVerificationCode": "api/v1/verification_code/any",
+      "saveVerificationCode": "api/v1/verification_code/add",
 
       "courseList": "/api/v1/course/list",
       "courseDetail": "/api/v1/course/any",
