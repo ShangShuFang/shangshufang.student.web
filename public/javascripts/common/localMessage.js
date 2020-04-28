@@ -11,6 +11,7 @@ localMessage.STUDENT_NAME_EMPTY = '请输入姓名';
 localMessage.CELLPHONE_EMPTY = '请输入手机号码';
 localMessage.CELLPHONE_INVALID = '请输入的不是正确的手机号码';
 localMessage.CELLPHONE_REGISTERED = '您输入的手机号码已注册';
+localMessage.CELLPHONE_NOT_EXISTS = '您输入的手机号码不存在';
 localMessage.VALID_CODE_EMPTY = '请输入验证码';
 localMessage.PASSWORD_EMPTY = '请输入密码';
 localMessage.CONFIRM_PASSWORD_EMPTY = '请再次输入密码';

@@ -12,8 +12,8 @@
       "checkCellphone4Register": "api/v1/user/student/check/cellphone",
       "register": "api/v1/user/student/add",
 
-      "checkCellphone4ChangePassword": "/api/v1/account/teacher/check/cellphone/change_password",
-      "changePassword": "/api/v1/account/teacher/change/password",
+      "checkCellphone4ChangePassword": "api/v1/user/student/check/cellphone",
+      "resetPassword": "api/v1/user/student/reset/password",
 
 
       "technologyList": "/api/v1/technology/client",
