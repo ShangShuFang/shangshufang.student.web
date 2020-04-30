@@ -18,6 +18,11 @@ localMessage.PASSWORD_EMPTY = '请输入密码';
 localMessage.CONFIRM_PASSWORD_EMPTY = '请再次输入密码';
 localMessage.CONFIRM_PASSWORD_ERROR = '两次输入的密码不一致，请重新输入';
 
+localMessage.OLD_PASSWORD_EMPTY = '请输入原始密码';
+localMessage.OLD_PASSWORD_ERROR = '原始密码不正确';
+localMessage.NEW_PASSWORD_EMPTY = '请输入新密码';
+localMessage.CONFIRM_NEW_PASSWORD_EMPTY = '请再次输入新密码';
+
 localMessage.UPLOAD_SUCCESS = '文件上传成功！';
 localMessage.SAVE_SUCCESS = '数据保存成功！';
 localMessage.DELETE_SUCCESS = '数据删除成功！';

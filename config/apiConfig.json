@@ -13,6 +13,7 @@
 
       "checkCellphone4ChangePassword": "api/v1/user/student/check/cellphone",
       "resetPassword": "api/v1/user/student/reset/password",
+      "changePassword": "api/v1/user/student/change/password",
 
       "checkStudentEmail": "api/v1/user/student/check/email",
       "changeStudentInfo": "api/v1/user/student/change",
