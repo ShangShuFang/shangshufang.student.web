@@ -17,7 +17,7 @@ Constants.ACCOUNT_STATUS = {
   DISABLED: 'D',
 };
 Constants.COOKIE_LOGIN_USER = 'shs.student.user';
-Constants.UPLOAD_SERVICE_URI='39.106.227.253:8000/upload';
+Constants.UPLOAD_SERVICE_URI='http://localhost:8000/upload';
 
 // Constants.KEY_OPTION_EXERCISES = 'shs.teacher.exercises.option';
 // Constants.KEY_OPTION_ADD = 'add';

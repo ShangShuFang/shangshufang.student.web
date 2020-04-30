@@ -200,4 +200,28 @@ router.get('/verificationCode/check', (req, res, next) => {
     });
 });
 
+router.get('/email/check', (req, res, next) => {
+  let apiKey = 'checkStudentEmail';
+  let email = req.query.email.replace('.', '%2E');
+  let parameters = [email];
+  let requestUri = encodeURI(buildUtils.buildRequestApiUri(apiKey, parameters));
+
+  axios.get(requestUri)
+    .then(result => {
+      res.json({
+        err: false,
+        code: result.data.responseCode,
+        msg: result.data.responseMessage,
+        exist: result.data.responseData
+      });
+    })
+    .catch(error => {
+      res.json({
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
+      });
+    });
+});
+
 module.exports = router;

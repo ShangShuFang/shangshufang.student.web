@@ -1,6 +1,7 @@
 const localMessage = {};
 localMessage.NETWORK_ERROR = '网络异常，请检查网络设置！';
 localMessage.SYSTEM_ERROR = '非常抱歉，系统异常，请稍后再试！';
+localMessage.UPLOAD_FAILED = '上传失败，请检查网络设置！';
 localMessage.PASSWORD_EMPTY = '请输入登陆密码！';
 localMessage.NO_ACCOUNT = '您输入的账号和密码不匹配';
 
@@ -9,7 +10,7 @@ localMessage.NO_SELECT_SCHOOL = '请选择所在二级学院';
 localMessage.NO_SELECT_MAJOR = '请选择所学专业';
 localMessage.STUDENT_NAME_EMPTY = '请输入姓名';
 localMessage.CELLPHONE_EMPTY = '请输入手机号码';
-localMessage.CELLPHONE_INVALID = '请输入的不是正确的手机号码';
+localMessage.CELLPHONE_INVALID = '请输入的内容不是正确的手机号码';
 localMessage.CELLPHONE_REGISTERED = '您输入的手机号码已注册';
 localMessage.CELLPHONE_NOT_EXISTS = '您输入的手机号码不存在';
 localMessage.VALID_CODE_EMPTY = '请输入验证码';
@@ -36,23 +37,22 @@ localMessage.EXERCISES_CODE_PROJECT_FORMAT_INVALID = '项目练习的习题编�
 localMessage.EXERCISES_CODE_INVALID = '您输入的习题编码已存在！';
 localMessage.PARAMETER_ERROR = '参数错误，未能读取到对应参数，无法继续操作！';
 
-localMessage.ACCOUNT_WAITING = '您的账户正在等待所在院校的管理员审批，审批通过后方可登陆。';
-localMessage.ACCOUNT_NO_PASS = '您的账户审批未通过，请联系所在院校的管理员。';
-localMessage.ACCOUNT_DISABLED = '您的账户已被冻结，请联系所在院校的管理员或我公司客服。';
+localMessage.ACCOUNT_WAITING = '您的账户正在等待所在院校的管理员审批，审批通过后方可登陆';
+localMessage.ACCOUNT_NO_PASS = '您的账户审批未通过，请联系所在院校的管理员';
+localMessage.ACCOUNT_DISABLED = '您的账户已被冻结，请联系所在院校的管理员或我公司客服';
 
 
-localMessage.EMAIL_INVALID = '您输入的内容不是有效的电子邮件地址。';
-localMessage.EMAIL_ERROR = '您输入的内容不是有效的电子邮件地址。';
-localMessage.EMAIL_REGISTERED = '您输入的电子邮箱已存在。';
+localMessage.EMAIL_INVALID = '您输入的内容不是有效的电子邮件地址';
+localMessage.EMAIL_REGISTERED = '您输入的电子邮箱已存在';
 
-localMessage.PASSWORD_OLD_EMPTY = '请输入您的原始密码。';
-localMessage.PASSWORD_OLD_ERROR = '您输入的原始密码不正确。';
-localMessage.PASSWORD_NEW_EMPTY = '请输入您的新密码。';
-localMessage.PASSWORD_NEW_ERROR = '您输入的新密码不正确。';
+localMessage.PASSWORD_OLD_EMPTY = '请输入您的原始密码';
+localMessage.PASSWORD_OLD_ERROR = '您输入的原始密码不正确';
+localMessage.PASSWORD_NEW_EMPTY = '请输入您的新密码';
+localMessage.PASSWORD_NEW_ERROR = '您输入的新密码不正确';
 
-localMessage.PASSWORD_CHANGE_SUCCESS = '密码修改成功。';
+localMessage.PASSWORD_CHANGE_SUCCESS = '密码修改成功';
 
-localMessage.CELLPHONE_NOT_FOUND = '您输入的手机号码不存在。';
+localMessage.CELLPHONE_NOT_FOUND = '您输入的手机号码不存在';
 localMessage.COURSE_NOT_FOUND = '该课程已被删除';
 
 localMessage.COURSE_PLAN_NOT_FOUND = '该课程计划已被删除';
