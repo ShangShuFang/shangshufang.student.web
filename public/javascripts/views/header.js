@@ -36,6 +36,10 @@ const vm = new Vue({
     },
     onRegister: function () {
       location.href = '/register';
+    },
+    onSignOut: function () {
+      commonUtility.delCookie(Constants.COOKIE_LOGIN_USER);
+      location.href = '/';
     }
   },
   mounted: function () {
