@@ -1,20 +1,6 @@
 let commonUtility = {};
-commonUtility.setNavActive = function () {
-  let pathname = window.location.pathname;
-  let linkObj = {};
-
-  if(pathname.includes('index')){
-    linkObj = $('#kt_aside_menu_wrapper ul.kt-menu__nav li a[href="/index"]');
-    linkObj.parent().addClass('kt-menu__item--active');
-    return false;
-  }
-  if(pathname.includes('softwareExercises')){
-    pathname = '/softwareExercises';
-  }
-
-  linkObj = $(`#kt_aside_menu_wrapper ul.kt-menu__nav li a[href="${pathname}"]`);
-  linkObj.parent().addClass('kt-menu__item--active');
-  linkObj.parent().parent().parent().parent().addClass('kt-menu__item--open');
+commonUtility.setNavActive = function (index) {
+  $(`ul.main-menu_nav li:nth-child(${index})`).addClass('kt-menu__item--here');
 };
 
 commonUtility.isEmpty = function (value) {
@@ -54,7 +40,7 @@ commonUtility.delCookie = function (name) {
   exp.setTime(exp.getTime() - 1);
   let cookieName = this.getCookie(name);
   if(cookieName !== null)
-    document.cookie= name + "=" + cookieName + ";expires=" + exp.toGMTString();
+    document.cookie= name + "=" + cookieName + ";expires=" + exp.toGMTString() + "; path=/";
 };
 
 commonUtility.getLoginUser = function () {

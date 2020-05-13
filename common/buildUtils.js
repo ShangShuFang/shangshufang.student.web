@@ -19,7 +19,7 @@ exports.buildRequestApiUri = function (apiName, parameters) {
 
 exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) {
   let renderData = {};
-  if(serviceResult.err || !serviceResult.content.result){
+  if(!serviceResult.data.result){
     renderData = {
       title: title,
       totalCount: 0,
@@ -28,57 +28,57 @@ exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) 
       dataList: []
     };
   }else{
-    let paginationArray = pagingUtils.getPaginationArray(pageNumber, serviceResult.content.totalCount);
+    let paginationArray = pagingUtils.getPaginationArray(pageNumber, pageSize, serviceResult.data.totalCount);
     let prePaginationNum = pagingUtils.getPrePaginationNum(pageNumber);
-    let nextPaginationNum = pagingUtils.getNextPaginationNum(pageNumber, serviceResult.content.totalCount);
-    if(serviceResult.content.responseData === null){
+    let nextPaginationNum = pagingUtils.getNextPaginationNum(pageNumber, pageSize, serviceResult.data.totalCount);
+    if(serviceResult.data.responseData === null){
       renderData = {
         title: title,
-        totalCount: serviceResult.content.totalCount,
+        totalCount: serviceResult.data.totalCount,
         currentPageNum: pageNumber,
-        pageSize: sysConfig.pageSize,
-        dataList: serviceResult.content.responseData
+        pageSize: pageSize,
+        dataList: serviceResult.data.responseData
       }
     }else{
       if(prePaginationNum > 0 && nextPaginationNum > 0){
         renderData = {
           title: title,
-          totalCount: serviceResult.content.totalCount,
+          totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           prePageNum: prePaginationNum,
           nextPageNum: nextPaginationNum,
           currentPageNum: pageNumber,
-          pageSize: sysConfig.pageSize,
-          dataList: serviceResult.content.responseData
+          pageSize: pageSize,
+          dataList: serviceResult.data.responseData
         }
       }else if(prePaginationNum === 0 && nextPaginationNum === -1){
         renderData = {
           title: title,
-          totalCount: serviceResult.content.totalCount,
+          totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           currentPageNum: pageNumber,
-          pageSize: sysConfig.pageSize,
-          dataList: serviceResult.content.responseData
+          pageSize: pageSize,
+          dataList: serviceResult.data.responseData
         }
       }else if(prePaginationNum === 0) {
         renderData = {
           title: title,
-          totalCount: serviceResult.content.totalCount,
+          totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           nextPageNum: nextPaginationNum,
           currentPageNum: pageNumber,
-          pageSize: sysConfig.pageSize,
-          dataList: serviceResult.content.responseData
+          pageSize: pageSize,
+          dataList: serviceResult.data.responseData
         }
       }else{
         renderData = {
           title: title,
-          totalCount: serviceResult.content.totalCount,
+          totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           prePageNum: prePaginationNum,
           currentPageNum: pageNumber,
-          pageSize: sysConfig.pageSize,
-          dataList: serviceResult.content.responseData
+          pageSize: pageSize,
+          dataList: serviceResult.data.responseData
         }
       }
     }

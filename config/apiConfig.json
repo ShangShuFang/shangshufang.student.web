@@ -18,9 +18,17 @@
       "checkStudentEmail": "api/v1/user/student/check/email",
       "changeStudentInfo": "api/v1/user/student/change",
 
+      "directionList": "api/v1/develop_direction/list",
+      "technologyCategoryList": "api/v1/technology/category/list",
+      "technologySimple": "api/v1/technology/simple",
+      "courseListByContent": "api/v1/course/list/like",
+      "courseList": "api/v1/course/list",
+
+
+      
       "technologyList": "/api/v1/technology/client",
       "technology": "/api/v1/technology/any",
-      "technologySimple": "/api/v1/technology/simple",
+      
       "learningTechnology": "/api/v1/technology/learning",
 
       "developmentDirections": "/api/v1/develop_direction/list/direction",
@@ -37,7 +45,7 @@
       "checkVerificationCode": "api/v1/verification_code/any",
       "saveVerificationCode": "api/v1/verification_code/add",
 
-      "courseList": "/api/v1/course/list",
+      
       "courseDetail": "/api/v1/course/any",
       "addCourse": "/api/v1/course/add",
       "courseSimpleList": "/api/v1/course/list/simple",

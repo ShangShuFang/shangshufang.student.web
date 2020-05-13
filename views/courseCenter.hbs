@@ -1,0 +1,208 @@
+<link href="/stylesheets/views/courseCenter.css" rel="stylesheet" type="text/css" />
+<div id="app">
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+          <div class="kt-input-icon kt-input-icon--right search-control">
+            <input type="text" class="form-control" v-model="content" @keydown="onFilterByLikeContent($event)" placeholder="课程名称/老师姓名">
+            <span class="kt-input-icon__icon kt-input-icon__icon--right">
+              <span><i class="la la-search"></i></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-2">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">研发方向：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedDirection.directionID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item" v-for="direction in directionList"
+              :class="{'kt-menu__item--here': selectedDirection.directionID == direction.directionID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection(direction)">
+                <span class="kt-menu__link-text" v-text="direction.directionName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">技术分类：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedCategory.categoryID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item" v-for="category in categoryList"
+              :class="{'kt-menu__item--here': selectedCategory.categoryID == category.technologyCategoryID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory(category)">
+                <span class="kt-menu__link-text" v-text="category.technologyCategoryName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">热点技术：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedTechnology.technologyID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item"
+                v-for="technology in technologyList"
+                :class="{'kt-menu__item--here': selectedTechnology.technologyID == technology.technologyID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology(technology)">
+                <span class="kt-menu__link-text" v-text="technology.technologyName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="kt-container kt-grid__item kt-grid__item--fluid" v-if="loginUser !== null">
+    <div class="filter-bar">
+      <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in universityFilterList"
+        :class="{'btn-info': selectedUniversityFilter.filterID == filter.filterID, 'btn-outline-hover-info': selectedUniversityFilter.filterID != filter.filterID}"
+        v-text="filter.filterName" @click="onFilterByUniversity(filter)"></button>
+    </div>
+  </div>
+
+  <div class="kt-container kt-grid__item kt-grid__item--fluid">
+    <div class="row courses">
+      <div class="col-md-3 col-sm-3 col-xl-3" v-for="data in dataList">
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">
+            <img src="/media/banner/course_demo.jpeg" alt="">
+            <div class="teacher-info">
+              <div class="row kt-margin-0">
+                <div class="col-md-2">
+                  <img src="/media/users/user_default.png" style="width: 40px;" alt="">
+                </div>
+                <div class="col-md-10">
+                  <span v-text="data.teacherName"></span> <br>
+                  <span v-text="data.universityName"></span>
+                  <span v-text="data.schoolName"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="kt-portlet__body kt-padding-15">
+            <div class="kt-widget kt-widget--user-profile-2 ">
+              <div class="kt-widget__body kt-margin-b-0-">
+                <div class="kt-widget__item">
+                  <div class="kt-widget__contact kt-margin-b-10">
+                    <span class="kt-widget__label ellipsis" v-text="data.courseName"></span>
+                  </div>
+                  <div class="kt-widget__contact kt-margin-b-10">
+                    <span class="kt-widget__data course-memo ellipsis-2" :title="data.courseIntroduction" v-text="data.courseIntroduction"></span>
+                  </div>
+                  <div class="kt-widget__contact kt-margin-b-10">
+                    <span class="kt-widget__data">课程时间:</span>
+                    <span class="kt-widget__data"><span v-text="data.courseTimeBegin"></span>～<span v-text="data.courseTimeBegin"></span></span>
+                  </div>
+                  <div class="kt-widget__contact kt-margin-b-10">
+                    <div class="row width-full">
+                      <div class="col-md-5">
+                        已报名<span class="kt-widget__data" v-text="data.courseSingUpCount"></span>人
+                      </div>
+                      <div class="col-md-7 kt-padding-0 kt-align-right">
+                        共有<span class="kt-widget__data" v-text="data.courseTechnologyUsingCompanyCount"></span>家企业使用该技术
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <div class="kt-widget__progress">
+                      <div class="progress">
+                        <div class="progress-bar kt-bg-success" role="progressbar" :style="{'width':data.courseProcess}"></div>
+                      </div>
+                      <div class="kt-widget__stats ng-binding" v-text="data.courseProcess"></div>
+                    </div>
+                   <span class="kt-badge kt-badge--inline course-status"
+                        :class="{ 'kt-badge--brand': data.dataStatus == 'P', 'kt-badge--success': data.dataStatus == 'A', 'kt-badge--light': data.dataStatus == 'F' }" 
+                        v-text="data.dataStatusText"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="kt-widget__footer kt-margin-t-15">
+                <div class="row">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-link">技术详情</button>
+                  </div>
+                  <div class="col-md-8">
+                    <button type="button" class="btn btn-warning btn-lg btn-upper"
+                      ng-click="onCreateCourse(data, 0)">去报名</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container kt-grid__item kt-grid__item--fluid kt-align-center kt-padding-15" v-if="totalCount == 0">
+    未查询到满足条件的课程
+  </div>
+  <div class="kt-container kt-grid__item kt-grid__item--fluid" v-if="totalCount > 0">
+    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
+      <div class="kt-pagination__toolbar">
+        <span class="pagination__desc">
+          显示第<span v-text="fromIndex"></span>到第<span v-text="toIndex"></span>条数据，共计<span v-text="totalCount"></span>条数据
+        </span>
+      </div>
+      <ul class="kt-pagination__links">
+        <li class="kt-pagination__link--first kt-pagination" v-if="prePageNum !== -1">
+          <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+        </li>
+        <li class="kt-pagination__link--next" v-if="prePageNum !== -1">
+          <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+        </li>
+        <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
+          <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+        </li>
+        <li class="kt-pagination__link--prev" v-if="nextPageNum !== -1">
+          <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+        </li>
+        <li class="kt-pagination__link--last" v-if="nextPageNum !== -1">
+          <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/courseCenter.js');
+  });
+</script>

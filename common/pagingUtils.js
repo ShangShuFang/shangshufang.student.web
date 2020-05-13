@@ -1,8 +1,7 @@
 let sysConfig = require('../config/sysConfig');
 
-exports.getPaginationArray = function(pageNumber, totalCount){
+exports.getPaginationArray = function(pageNumber, pageSize, totalCount){
   let paginationArray = []; //返回的页码内容
-  let pageSize = sysConfig.pageSize; //一页显示多少条数据
   let paginationSize = sysConfig.paginationSize; //最多显示多少个页码
   let maxPageNum = Math.ceil(totalCount / pageSize); //根据数据总数及每页显示的数据条数，计算理论上有多少页码
 
@@ -35,9 +34,8 @@ exports.getPrePaginationNum = function (pageNumber) {
   return prePageNum;
 };
 
-exports.getNextPaginationNum = function (pageNumber, totalCount) {
+exports.getNextPaginationNum = function (pageNumber, pageSize, totalCount) {
   let nextPageNum = -1;
-  let pageSize = sysConfig.pageSize; //一页显示多少条数据
   let maxPageNum = Math.ceil(totalCount / pageSize); //根据数据总数及每页显示的数据条数，计算理论上有多少页码
   if(parseInt(pageNumber) < maxPageNum){
     nextPageNum = parseInt(pageNumber) + 1;

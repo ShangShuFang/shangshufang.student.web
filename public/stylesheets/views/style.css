@@ -127,9 +127,6 @@ a.no-hand{
 .website-logo{
   width: 180px;
 }
-/*.kt-header--fixed.kt-header--minimize .kt-header{*/
-/*  position: relative;*/
-/*}*/
 .kt-footer{
   background-color: #383840;
   color: #999999;
@@ -242,4 +239,71 @@ a.no-hand{
 }
 .header-login a:hover {
   color: #edaa2e;;
+}
+
+.category-2 {
+  max-height: 68px;
+  padding: 15px 0;
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px 0 rgba(28,31,33,.1);
+}
+.category-2 .kt-header-menu-wrapper {
+  width: 100%;
+}
+.category-2 .filter-title {
+  padding: 0.75rem 0rem 0.75rem 1.45rem;
+  color: #959eaf;
+  font-weight: 500;
+}
+.category-2 .kt-header-menu .kt-menu__nav > .kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active) > .kt-menu__link, .kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active) > .kt-menu__link {
+  background-color: transparent;
+  border-radius: 0%;
+  font-weight: bolder;
+}
+.category-2 .kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--here > .kt-menu__link {
+  background-color: transparent;
+  font-weight: bolder !important;
+  font-family: "微软雅黑","Microsoft YaHei";
+}
+
+.category-3 .kt-header-menu-wrapper {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.category-3 .filter-title {
+  padding: 1.65rem 0rem 0.75rem 1.45rem;
+  color: #959eaf;
+  font-weight: 500;
+}
+.category-3 .kt-header-menu .kt-menu__nav > .kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active) > .kt-menu__link, .kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active) > .kt-menu__link {
+  background-color: transparent;
+}
+.category-3 .kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--here > .kt-menu__link {
+  background-color: transparent;
+}
+
+.category-4 .kt-header-menu-wrapper {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.filter-bar {
+  padding: 15px 0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.width-full {
+  width: 100%;
 }

@@ -224,4 +224,83 @@ router.get('/email/check', (req, res, next) => {
     });
 });
 
+router.get('/direction/list', (req, res, next) => {
+  const apiKey = 'directionList';
+  const pageNumber = 1;
+  const pageSize = 9999;
+  const dataStatus = 'A';
+  const parameters = [pageNumber, pageSize, dataStatus];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+    .then(result => {
+      res.json({
+        err: !result.data.result,
+        code: result.data.responseCode,
+        msg: result.data.responseMessage,
+        dataList: result.data.responseData
+      });
+    })
+    .catch(error => {
+      res.json({
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
+      });
+    });
+});
+
+router.get('/technology/category/list', (req, res, next) => {
+  const apiKey = 'technologyCategoryList';
+  const pageNumber = 1;
+  const pageSize = 9999;
+  const directionID = req.query.directionID;
+  const dataStatus = 'A';
+  const parameters = [pageNumber, pageSize, directionID, dataStatus];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+    .then(result => {
+      res.json({
+        err: !result.data.result,
+        code: result.data.responseCode,
+        msg: result.data.responseMessage,
+        dataList: result.data.responseData
+      });
+    })
+    .catch(error => {
+      res.json({
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
+      });
+    });
+});
+
+router.get('/technology/simple/list', (req, res, next) => {
+  const apiKey = 'technologySimple';
+  const directionID = req.query.directionID;
+  const categoryID = req.query.categoryID;
+  const dataStatus = 'A';
+  const parameters = [directionID, categoryID, dataStatus];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+    .then(result => {
+      res.json({
+        err: !result.data.result,
+        code: result.data.responseCode,
+        msg: result.data.responseMessage,
+        dataList: result.data.responseData
+      });
+    })
+    .catch(error => {
+      res.json({
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
+      });
+    });
+});
+
 module.exports = router;

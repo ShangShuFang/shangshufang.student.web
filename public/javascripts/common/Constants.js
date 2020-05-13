@@ -1,5 +1,8 @@
 const Constants = {};
-Constants.PAGE_SIZE = 10;
+Constants.PAGE_SIZE = {
+  PAGE_SIZE_10: 10,
+  PAGE_SIZE_16: 16,
+};
 Constants.PROVINCE_LEVEL_MUNICIPALITY = ['北京', '天津', '上海', '重庆'];
 Constants.CHECK_INVALID = {
   DEFAULT: -1,

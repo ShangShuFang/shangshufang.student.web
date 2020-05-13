@@ -22,11 +22,7 @@ const register = new Vue({
 
       step: 1
   },
-  methods: {
-      initPage: function () {
-        this.loadUniversity();
-      },
-      
+  methods: {      
       checkPreSendValidCode: function () {
         let checkPass = true;
         this.showCellphoneAlert = commonUtility.isEmpty(this.cellphone);
