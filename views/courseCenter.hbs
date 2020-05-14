@@ -100,11 +100,11 @@
       <div class="col-md-3 col-sm-3 col-xl-3" v-for="data in dataList">
         <div class="kt-portlet kt-portlet--height-fluid">
           <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">
-            <img src="/media/banner/course_demo.jpeg" alt="">
+            <img :src="data.technologyThumbnail" alt="">
             <div class="teacher-info">
               <div class="row kt-margin-0">
                 <div class="col-md-2">
-                  <img src="/media/users/user_default.png" style="width: 40px;" alt="">
+                  <img :src="data.teacherPhotoUrl" alt="">
                 </div>
                 <div class="col-md-10">
                   <span v-text="data.teacherName"></span> <br>
@@ -146,7 +146,7 @@
                       <div class="kt-widget__stats ng-binding" v-text="data.courseProcess"></div>
                     </div>
                    <span class="kt-badge kt-badge--inline course-status"
-                        :class="{ 'kt-badge--brand': data.dataStatus == 'P', 'kt-badge--success': data.dataStatus == 'A', 'kt-badge--light': data.dataStatus == 'F' }" 
+                        :class="{ 'kt-badge--brand': data.dataStatus == '0', 'kt-badge--success': data.dataStatus == '1', 'kt-badge--light': data.dataStatus == '2' }" 
                         v-text="data.dataStatusText"></span>
                   </div>
                 </div>

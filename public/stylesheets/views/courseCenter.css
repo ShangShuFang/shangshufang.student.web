@@ -13,12 +13,17 @@
 .courses .kt-portlet .kt-portlet__head {
   position: relative;
 }
-.courses .kt-portlet .kt-portlet__head .teacher-info{
+.courses .kt-portlet .kt-portlet__head .teacher-info {
   position: absolute; 
   bottom: 0;
   height: 60px;
   width: 100%;
   background-image: linear-gradient(-180deg,#07111b00 0,#07111b99 97%);
+}
+
+.courses .kt-portlet .kt-portlet__head .teacher-info img {
+  width: 40px;
+  border-radius: 50%;
 }
 
 .courses .kt-portlet .kt-portlet__head img {
