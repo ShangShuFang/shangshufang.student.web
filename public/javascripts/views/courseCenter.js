@@ -177,11 +177,13 @@ const app = new Vue({
           message.error(localMessage.exception(res.data.code, res.data.msg));
           return false;
         }
-        res.data.dataContent.dataList.forEach((data)=>{
-          if (commonUtility.isEmpty(data.teacherPhotoUrl)) {
-            data.teacherPhotoUrl = '/media/users/user_default.png';
-          }
-        });
+        if (!commonUtility.isEmptyList(res.data.dataContent.dataList)) {
+          res.data.dataContent.dataList.forEach((data)=>{
+            if (commonUtility.isEmpty(data.teacherPhotoUrl)) {
+              data.teacherPhotoUrl = '/media/users/user_default.png';
+            }
+          });
+        }
         this.totalCount = res.data.dataContent.totalCount;
         this.dataList = res.data.dataContent.dataList;
         this.pageNumber = res.data.dataContent.currentPageNum;
@@ -221,11 +223,14 @@ const app = new Vue({
           message.error(localMessage.exception(res.data.code, res.data.msg));
           return false;
         }
-        res.data.dataContent.dataList.forEach((data)=>{
-          if (commonUtility.isEmpty(data.teacherPhotoUrl)) {
-            data.teacherPhotoUrl = '/media/users/user_default.png';
-          }
-        });
+
+        if (!commonUtility.isEmptyList(res.data.dataContent.dataList)) {
+          res.data.dataContent.dataList.forEach((data)=>{
+            if (commonUtility.isEmpty(data.teacherPhotoUrl)) {
+              data.teacherPhotoUrl = '/media/users/user_default.png';
+            }
+          });
+        }
         
         this.totalCount = res.data.dataContent.totalCount;
         this.dataList = res.data.dataContent.dataList;
