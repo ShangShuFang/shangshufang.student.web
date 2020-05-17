@@ -40,7 +40,8 @@ localMessage.EXERCISES_CODE_SINGLE_FORMAT_INVALID = '单点练习的习题编码
 localMessage.EXERCISES_CODE_COMPREHENSIVE_FORMAT_INVALID = '综合练习的习题编码格式不正确！';
 localMessage.EXERCISES_CODE_PROJECT_FORMAT_INVALID = '项目练习的习题编码格式不正确！';
 localMessage.EXERCISES_CODE_INVALID = '您输入的习题编码已存在！';
-localMessage.PARAMETER_ERROR = '参数错误，未能读取到对应参数，无法继续操作！';
+localMessage.PARAMETER_ERROR = '参数错误，无法继续操作！';
+localMessage.PARAMETER_ERROR_TECHNOLOGY_ID = '未能读取到技术编号，无法继续操作！';
 
 localMessage.ACCOUNT_WAITING = '您的账户正在等待所在院校的管理员审批，审批通过后方可登陆';
 localMessage.ACCOUNT_NO_PASS = '您的账户审批未通过，请联系所在院校的管理员';

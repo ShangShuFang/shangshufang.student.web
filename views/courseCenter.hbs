@@ -85,8 +85,6 @@
     </div>
   </div>
 
-
-
   <div class="kt-container kt-grid__item kt-grid__item--fluid" v-if="loginUser !== null">
     <div class="filter-bar">
       <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in universityFilterList"
@@ -154,7 +152,7 @@
               <div class="kt-widget__footer kt-margin-t-15">
                 <div class="row">
                   <div class="col-md-4">
-                    <button type="button" class="btn btn-link">技术详情</button>
+                    <a :href="'/technology/info?technologyID='+data.technologyID" target="_blank" class="btn btn-link">技术详情</a>
                   </div>
                   <div class="col-md-8">
                     <button type="button" class="btn btn-warning btn-lg btn-upper"

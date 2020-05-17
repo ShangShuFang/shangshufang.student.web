@@ -1,0 +1,284 @@
+<link href="/stylesheets/views/technologyInfo.css" rel="stylesheet" type="text/css" />
+
+<div id="app">
+  <div class="kt-subheader kt-grid__item breadcrumbs" id="kt_subheader">
+    <div class="kt-container">
+      <div class="kt-subheader__main">
+        <div class="kt-subheader__breadcrumbs">
+          <span class="kt-subheader__breadcrumbs-link" v-text="technologyModel.directionName"></span>
+          <span class="fa fa-angle-right"></span>
+          <span class="kt-subheader__breadcrumbs-link" v-text="technologyModel.categoryName"></span>
+          <span class="fa fa-angle-right"></span>
+          <span class="kt-subheader__breadcrumbs-link" v-text="technologyModel.technologyName"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+        <div class="col-md-2 text-center">
+          <img :src="technologyModel.technologyThumbnailSquare" alt="">
+        </div>
+        <div class="col-md-10">
+          <div>
+            <strong v-text="technologyModel.technologyName"></strong>
+            <span class="kt-font-bold kt-badge kt-badge--inline kt-badge--pill"
+                  :class="{'kt-badge--info': technologyModel.difficultyLevel == 'J', 'kt-badge--warning': technologyModel.difficultyLevel == 'M', 'kt-badge--danger': technologyModel.difficultyLevel == 'S'}"
+                  v-text="technologyModel.difficultyLevelText">
+            </span>
+          </div>
+          <div class="kt-margin-t-5">
+            <i class="la la-star star-selected" v-for="star in technologyModel.technologyStars"></i>
+          </div>
+          <div class="kt-margin-t-5">
+            <p class="technology-memo" v-text="technologyModel.technologyMemo"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-subheader kt-grid__item">
+    <div class="kt-container">
+      <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title"></h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- begin:: 使用该技术的企业 -->
+  <div class="kt-container kt-grid__item kt-grid__item--fluid using-company">
+    <div class="kt-portlet">
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            使用该技术的重点企业
+            <small class="count">
+              <strong>站内共有<span v-text="technologyModel.usingCompanyCount"></span>家企业使用该技术进行项目研发</strong>
+            </small>
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <div class="row">
+          <div class="col-md-2" v-for="company in companyModel.dataList">
+            <img :src="company.brand" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end:: 市场研发方向 -->
+
+  <div class="space-10"></div>
+
+  <!-- begin:: 知识点列表 -->
+  <div class="kt-container kt-grid__item kt-grid__item--fluid knowledge-list">
+    <div class="kt-portlet">
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            知识点列表
+            <small class="count">
+              <strong>共计<span v-text="knowledgeModel.totalCount"></span>个知识点</strong>
+            </small>
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="order">#</th>
+              <th class="knowledge">知识点</th>
+              <th class="phase">所属阶段</th>
+              <th class="exercises-count">练习题数量</th>
+              <th class="using-count">使用企业</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(data, index) in knowledgeModel.dataList">
+              <th class="order" scope="row" v-text="index+1"></th>
+              <td class="knowledge" v-text="data.knowledgeName"></td>
+              <td class="phase" v-text="data.learningPhaseName"></td>
+              <td class="exercises-count">
+                共有<span v-text="data.knowledgeExercisesCount"></span>道练习题
+              </td>
+              <td class="using-count">
+                共有<span v-text="data.usingCompanyCount"></span>家企业使用该知识点
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
+          <div class="kt-pagination__toolbar">
+            <span class="pagination__desc">
+              显示第<span v-text="knowledgeModel.fromIndex"></span>到第<span v-text="knowledgeModel.toIndex"></span>条数据，共计<span v-text="knowledgeModel.totalCount"></span>条数据
+            </span>
+          </div>
+          <ul class="kt-pagination__links">
+            <li class="kt-pagination__link--first kt-pagination" v-if="knowledgeModel.prePageNum !== -1">
+              <a href="javascript:" @click="onKnowledgeFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+            </li>
+            <li class="kt-pagination__link--next" v-if="knowledgeModel.prePageNum !== -1">
+              <a href="javascript:" @click="onKnowledgePrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+            </li>
+            <li v-for="pagination in knowledgeModel.paginationArray"
+                :class="{'kt-pagination__link--active': knowledgeModel.pageNumber == pagination}">
+              <a href="javascript:" v-text="pagination" @click="onKnowledgePagination(pagination)"></a>
+            </li>
+            <li class="kt-pagination__link--prev" v-if="knowledgeModel.nextPageNum !== -1">
+              <a href="javascript:" @click="onKnowledgeNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+            </li>
+            <li class="kt-pagination__link--last" v-if="knowledgeModel.nextPageNum !== -1">
+              <a href="javascript:" @click="onKnowledgeLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end:: 知识点列表 -->
+
+  <div class="space-10"></div>
+
+  <!-- begin:: 选课学生信息 -->
+  <div class="kt-container kt-grid__item kt-grid__item--fluid student-list">
+    <div class="kt-portlet">
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            选课学生信息
+            <small class="count">
+              <strong>站内共有\{{studentModel.totalCount}}名学生正在学习该技术</strong>
+            </small>
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <div class="row" v-if="studentModel.totalCount == 0">
+              <div class="col-xl-12 text-center">
+                <div class="alert alert-secondary" role="alert">
+                  <div class="alert-text">未查询到已报名的学生。</div>
+                </div>
+              </div>
+            </div>
+
+        <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded" v-if="studentModel.totalCount > 0">
+          <table class="kt-datatable__table">
+            <thead class="kt-datatable__head">
+              <tr class="kt-datatable__row">
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="student-name">报名学生</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="course-name">报名课程</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="apply-time">报名时间</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="university-name">就读院校</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="school-name">所在学院</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="cellphone">手机号码</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="enrollment-year">入学年份</span>
+                </th>
+                <th class="kt-datatable__cell kt-datatable__cell--sort">
+                  <span class="apply-status">报名状态</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="kt-datatable__body" style="">
+            <tr class="kt-datatable__row" v-for="data in studentModel.dataList">
+              <td class="kt-datatable__cell">
+                <span class="student-name">
+                  <div class="kt-user-card-v2">
+                    <div class="kt-user-card-v2__pic">
+                      <a href="javascript:" target="_blank">
+                        <img class="kt-badge kt-badge--xl" :src="data.studentPhoto" alt="">
+                      </a>
+                    </div>
+                    <div class="kt-user-card-v2__details">
+                      <span class="kt-user-card-v2__name" v-text="data.studentName"></span>
+                      <span class="kt-user-card-v2__desc"
+                            :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}"
+                            v-text="data.abilityLevel"></span>
+                    </div>
+                  </div>
+                </span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="course-name" v-text="data.courseName"></span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="apply-time" v-text="data.createTime"></span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="university-name" v-text="data.studentUniversityName"></span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="school-name" v-text="data.studentSchoolName"></span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="cellphone" v-text="data.cellphone"></span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="enrollment-year" v-text="data.enrollmentYear"></span>
+              </td>
+              <td class="kt-datatable__cell">
+                <span class="apply-status">
+                  <span class="kt-badge kt-badge--inline kt-badge--pill"
+                        :class="{'kt-badge--success': data.dataStatus == 'A', 'kt-badge--warning': data.dataStatus == 'C'}"
+                        v-text="data.dataStatusText"></span>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
+          <div class="kt-pagination__toolbar">
+              <span class="pagination__desc">
+                显示第<span v-text="studentModel.fromIndex"></span>到第<span v-text="studentModel.toIndex"></span>条数据，共计<span v-text="studentModel.totalCount"></span>条数据
+              </span>
+          </div>
+          <ul class="kt-pagination__links">
+            <li class="kt-pagination__link--first kt-pagination" v-if="studentModel.prePageNum !== -1">
+              <a href="javascript:" @click="onStudentFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+            </li>
+            <li class="kt-pagination__link--next" v-if="studentModel.prePageNum !== -1">
+              <a href="javascript:" @click="onStudentPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+            </li>
+            <li v-for="pagination in studentModel.paginationArray"
+                :class="{'kt-pagination__link--active': knowledgeModel.pageNumber == pagination}">
+              <a href="javascript:" v-text="pagination" @click="onStudentPagination(pagination)"></a>
+            </li>
+            <li class="kt-pagination__link--prev" v-if="studentModel.nextPageNum !== -1">
+              <a href="javascript:" @click="onStudentNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+            </li>
+            <li class="kt-pagination__link--last" v-if="studentModel.nextPageNum !== -1">
+              <a href="javascript:" @click="onStudentLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end:: 选课学生信息 -->
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/technologyInfo.js');
+  });
+</script>

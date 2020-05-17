@@ -24,16 +24,26 @@
       "courseListByContent": "api/v1/course/list/like",
       "courseList": "api/v1/course/list",
 
+      "technology": "api/v1/technology/any",
+      "knowledgeList": "api/v1/knowledge/list",
+      "signUp4Technology": "api/v1/course/sign_up/list/student",
+      "company": "api/v1/customer/company/list",
+
+
+
+
+
+
 
       
       "technologyList": "/api/v1/technology/client",
-      "technology": "/api/v1/technology/any",
+      
       
       "learningTechnology": "/api/v1/technology/learning",
 
       "developmentDirections": "/api/v1/develop_direction/list/direction",
 
-      "knowledgeList": "/api/v1/knowledge/list",
+      
       "knowledgeSimpleList": "/api/v1/knowledge/list/simple",
 
       "learningPhase": "/api/v1/sys_parm/learning_phase/list",
@@ -56,7 +66,7 @@
       "coursePlanList": "/api/v1/course/plan/list",
       "changeCoursePlan": "/api/v1/course/plan/change",
       "finishClass": "/api/v1/course/plan/finish",
-      "signUp4Technology": "/api/v1/course/sign_up/list/student",
+      
       "signUp4Student": "/api/v1/course/sign_up/list/student",
       "signUp4Course": "/api/v1/course/sign_up/list/course",
       "courseQuestionList": "/api/v1/course/question/list",
@@ -78,7 +88,7 @@
       "suggestType": "/api/v1/sys_parm/suggest_type/list",
       "addSuggest": "/api/v1/suggest/add",
 
-      "company": "/api/v1/customer/company/client",
+      
       "companyUsingTechnology": "/api/v1/customer/company/list/using/technology",
       "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client",
 

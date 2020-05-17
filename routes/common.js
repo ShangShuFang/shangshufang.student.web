@@ -303,4 +303,32 @@ router.get('/technology/simple/list', (req, res, next) => {
     });
 });
 
+router.get('/company/list/top', (req, res, next) => {
+  const apiKey = 'company';
+  const pageNumber = 1;
+  const pageSize = 12;
+  const provinceCode = 0;
+  const cityCode = 0;
+  const dataStatus = 'A';
+  const parameters = [pageNumber, pageSize, provinceCode, cityCode, dataStatus];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+    .then(result => {
+      res.json({
+        err: !result.data.result,
+        code: result.data.responseCode,
+        msg: result.data.responseMessage,
+        dataList: result.data.responseData
+      });
+    })
+    .catch(error => {
+      res.json({
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
+      });
+    });
+});
+
 module.exports = router;

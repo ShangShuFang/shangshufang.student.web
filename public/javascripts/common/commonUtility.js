@@ -12,7 +12,7 @@ commonUtility.isEmptyList = function (list) {
 };
 
 commonUtility.isNumber = function (value) {
-  if(commonUtility.isEmpty(value)){
+  if (commonUtility.isEmpty(value)) {
     return false;
   }
   return !isNaN(value);
@@ -22,14 +22,14 @@ commonUtility.isNumber = function (value) {
 commonUtility.setCookie = function (name, value) {
   let days = 30;
   let exp = new Date();
-  exp.setTime(exp.getTime() + days*24*60*60*1000);
-  document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+  exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 };
 
 commonUtility.getCookie = function (name) {
-  let reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+  let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   let arr = document.cookie.match(reg);
-  if(arr === null){
+  if (arr === null) {
     return null;
   }
   return unescape(arr[2]);
@@ -39,13 +39,13 @@ commonUtility.delCookie = function (name) {
   let exp = new Date();
   exp.setTime(exp.getTime() - 1);
   let cookieName = this.getCookie(name);
-  if(cookieName !== null)
-    document.cookie= name + "=" + cookieName + ";expires=" + exp.toGMTString() + "; path=/";
+  if (cookieName !== null)
+    document.cookie = name + "=" + cookieName + ";expires=" + exp.toGMTString() + "; path=/";
 };
 
 commonUtility.getLoginUser = function () {
   let cookie = this.getCookie(Constants.COOKIE_LOGIN_USER);
-  if(cookie === null){
+  if (cookie === null) {
     return null;
   }
   return JSON.parse(cookie);
@@ -84,6 +84,38 @@ commonUtility.isEmail = function (email) {
 commonUtility.isLogin = function () {
   let login_cookie = commonUtility.getCookie(Constants.COOKIE_LOGIN_USER);
   return login_cookie !== null;
+};
+
+commonUtility.getUriParameter = function (name) {
+  let url = window.location.search;
+  if (url.indexOf('?') !== 0) { 
+    return null; 
+  }
+  parameters = url.substr(1);
+  parameterArray = parameters.split('&');
+  // let name = name || '';
+  let value = '';
+  // 获取全部参数及其值
+  for (let i = 0; i < parameterArray.length; i++) {
+    let info = parameterArray[i].split('=');
+    let obj = {};
+    obj[info[0]] = decodeURI(info[1]);
+    parameterArray[i] = obj;
+  }
+  // 如果传入一个参数名称，就匹配其值
+  if (name) {
+    for (let i = 0; i < parameterArray.length; i++) {
+      for (const key in parameterArray[i]) {
+        if (key == name) {
+          value = parameterArray[i][key];
+        }
+      }
+    }
+  } else {
+    value = parameters;
+  }
+  // 返回结果
+  return value;
 };
 
 commonUtility.getIpAddress = function () {

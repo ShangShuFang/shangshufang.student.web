@@ -32,7 +32,7 @@ const app = new Vue({
       this.loadCourseList();
     },
     loadDirectionList: function () {
-      axios.get('/common//direction/list')
+      axios.get('/common/direction/list')
         .then(res => {
           if (res.data.err) {
             message.error(localMessage.exception(res.data.code, res.data.msg));
