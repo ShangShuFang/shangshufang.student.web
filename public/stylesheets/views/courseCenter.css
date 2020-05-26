@@ -20,17 +20,23 @@
   width: 100%;
   background-image: linear-gradient(-180deg,#07111b00 0,#07111b99 97%);
 }
-
 .courses .kt-portlet .kt-portlet__head .teacher-info img {
   width: 40px;
   border-radius: 50%;
 }
-
 .courses .kt-portlet .kt-portlet__head img {
   width: 100%;
 }
 .courses .kt-portlet .kt-portlet__head .teacher-info span {
   color: #ffffff; font-weight: bold;
+}
+.courses .course-name {
+  font-size: 1.3rem;
+  color: #3d94fb;
+  font-weight: 600;
+}
+.courses .course-name:hover {
+  text-decoration: underline !important;
 }
 .courses .kt-widget__progress {
   width: 220px;

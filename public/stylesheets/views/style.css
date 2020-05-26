@@ -1,6 +1,6 @@
 body {
   font-size: 14px;
-  font-family: "Microsoft YaHei" "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Microsoft YaHei" , Helvetica, Arial, sans-serif;
 }
 
 .invalid-feedback {
@@ -81,7 +81,7 @@ a.no-hand{
   -webkit-box-orient: vertical;
 }
 .course-decs-2{
-  max-width: 500px;
+  max-width: 480px;
   max-height: 43px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -306,4 +306,8 @@ a.no-hand{
 }
 .width-full {
   width: 100%;
+}
+
+[v-cloak] {
+  display: none;
 }

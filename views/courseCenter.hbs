@@ -86,11 +86,23 @@
   </div>
 
   <div class="kt-container kt-grid__item kt-grid__item--fluid" v-if="loginUser !== null">
-    <div class="filter-bar">
-      <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in universityFilterList"
-        :class="{'btn-info': selectedUniversityFilter.filterID == filter.filterID, 'btn-outline-hover-info': selectedUniversityFilter.filterID != filter.filterID}"
-        v-text="filter.filterName" @click="onFilterByUniversity(filter)"></button>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="filter-bar">
+          <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in universityFilterList"
+                  :class="{'btn-info': selectedUniversityFilter.filterID == filter.filterID, 'btn-outline-hover-info': selectedUniversityFilter.filterID != filter.filterID}"
+                  v-text="filter.filterName" @click="onFilterByUniversity(filter)"></button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="filter-bar kt-pull-right">
+          <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in courseFilterList"
+                  :class="{'btn-info': selectedCourseFilter.filterID == filter.filterID, 'btn-outline-hover-info': selectedCourseFilter.filterID != filter.filterID}"
+                  v-text="filter.filterName" @click="onFilterByStudent(filter)"></button>
+        </div>
+      </div>
     </div>
+
   </div>
 
   <div class="kt-container kt-grid__item kt-grid__item--fluid">
@@ -117,14 +129,16 @@
               <div class="kt-widget__body kt-margin-b-0-">
                 <div class="kt-widget__item">
                   <div class="kt-widget__contact kt-margin-b-10">
-                    <span class="kt-widget__label ellipsis" v-text="data.courseName"></span>
+                    <a :href="'/course/detail?universityCode='+data.universityCode+'&schoolID='+data.schoolID+'&courseID='+data.courseID"
+                       target="_blank"
+                       class="course-name ellipsis" v-text="data.courseName"></a>
                   </div>
                   <div class="kt-widget__contact kt-margin-b-10">
                     <span class="kt-widget__data course-memo ellipsis-2" :title="data.courseIntroduction" v-text="data.courseIntroduction"></span>
                   </div>
                   <div class="kt-widget__contact kt-margin-b-10">
                     <span class="kt-widget__data">课程时间:</span>
-                    <span class="kt-widget__data"><span v-text="data.courseTimeBegin"></span>～<span v-text="data.courseTimeBegin"></span></span>
+                    <span class="kt-widget__data"><span v-text="data.courseTimeBegin"></span>～<span v-text="data.courseTimeEnd"></span></span>
                   </div>
                   <div class="kt-widget__contact kt-margin-b-10">
                     <div class="row width-full">
@@ -152,11 +166,17 @@
               <div class="kt-widget__footer kt-margin-t-15">
                 <div class="row">
                   <div class="col-md-4">
-                    <a :href="'/technology/info?technologyID='+data.technologyID" target="_blank" class="btn btn-link">技术详情</a>
+                    <a :href="'/technology/info?technologyID='+data.technologyID"
+                       target="_blank"
+                       class="btn btn-link">技术详情</a>
                   </div>
                   <div class="col-md-8">
-                    <button type="button" class="btn btn-warning btn-lg btn-upper"
-                      ng-click="onCreateCourse(data, 0)">去报名</button>
+                    <a :href="'/course/detail?universityCode='+data.universityCode+'&schoolID='+data.schoolID+'&courseID='+data.courseID"
+                       target="_blank"
+                       class="btn btn-lg btn-upper"
+                       :class="{'btn-outline-success disabled': data.dataStatus === '2', 'btn-success': data.dataStatus !== '2' && data.isApplied === true, 'btn-warning': data.dataStatus !== '2' && data.isApplied === false}"
+                       v-text="data.actionText">
+                    </a>
                   </div>
                 </div>
               </div>

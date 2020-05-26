@@ -1,0 +1,67 @@
+#app {
+  font-weight: 400;
+}
+.kt-widget__media img {
+  width: 230px !important;
+}
+.text-applied {
+  margin-top: 1.5rem;
+  margin-right: 2rem;
+}
+.kt-widget__value {
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  display: inline !important;
+}
+.course-schedule {
+  width: 750px;
+  margin: 0 auto;
+}
+.font-weight-400 {
+  font-weight: 400;
+}
+.course-schedule .week-day {
+  width: 150px;
+}
+.course-schedule .week-day-schedule {
+  width: 600px;
+}
+.exercises-self .student-name {
+  width: 125px !important;
+}
+.exercises-self .university {
+  width: 120px !important;
+}
+.exercises-self .course-class {
+  width: 70px;
+}
+.exercises-self .knowledge {
+  width: 140px;
+}
+.exercises-self .exercises-name {
+  width: 150px;
+}
+.exercises-self .code-uri {
+  width: 80px;
+}
+.exercises-self .submit-time {
+  width: 100px;
+}
+.exercises-self .approve-name {
+  width: 100px;
+}
+.exercises-self .exercises-status {
+  width: 100px;
+}
+.exercises-self .option {
+  width: 100px;
+}
+.tab-label-color-1 {
+  color: #ff6666 !important;
+}
+.tab-label-color-2 {
+  color: #3399cc !important;
+}
+.tab-label-color-3 {
+  color: #339999 !important;
+}

@@ -1,7 +1,8 @@
 {
   "pageSize": {
-    "page_size_10": 10,
-    "page_size_16": 16
+    "ten": 10,
+    "sixteen": 16,
+    "all": 9999
   },
   "paginationSize": 10
 }

@@ -27,6 +27,7 @@ localMessage.UPLOAD_SUCCESS = '文件上传成功！';
 localMessage.SAVE_SUCCESS = '数据保存成功！';
 localMessage.DELETE_SUCCESS = '数据删除成功！';
 localMessage.SET_SUCCESS = '设置成功！';
+localMessage.NOT_FOUND_DATA = '为查询到满足条件的内容。';
 localMessage.NO_USING_LEARNING_PHASE = '未查询到该技术的学习路径！';
 localMessage.NO_USING_KNOWLEDGE = '未查询到该学习路径的知识点！';
 localMessage.NO_TECHNOLOGY_DATA = '抱歉，暂时没有更多热门技术了, 后续会持续添加，敬请期待！';
@@ -40,7 +41,7 @@ localMessage.EXERCISES_CODE_SINGLE_FORMAT_INVALID = '单点练习的习题编码
 localMessage.EXERCISES_CODE_COMPREHENSIVE_FORMAT_INVALID = '综合练习的习题编码格式不正确！';
 localMessage.EXERCISES_CODE_PROJECT_FORMAT_INVALID = '项目练习的习题编码格式不正确！';
 localMessage.EXERCISES_CODE_INVALID = '您输入的习题编码已存在！';
-localMessage.PARAMETER_ERROR = '参数错误，无法继续操作！';
+localMessage.PARAMETER_ERROR = '未能取得必要的参数，无法继续操作！';
 localMessage.PARAMETER_ERROR_TECHNOLOGY_ID = '未能读取到技术编号，无法继续操作！';
 
 localMessage.ACCOUNT_WAITING = '您的账户正在等待所在院校的管理员审批，审批通过后方可登陆';

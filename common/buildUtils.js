@@ -17,11 +17,10 @@ exports.buildRequestApiUri = function (apiName, parameters) {
   return serviceUri;
 };
 
-exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) {
+exports.buildRenderData = function (pageNumber, pageSize, serviceResult) {
   let renderData = {};
   if(!serviceResult.data.result){
     renderData = {
-      title: title,
       totalCount: 0,
       pageSize: pageSize,
       paginationArray:[],
@@ -33,7 +32,6 @@ exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) 
     let nextPaginationNum = pagingUtils.getNextPaginationNum(pageNumber, pageSize, serviceResult.data.totalCount);
     if(serviceResult.data.responseData === null){
       renderData = {
-        title: title,
         totalCount: serviceResult.data.totalCount,
         currentPageNum: pageNumber,
         pageSize: pageSize,
@@ -42,7 +40,6 @@ exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) 
     }else{
       if(prePaginationNum > 0 && nextPaginationNum > 0){
         renderData = {
-          title: title,
           totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           prePageNum: prePaginationNum,
@@ -53,7 +50,6 @@ exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) 
         }
       }else if(prePaginationNum === 0 && nextPaginationNum === -1){
         renderData = {
-          title: title,
           totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           currentPageNum: pageNumber,
@@ -62,7 +58,6 @@ exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) 
         }
       }else if(prePaginationNum === 0) {
         renderData = {
-          title: title,
           totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           nextPageNum: nextPaginationNum,
@@ -72,7 +67,6 @@ exports.buildRenderData = function (title, pageNumber, pageSize, serviceResult) 
         }
       }else{
         renderData = {
-          title: title,
           totalCount: serviceResult.data.totalCount,
           paginationArray: paginationArray,
           prePageNum: prePaginationNum,

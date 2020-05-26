@@ -81,7 +81,7 @@ const app = new Vue({
         this.technologyModel.technologyMemo = res.data.technology.technologyMemo;
       })
       .catch(err => {
-        message.error(localStorage.NETWORK_ERROR);
+        message.error(localMessage.NETWORK_ERROR);
       });
     },
     loadCompanyList: function () {
@@ -94,7 +94,7 @@ const app = new Vue({
         this.companyModel.dataList = res.data.dataList;
       })
       .catch(err => {
-        message.error(localStorage.NETWORK_ERROR);
+        message.error(localMessage.NETWORK_ERROR);
       });
     },
     loadKnowledgeList: function () {
@@ -115,7 +115,7 @@ const app = new Vue({
         this.knowledgeModel.toIndex = res.data.dataContent.dataList === null ? 0 : (this.knowledgeModel.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + this.knowledgeModel.dataList.length;
       })
       .catch(err => {
-        message.error(localStorage.NETWORK_ERROR);
+        message.error(localMessage.NETWORK_ERROR);
       });
     },
     loadStudentList: function () {
@@ -145,7 +145,7 @@ const app = new Vue({
         this.studentModel.toIndex = res.data.dataContent.dataList === null ? 0 : (this.studentModel.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + this.studentModel.dataList.length;
       })
       .catch(err => {
-        message.error(localStorage.NETWORK_ERROR);
+        message.error(localMessage.NETWORK_ERROR);
       });
     },
     onKnowledgeFirstPage: function () {

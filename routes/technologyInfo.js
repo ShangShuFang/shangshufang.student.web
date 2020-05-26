@@ -36,7 +36,7 @@ router.get('/data', function(req, res, next) {
 router.get('/knowledge/list', function(req, res, next) {
   const apiKey = 'knowledgeList';
   const pageNumber = req.query.pageNumber;
-  const pageSize = sysConfig.pageSize.page_size_10;
+  const pageSize = sysConfig.pageSize.ten;
   const technologyID = req.query.technologyID;
   const learningPhaseID = 0;
   const dataStatus = 'A';
@@ -45,7 +45,7 @@ router.get('/knowledge/list', function(req, res, next) {
 
   axios.get(requestUri)
     .then(result => {
-      let dataContent = buildUtils.buildRenderData('知识点列表', pageNumber, pageSize, result);
+      let dataContent = buildUtils.buildRenderData(pageNumber, pageSize, result);
       res.json({
         err: !result.data.result,
         code: result.data.responseCode,
@@ -65,14 +65,14 @@ router.get('/knowledge/list', function(req, res, next) {
 router.get('/student/list', function(req, res, next) {
   const apiKey = 'signUp4Technology';
   const pageNumber = req.query.pageNumber;
-  const pageSize = sysConfig.pageSize.page_size_10;
+  const pageSize = sysConfig.pageSize.ten;
   const technologyID = req.query.technologyID;
   const parameters = [pageNumber, pageSize, technologyID];
   const requestUri = encodeURI(buildUtils.buildRequestApiUri(apiKey, parameters));
 
   axios.get(requestUri)
     .then(result => {
-      let dataContent = buildUtils.buildRenderData('报名学生列表', pageNumber, pageSize, result);
+      let dataContent = buildUtils.buildRenderData(pageNumber, pageSize, result);
       res.json({
         err: !result.data.result,
         code: result.data.responseCode,

@@ -23,12 +23,30 @@
       "technologySimple": "api/v1/technology/simple",
       "courseListByContent": "api/v1/course/list/like",
       "courseList": "api/v1/course/list",
+      "courseListByStudent": "api/v1/course/list/student",
+      "applyCourse": "api/v1/course/sign_up/add",
+
+
+
+
 
       "technology": "api/v1/technology/any",
       "knowledgeList": "api/v1/knowledge/list",
       "signUp4Technology": "api/v1/course/sign_up/list/student",
       "company": "api/v1/customer/company/list",
 
+      "courseDetail": "api/v1/course/any",
+      "signUp4Student": "api/v1/course/sign_up/list/student",
+      "exercises4Student": "api/v1/course/exercises/list/student",
+      "courseQuestionList": "api/v1/course/question/list",
+      "checkAppliedCourse": "api/v1/course/sign_up/check/sign_up",
+      "checkIsAssistant": "api/v1/course/sign_up/check/assistant",
+      "submitCourseQuestionLeaveMessage": "api/v1/course/answer/add",
+      "classExercisesReviewList": "api/v1/course/exercises/review/list",
+      "submitSourceCodeGitUrl": "api/v1/course/exercises/change",
+      "codeStandard": "api/v1/code_standard/list",
+      "addClassExercisesReview": "api/v1/course/exercises/review/add",
+      "courseExercises": "api/v1/knowledge/exercises/list/assigned",
 
 
 
@@ -50,13 +68,11 @@
 
       "usingLearningPhase": "/api/v1/sys_parm/learning_phase/list/has_knowledge",
 
-      "knowledgeExercises": "/api/v1/knowledge/exercises/list/assigned",
-
       "checkVerificationCode": "api/v1/verification_code/any",
       "saveVerificationCode": "api/v1/verification_code/add",
 
       
-      "courseDetail": "/api/v1/course/any",
+
       "addCourse": "/api/v1/course/add",
       "courseSimpleList": "/api/v1/course/list/simple",
       "changeCourseStatus": "/api/v1/course/change/status",
@@ -67,16 +83,16 @@
       "changeCoursePlan": "/api/v1/course/plan/change",
       "finishClass": "/api/v1/course/plan/finish",
       
-      "signUp4Student": "/api/v1/course/sign_up/list/student",
+
       "signUp4Course": "/api/v1/course/sign_up/list/course",
-      "courseQuestionList": "/api/v1/course/question/list",
-      "addCourseQuestionLeaveMessage": "/api/v1/course/answer/add",
+
+
       "classExercises": "/api/v1/course/exercises/list",
       "assignClassExercises": "/api/v1/course/exercises/assign",
-      "classExercisesReviewList": "/api/v1/course/exercises/review/list",
-      "addClassExercisesReview": "/api/v1/course/exercises/review/add",
+
+
       "changeClassExercisesReview": "/api/v1/course/exercises/review/change",
-      "codeStandard": "/api/v1/code_standard/list",
+
 
       "teachersList": "/api/v1/user/teacher/list",
       

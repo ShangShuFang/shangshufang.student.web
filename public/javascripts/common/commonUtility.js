@@ -91,8 +91,8 @@ commonUtility.getUriParameter = function (name) {
   if (url.indexOf('?') !== 0) { 
     return null; 
   }
-  parameters = url.substr(1);
-  parameterArray = parameters.split('&');
+  let parameters = url.substr(1);
+  let parameterArray = parameters.split('&');
   // let name = name || '';
   let value = '';
   // 获取全部参数及其值

@@ -38,7 +38,7 @@ message.info = function (msg) {
         mouse_over:  false,
         showProgressbar:  false,
         spacing: 10,
-        timer: 3000,
+        timer: 5000,
         placement: {
             from: 'top', 
             align: 'right'

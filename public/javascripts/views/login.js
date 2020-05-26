@@ -4,9 +4,15 @@ const login = new Vue({
     cellphone: '',
     password: '',
     showError: false,
-    errorMessage: ''
+    errorMessage: '',
+    backUrl: '/'
   },
   methods: {
+    initPage: function () {
+      if (location.href.indexOf('=') !== -1) {
+        this.backUrl = location.href.substr(location.href.indexOf('=') + 1);
+      }
+    },
     checkData: function () {
       if (commonUtility.isEmpty(this.cellphone)) {
         this.showError = true;
@@ -45,11 +51,14 @@ const login = new Vue({
           return false;
         }
         commonUtility.setCookie(Constants.COOKIE_LOGIN_USER, JSON.stringify(res.data.userInfo));
-        location.href = '/index';
+        location.href = _this.backUrl;
       })
       .catch(function (error) {
         message.error(localMessage.NETWORK_ERROR);
       });
     }
+  },
+  mounted() {
+    this.initPage();
   }
 });
