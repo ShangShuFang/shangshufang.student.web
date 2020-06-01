@@ -334,7 +334,11 @@ const app = new Vue({
     },
     setStudentAppliedCourse: function (dataList) {
       let that = this;
-      if (commonUtility.isEmpty(this.loginUser) || commonUtility.isEmptyList(dataList)) {
+      if (commonUtility.isEmptyList(dataList)) {
+        that.dataList = [];
+        return false;
+      }
+      if (commonUtility.isEmpty(this.loginUser)) {
         dataList.forEach((data) => {
           if (data.dataStatus === '2') {
             data.actionText = '课程结束';

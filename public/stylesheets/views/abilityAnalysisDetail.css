@@ -1,0 +1,40 @@
+.learning-technology-count{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0f9af0;
+}
+.company-focus-count {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e71d62;
+}
+.student-name{
+  font-size: 1.8rem;
+}
+.online-question-count {
+  font-weight: bold;
+  color: #2bc9c5;
+}
+.online-question-position {
+  font-weight: bold;
+  color: #2bc9c5;
+}
+.online-answer-count {
+  font-weight: bold;
+  color: #1dc94c;
+}
+.online-answer-position {
+  font-weight: bold;
+  color: #1dc94c;
+}
+.project-count {
+  font-weight: bold;
+  color: #e84b3c;
+}
+.project-position {
+  font-weight: bold;
+  color: #e84b3c;
+}
+.learning-percent-text{
+  font-size: 1rem !important;
+}

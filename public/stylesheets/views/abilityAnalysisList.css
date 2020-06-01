@@ -1,0 +1,71 @@
+.body-header {
+  max-height: 132px;
+  height: 132px;
+  background: url(/media/bg/header.png) no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}
+.filter-group {
+  border: 1px solid #e8e8e8;
+}
+.filter-group .filter{
+  padding-top: 7px;
+}
+.filter-group .filter .head{
+  padding: 0.5rem 1rem;
+  line-height: 1.5;
+}
+.filter-group .filter .cellphone{
+  width: 250px;
+  display: inline-block;
+  height: 33px;
+}
+.filter-group .filter-last{
+  padding-bottom: 7px;
+}
+.filter-group .btn-search{
+  width: 33px;
+  height: 33px;
+}
+.filter-space{
+  border-top: 1px dashed #dedede;
+}
+.kt-widget12__stat{
+  float: right;
+}
+.progress{
+  height: 0.6rem;
+  margin-top: 3px
+}
+.finish-knowledge-percent{
+  color: #1ec9b7 !important;
+}
+.finish-exercises-count{
+  color: #f6aa33 !important;
+}
+.once-compilation-success-rate{
+  color: #2bc9c5 !important;
+}
+.once-run-success-rate{
+  color: #1dc94c !important;
+}
+.finish-comprehensive-exercises {
+  color: #9a58b5 !important;
+}
+.finish-project-count {
+  color: #e84b3c !important;
+}
+
+.kt-pagination__link--disabled, .kt-pagination__link--disabled > a:hover {
+  color: #93a2dd !important;
+  background: #f0f3ff !important;
+  opacity: 0.3 !important;
+}
+.student-filter {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.student-filter .kt-input-icon {
+  width: 60%;
+  float: right;
+}

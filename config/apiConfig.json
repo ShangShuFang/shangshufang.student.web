@@ -26,10 +26,6 @@
       "courseListByStudent": "api/v1/course/list/student",
       "applyCourse": "api/v1/course/sign_up/add",
 
-
-
-
-
       "technology": "api/v1/technology/any",
       "knowledgeList": "api/v1/knowledge/list",
       "signUp4Technology": "api/v1/course/sign_up/list/student",
@@ -48,6 +44,21 @@
       "addClassExercisesReview": "api/v1/course/exercises/review/add",
       "courseExercises": "api/v1/knowledge/exercises/list/assigned",
 
+      "studentAbilityResultList": "api/v1/analysis/ability/student/list",
+      "studentAbilityResultSummary": "api/v1/analysis/ability/student/any/student_summary",
+      "studentLearningTechnologyAbilityResultSummary": "api/v1/analysis/ability/student/list/learning_technology",
+      "studentAbility4knowledge": "api/v1/analysis/ability/student/any/knowledge_summary",
+      "studentAbility4codeStandard": "api/v1/analysis/ability/student/any/code_guideline",
+      "exerciseAnalysis": "api/v1/analysis/ability/student/list/exercise_number",
+      "exercisePercentAnalysis": "api/v1/analysis/ability/student/list/exercise_percent",
+
+
+
+
+
+
+
+
 
 
 
@@ -55,24 +66,13 @@
 
       
       "technologyList": "/api/v1/technology/client",
-      
-      
       "learningTechnology": "/api/v1/technology/learning",
-
       "developmentDirections": "/api/v1/develop_direction/list/direction",
-
-      
       "knowledgeSimpleList": "/api/v1/knowledge/list/simple",
-
       "learningPhase": "/api/v1/sys_parm/learning_phase/list",
-
       "usingLearningPhase": "/api/v1/sys_parm/learning_phase/list/has_knowledge",
-
       "checkVerificationCode": "api/v1/verification_code/any",
       "saveVerificationCode": "api/v1/verification_code/add",
-
-      
-
       "addCourse": "/api/v1/course/add",
       "courseSimpleList": "/api/v1/course/list/simple",
       "changeCourseStatus": "/api/v1/course/change/status",
@@ -82,39 +82,17 @@
       "coursePlanList": "/api/v1/course/plan/list",
       "changeCoursePlan": "/api/v1/course/plan/change",
       "finishClass": "/api/v1/course/plan/finish",
-      
-
       "signUp4Course": "/api/v1/course/sign_up/list/course",
-
-
       "classExercises": "/api/v1/course/exercises/list",
       "assignClassExercises": "/api/v1/course/exercises/assign",
-
-
       "changeClassExercisesReview": "/api/v1/course/exercises/review/change",
-
-
       "teachersList": "/api/v1/user/teacher/list",
-      
-      
       "changeAssistant": "/api/v1/user/student/change/assistant",
-
       "buryingPoint": "/api/v1/burying_point/add",
-
       "suggestType": "/api/v1/sys_parm/suggest_type/list",
       "addSuggest": "/api/v1/suggest/add",
-
-      
       "companyUsingTechnology": "/api/v1/customer/company/list/using/technology",
-      "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client",
-
-      "studentAbilityResultList": "/api/v1/analysis/ability/student/list",
-      "studentAbilityResultSummary": "/api/v1/analysis/ability/student/any/student_summary",
-      "studentLearningTechnologyAbilityResultSummary": "/api/v1/analysis/ability/student/list/learning_technology",
-      "studentAbility4knowledge": "/api/v1/analysis/ability/student/any/knowledge_summary",
-      "studentAbility4codeStandard": "/api/v1/analysis/ability/student/any/code_guideline",
-      "exerciseAnalysis": "/api/v1/analysis/ability/student/list/exercise_number",
-      "exercisePercentAnalysis": "/api/v1/analysis/ability/student/list/exercise_percent"
+      "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client"
     }
   }
 }

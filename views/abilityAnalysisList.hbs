@@ -1,0 +1,256 @@
+<link href="/stylesheets/views/abilityAnalysisList.css" rel="stylesheet" type="text/css" />
+<div id="app">
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-2">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">研发方向：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedDirection.directionID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item" v-for="direction in directionList" :class="{'kt-menu__item--here': selectedDirection.directionID == direction.directionID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection(direction)">
+                <span class="kt-menu__link-text" v-text="direction.directionName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">技术分类：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedCategory.categoryID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item"
+                v-for="category in categoryList"
+                :class="{'kt-menu__item--here': selectedCategory.categoryID == category.technologyCategoryID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory(category)">
+                <span class="kt-menu__link-text" v-text="category.technologyCategoryName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">热点技术：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedTechnology.technologyID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item"
+                v-for="technology in technologyList"
+                :class="{'kt-menu__item--here': selectedTechnology.technologyID == technology.technologyID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology(technology)">
+                <span class="kt-menu__link-text" v-text="technology.technologyName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3" v-if="isLogin === true">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="row student-filter">
+        <div class="col-md-6">
+          <button type="button"
+                  class="btn btn-pill btn-elevate btn-sm"
+                  v-for="universityFilter in universityFilterList"
+                  :class="{'btn-info': selectedUniversityFilter.filterID == universityFilter.filterID, 'btn-outline-hover-info': selectedUniversityFilter.filterID != universityFilter.filterID}"
+                  v-text="universityFilter.filterName"
+                  @click="onFilterByUniversity(universityFilter)"></button>
+        </div>
+        <div class="col-md-6 text-right">
+          <div class="kt-input-icon kt-input-icon--right">
+            <input type="text" class="form-control student-name" v-model="studentName" @keydown="onFilterByName($event)" placeholder="按姓名查询...">
+            <span class="kt-input-icon__icon kt-input-icon__icon--right">
+              <span><i class="la la-search"></i></span>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container kt-grid__item kt-grid__item--fluid kt-align-center kt-padding-15" v-if="totalCount == 0">
+    未查询到满足条件的数据
+  </div>
+
+  <div class="kt-container kt-grid__item kt-grid__item--fluid" v-if="totalCount > 0">
+    <div ng-cloak class="row" v-if="totalCount > 0">
+      <div class="col-xl-3" v-for="data in dataList">
+        <!--Begin::Portlet-->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__head kt-portlet__head--noborder">
+            <div class="kt-portlet__head-label">
+              <h3 class="kt-portlet__head-title">
+              </h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+              <a class="kt-nav__link kt-widget__username kt-font-brand kt-font-bold"
+                 :href="'/ability/analysis/detail?s=o&universityCode='+data.universityCode+'&schoolID='+data.schoolID+'&studentID='+data.studentID" target="_blank">
+              <i class="kt-nav__link-icon flaticon2-pie-chart-1"></i>
+              <span class="kt-nav__link-text">详细</span>
+              </a>
+            </div>
+          </div>
+          <div class="kt-portlet__body">
+            <!--begin::Widget -->
+            <div class="kt-widget kt-widget--user-profile-2">
+              <div class="kt-widget__head">
+                <div class="kt-widget__media">
+                  <img class="kt-widget__img" :src="data.studentPhoto" alt="image">
+                </div>
+                <div class="kt-widget__info">
+                <span class="kt-widget__username">
+                  <span v-text="data.studentName"></span>
+                  <span v-text="data.abilityLevel"
+                        class="ability-level"
+                        :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}"></span>
+                </span>
+                  <span class="kt-widget__desc">
+                  超越站内<span class="position-site" v-text="data.positionSite + '%'"></span>的同学
+                </span>
+                  <span class="kt-widget__desc">
+                  已被<span class="position-site">0</span>家企业关注
+                </span>
+                </div>
+              </div>
+              <div class="kt-widget__body">
+                <div class="kt-widget__section">
+                  <div>
+                    <span>掌握知识点</span>
+                    <span class="kt-widget12__stat learning-percent-text finish-knowledge-percent kt-font-bold" v-text="data.finishKnowledgePercent + '%'"></span>
+                  </div>
+                  <div class="progress kt-progress--sm">
+                    <div class="progress-bar bg-success" role="progressbar"
+                         :style="{'width': data.finishKnowledgePercent + '%'}">
+                    </div>
+                  </div>
+                </div>
+                <div class="kt-widget__item">
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label">高校:</span>
+                    <span class="kt-widget__data" v-text="data.universityName"></span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label">学院:</span>
+                    <span class="kt-widget__data" v-text="data.schoolName"></span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label">专业:</span>
+                    <span class="kt-widget__data" v-text="data.majorName"></span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label">技术:</span>
+                    <span class="kt-widget__data" v-text="data.technologyName"></span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label finish-exercises-count">练习题完成数量:</span>
+                    <span class="kt-widget__data finish-exercises-count kt-font-bold" v-text="data.finishExercisesCount"></span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label once-compilation-success-rate">平均一次性编译通过率:</span>
+                    <span class="kt-widget__data once-compilation-success-rate kt-font-bold" v-text="data.onceCompilationSuccessRate"></span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label once-run-success-rate">平均一次性运行正确率:</span>
+                    <span class="kt-widget__data once-run-success-rate kt-font-bold" v-text="data.onceRunSuccessRate"></span>
+                  </div>
+
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label finish-comprehensive-exercises">综合练习完成数量:</span>
+                    <span class="kt-widget__data finish-comprehensive-exercises kt-font-bold">0</span>
+                  </div>
+                  <div class="kt-widget__contact">
+                    <span class="kt-widget__label finish-project-count">参与实战项目数量:</span>
+                    <span class="kt-widget__data finish-project-count kt-font-bold">0</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!--end::Widget -->
+          </div>
+        </div>
+
+        <!--End::Portlet-->
+      </div>
+    </div>
+    <div ng-cloak class="row" v-if="totalCount > 0">
+      <div class="col-xl-12">
+        <!--begin:: Components/Pagination/Default-->
+        <div class="kt-portlet">
+          <div class="kt-portlet__body">
+            <!--begin: Pagination-->
+            <div class="kt-pagination kt-pagination--brand">
+              <ul class="kt-pagination__links">
+                <li class="kt-pagination__link--first" @click="onFirstPage()" v-if="pageNumber > 1">
+                  <a href="javascript:;" title="第一页"><i class="fa fa-angle-double-left kt-font-brand"></i></a>
+                </li>
+                <li class="kt-pagination__link--next" @click="onPrePage" v-if="pageNumber > 1">
+                  <a href="javascript:;" title="前一页"><i class="fa fa-angle-left kt-font-brand"></i></a>
+                </li>
+
+                <li v-for="pagination in paginationArray"
+                    :class="{'kt-pagination__link--active': pageNumber == pagination}"
+                    @click="onPagination(pagination)">
+                  <a href="javascript:;" v-text="pagination"></a>
+                </li>
+
+                <li class="kt-pagination__link--prev" @click="onNextPage()" v-if="pageNumber < maxPageNumber">
+                  <a href="javascript:;" title="下一页"><i class="fa fa-angle-right kt-font-brand"></i></a>
+                </li>
+                <li class="kt-pagination__link--last" @click="onLastPage()" v-if="pageNumber < maxPageNumber">
+                  <a href="javascript:;" title="最后一页"><i class="fa fa-angle-double-right kt-font-brand"></i></a>
+                </li>
+
+              </ul>
+              <div class="kt-pagination__toolbar">
+              <span class="pagination__desc">
+                显示第<span v-text="fromIndex"></span>到第<span v-text="toIndex"></span>条数据，共计<span v-text="totalCount"></span>条数据
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/abilityAnalysisList.js');
+  });
+</script>
