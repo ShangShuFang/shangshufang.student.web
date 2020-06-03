@@ -89,4 +89,29 @@ router.get('/student/list', function(req, res, next) {
     });
 });
 
+router.get('/student/top/list', function(req, res, next) {
+  const apiKey = 'topStudentList';
+  const technologyID = req.query.technologyID;
+  const topNumber = sysConfig.pageSize.ten;
+  const parameters = [technologyID, topNumber];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          dataList: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
 module.exports = router;

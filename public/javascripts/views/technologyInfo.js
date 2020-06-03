@@ -19,6 +19,10 @@ const app = new Vue({
     companyModel: {
       dataList: []
     },
+    topStudentModel: {
+      totalCount: 0,
+      dataList: []
+    },
     knowledgeModel: {
       fromIndex : 0,
       toIndex: 0,
@@ -52,6 +56,7 @@ const app = new Vue({
       this.getParameter();
       this.loadTechnologyInfo();
       this.loadCompanyList();
+      this.loadTopStudent();
       this.loadKnowledgeList();
       this.loadStudentList();
     },
@@ -96,6 +101,27 @@ const app = new Vue({
       .catch(err => {
         message.error(localMessage.NETWORK_ERROR);
       });
+    },
+    loadTopStudent: function () {
+      axios.get(`/technology/info/student/top/list?technologyID=${this.commonModel.technologyID}`)
+          .then(res => {
+            if (res.data.err) {
+              message.error(localMessage.exception(res.data.code, res.data.msg));
+              return false;
+            }
+            if (!commonUtility.isEmptyList(res.data.dataList)) {
+              res.data.dataList.forEach((data)=>{
+                if (commonUtility.isEmpty(data.studentPhoto)) {
+                  data.studentPhoto = '/media/users/user_default.png';
+                }
+              });
+            }
+            this.topStudentModel.totalCount = commonUtility.isEmptyList(res.data.dataList) ? 0 : res.data.dataList.length;
+            this.topStudentModel.dataList = res.data.dataList;
+          })
+          .catch(err => {
+            message.error(localMessage.NETWORK_ERROR);
+          });
     },
     loadKnowledgeList: function () {
       axios.get(`/technology/info/knowledge/list?pageNumber=${this.knowledgeModel.pageNumber}&technologyID=${this.commonModel.technologyID}`)

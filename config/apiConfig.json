@@ -28,6 +28,7 @@
 
       "technology": "api/v1/technology/any",
       "knowledgeList": "api/v1/knowledge/list",
+      "topStudentList": "api/v1/user/student/list/top",
       "signUp4Technology": "api/v1/course/sign_up/list/student",
       "company": "api/v1/customer/company/list",
 

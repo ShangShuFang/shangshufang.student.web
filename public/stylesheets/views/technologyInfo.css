@@ -43,6 +43,33 @@
 .using-company .count {
   color: #f3bb3a !important;
 }
+
+.top-student table .student-name {
+  width: 150px;
+}
+.top-student table .university-name {
+  width: 140px;
+}
+.top-student table .major-name {
+  width: 140px;
+}
+.top-student table .learning-processing {
+  width: 160px;
+}
+.top-student table .progress {
+  height: 1.3rem;
+}
+.top-student table .exercises_count {
+  width: 150px;
+}
+.top-student table .once-compilation-success-rate {
+  width: 150px;
+}
+.top-student table .once-run-success-rate {
+  width: 150px;
+}
+
+
 .knowledge-list table .order {
   width: 8%;
 }
