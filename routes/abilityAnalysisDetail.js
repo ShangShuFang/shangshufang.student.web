@@ -170,4 +170,156 @@ router.get('/exercisePercentAnalysis', (req, res, next) => {
       });
 });
 
+router.get('/knowledge/finish', (req, res, next) => {
+  const apiKey = 'finishKnowledgeList';
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          totalCount: result.data.totalCount,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+router.get('/knowledge/weakness', (req, res, next) => {
+  const apiKey = 'weaknessKnowledgeList';
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          totalCount: result.data.totalCount,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+router.get('/knowledge/noLearning', (req, res, next) => {
+  const apiKey = 'noLearningKnowledgeList';
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          totalCount: result.data.totalCount,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+router.get('/exercise/list', (req, res, next) => {
+  const apiKey = 'studentExercisesList';
+  const pageNumber = req.query.pageNumber;
+  const pageSize = sysConfig.pageSize.ten;
+  const universityCode = req.query.universityCode;
+  const schoolID = req.query.schoolID;
+  const studentID = req.query.studentID;
+  const technologyID = req.query.technologyID;
+  const dataStatus = req.query.dataStatus;
+
+  const parameters = [pageNumber, pageSize, universityCode, schoolID, studentID, technologyID, dataStatus];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        let dataContent = buildUtils.buildRenderData(pageNumber, pageSize, result);
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          dataContent: dataContent
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+
+
+router.get('/exercisePercentAnalysis', (req, res, next) => {
+  const apiKey = 'exercisePercentAnalysis';
+  const parameters = [req.query.pageSize, sysConfig.pageSize.sixteen, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+router.get('/exercisePercentAnalysis', (req, res, next) => {
+  const apiKey = 'exercisePercentAnalysis';
+  const parameters = [req.query.pageSize, sysConfig.pageSize.sixteen, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
 module.exports = router;

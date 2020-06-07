@@ -101,8 +101,169 @@
     </div>
 
   </div>
+
+  <div class="modal fade" id="kt_modal_knowledge" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content" style="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">知识点掌握情况</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="kt-scroll ps ps--active-y" data-scroll="true" data-height="550" style="max-height: 550px; overflow: hidden;">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="kt-portlet">
+                  <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                      <h3 class="kt-portlet__head-title">
+                        已掌握知识点
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="kt-list-timeline">
+                      <div class="kt-list-timeline__items finish-knowledge">
+                        <div class="kt-align-center finish-knowledge-message-complete kt-hidden">没有更多已掌握的知识点了</div>
+                        <div class="kt-align-center finish-knowledge-message-none kt-hidden">暂时还没有已掌握的知识点</div>
+                      </div>
+<!--                      <div class="kt-align-center kt-margin-t-15 finish-knowledge-more kt-hidden">-->
+<!--                        <button type="button" class="btn btn-secondary btn-pill" id="btnLoadMoreFinishKnowledge">加载更多</button>-->
+<!--                      </div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="kt-portlet">
+                  <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                      <h3 class="kt-portlet__head-title">
+                        掌握薄弱知识点
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="kt-list-timeline">
+                      <div class="kt-list-timeline__items weakness-knowledge">
+                        <div class="kt-align-center weakness-knowledge-message-complete kt-hidden">没有更多掌握薄弱知识点了</div>
+                        <div class="kt-align-center weakness-knowledge-message-none kt-hidden">暂时还没有掌握薄弱的知识点</div>
+                      </div>
+<!--                      <div class="kt-align-center kt-margin-t-15 weakness-knowledge-more kt-hidden">-->
+<!--                        <button type="button" class="btn btn-secondary btn-pill" id="btnLoadMoreWeaknessKnowledge">加载更多</button>-->
+<!--                      </div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="kt-portlet">
+                  <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                      <h3 class="kt-portlet__head-title">
+                        未掌握知识点
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="kt-list-timeline">
+                      <div class="kt-list-timeline__items noLearning-knowledge">
+                        <div class="kt-align-center noLearning-knowledge-message-complete kt-hidden">没有更多未掌握知识点了</div>
+                        <div class="kt-align-center noLearning-knowledge-message-none kt-hidden">太棒了，所有的知识点全都学习过了！</div>
+                      </div>
+<!--                      <div class="kt-align-center kt-margin-t-20 noLearning-knowledge-more kt-hidden">-->
+<!--                        <button type="button" class="btn btn-secondary btn-pill" id="btnLoadMoreNoLearningKnowledge">加载更多</button>-->
+<!--                      </div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
+  <div class="modal fade" id="kt_modal_code_standard" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content" style="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">代码规范出错情况</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="kt-scroll ps ps--active-y" data-scroll="true" data-height="450" style="max-height: 450px; overflow: hidden;">
+            <table class="table table-striped" id="table_code_standard">
+              <thead>
+                <tr>
+                  <th style="width: 15%">#</th>
+                  <th style="width: 65%">代码规范</th>
+                  <th style="width: 20%">出错次数</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <div class="modal fade" id="kt_modal_exercise" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content" style="">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">练习题</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <button type="button" class="btn btn-pill btn-sm btn-info btn-filter" data-status="NULL">全部</button>
+            <button type="button" class="btn btn-pill btn-sm btn-outline-hover-info btn-filter" data-status="P">未练习</button>
+            <button type="button" class="btn btn-pill btn-sm btn-outline-hover-info btn-filter" data-status="W">待批改</button>
+            <button type="button" class="btn btn-pill btn-sm btn-outline-hover-info btn-filter" data-status="R">待修改</button>
+            <button type="button" class="btn btn-pill btn-sm btn-outline-hover-info btn-filter" data-status="S">已通过</button>
+          </div>
+          <table class="table table-striped" id="table_exercise">
+            <thead>
+              <tr>
+                <th style="width: 25%">知识点</th>
+                <th style="width: 25%">练习题</th>
+                <th style="width: 15%">下发时间</th>
+                <th style="width: 15%">提交时间</th>
+                <th style="width: 10%">习题状态</th>
+                <th style="width: 10%">查看作品</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <div class="kt-pagination kt-pagination--warning kt-pagination--circle">
+            <ul class="kt-pagination__links exercise-pagination">
+            </ul>
+            <div class="kt-pagination__toolbar">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
 <script>
   $(document).ready(function () {
     commonUtility.appendScript('/javascripts/views/abilityAnalysisDetail.js');
