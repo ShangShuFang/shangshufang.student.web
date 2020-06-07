@@ -194,8 +194,8 @@ router.get('/knowledge/finish', (req, res, next) => {
       });
 });
 
-router.get('/knowledge/weakness', (req, res, next) => {
-  const apiKey = 'weaknessKnowledgeList';
+router.get('/knowledge/learning', (req, res, next) => {
+  const apiKey = 'learningKnowledgeList';
   const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
