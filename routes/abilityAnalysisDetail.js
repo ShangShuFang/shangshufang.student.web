@@ -242,6 +242,31 @@ router.get('/knowledge/noLearning', (req, res, next) => {
       });
 });
 
+router.get('/knowledge/weak', (req, res, next) => {
+  const apiKey = 'weakKnowledgeList';
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.universityCode, req.query.schoolID, req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        let dataContent = buildUtils.buildRenderData(req.query.pageNumber, sysConfig.pageSize.all, result);
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          totalCount: result.data.totalCount,
+          dataContent: dataContent
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
 router.get('/exercise/list', (req, res, next) => {
   const apiKey = 'studentExercisesList';
   const pageNumber = req.query.pageNumber;
@@ -273,8 +298,6 @@ router.get('/exercise/list', (req, res, next) => {
         });
       });
 });
-
-
 
 router.get('/exercisePercentAnalysis', (req, res, next) => {
   const apiKey = 'exercisePercentAnalysis';

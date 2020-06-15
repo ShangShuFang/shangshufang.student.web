@@ -945,6 +945,7 @@ const app = new Vue({
         that.loadExercises(
             that.courseMyExercisesModel.pageNumber,
             that.courseMyExercisesModel.filterStatus,
+            that.courseMyExercisesModel.studentName,
             true);
       })
       .catch(function (error) {

@@ -56,6 +56,7 @@
       "finishKnowledgeList": "api/v1/analysis/ability/student/list/finish_knowledge",
       "learningKnowledgeList": "/api/v1/analysis/ability/student/list/learning_knowledge",
       "noLearningKnowledgeList": "api/v1/analysis/ability/student/list/noLearning_knowledge",
+      "weakKnowledgeList": "/api/v1/analysis/ability/student/list/weak_knowledge",
       "studentExercisesList": "api/v1/course/exercises/list/student/technology",
 
 
