@@ -26167,7 +26167,7 @@ strong {
       .kt-nav .kt-nav__item.active > .kt-nav__link .kt-nav__link-arrow, .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub) > .kt-nav__link .kt-nav__link-icon,
       .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub) > .kt-nav__link .kt-nav__link-text,
       .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub) > .kt-nav__link .kt-nav__link-arrow {
-        color: #3d94fb; }
+        color: #edad37; }
       .kt-nav .kt-nav__item.kt-nav__item--active > .kt-nav__link .kt-nav__link-icon g [fill], .kt-nav .kt-nav__item.active > .kt-nav__link .kt-nav__link-icon g [fill], .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub) > .kt-nav__link .kt-nav__link-icon g [fill] {
         -webkit-transition: fill 0.3s ease;
         transition: fill 0.3s ease;

@@ -1,0 +1,88 @@
+<link href="/stylesheets/views/growingMap.css" rel="stylesheet" type="text/css" />
+<div id="app">
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+    </div>
+  </div>
+  <div class="kt-container kt-grid__item kt-grid__item--fluid kt-margin-t-25">
+    <div class="row" data-sticky-container="">
+      <div class="col-lg-3 col-xl-2">
+        <div class="kt-portlet sticky" data-sticky="true" data-margin-top="100px" data-sticky-for="1023" data-sticky-class="kt-sticky" style="">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+            <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v3 kt-margin-t-20 kt-margin-b-20 nav nav-tabs" role="tablist">
+              <li class="kt-nav__item" v-for="data in growingList">
+                <a class="kt-nav__link" 
+                    :class="{'selected': data.growingID == selectedGrowing.growingID}"
+                    href="javascripts:" 
+                    @click="onShowDetail(data)">
+                  <span class="kt-nav__link-icon"><i class="flaticon2-paper-plane"></i></span>
+                  <span class="kt-nav__link-text" v-text="data.growingTarget"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-xl-10">
+        <div class="alert alert-light alert-elevate fade show" role="alert">
+          <div class="alert-icon"><i class="flaticon-tea-cup kt-font-brand"></i></div>
+          <div class="alert-text" v-text="selectedGrowing.targetMemo"></div>
+        </div>
+        <div class="kt-portlet">
+          <div class="kt-portlet__body">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="kt-timeline-v1">
+                  <div class="kt-timeline-v1__items">
+                    <div class="kt-timeline-v1__marker"></div>
+
+                    <div v-for="(data,index) in selectedGrowingList"
+                        class="kt-timeline-v1__item" 
+                        :class="{'kt-timeline-v1__item--first':index == 0, 'kt-timeline-v1__item--left':index%2 != 1, 'kt-timeline-v1__item--right':index%2 == 1}">
+                      <div class="kt-timeline-v1__item-circle">
+                        <div class="kt-bg-danger"></div>
+                      </div>
+                      <span class="kt-timeline-v1__item-time kt-font-brand" v-text="data.technologyName">
+                      </span>
+                      <div class="kt-timeline-v1__item-content">
+                        <div class="kt-timeline-v1__item-title">
+                          <i class="flaticon-placeholder-3 kt-font-danger"></i>&nbsp;
+                          <span v-text="data.learningPhaseName"></span>
+                        </div>
+                        <div class="kt-timeline-v1__item-body">
+                          <div class="kt-widget4">
+                            <p class="kt-widget4__text" v-for="knowledge in data.knowledgeList">
+                              <i class="flaticon-tool-1 kt-font-success"></i>&nbsp;
+                              <span v-text="knowledge.knowledgeName"></span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="kt-timeline-v1__marker last-marker"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{!-- <div class="col-lg-3 col-xl-2">
+        <div class="kt-portlet sticky" data-sticky="true" data-margin-top="100px" data-sticky-for="1023" data-sticky-class="kt-sticky" style="">
+          <div class="kt-portlet__body">
+            <h4>我的目标</h4>
+
+          </div>
+        </div>
+      </div> --}}
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/growingMap.js');
+  });
+</script>

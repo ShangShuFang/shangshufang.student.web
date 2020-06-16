@@ -16,7 +16,6 @@ commonUtility.isNumber = function (value) {
     return false;
   }
   return !isNaN(value);
-
 };
 
 commonUtility.setCookie = function (name, value) {

@@ -5,7 +5,12 @@
   background-size: cover;
   box-sizing: border-box;
 }
-.kt-nav__link:hover {
-  background-color: #f2f3f8 !important;
-  color: #edaa2e !important;
+.selected {
+  background-color: #f7f8fa;
+}
+.selected span {
+  color: #edad37 !important;
+}
+.last-marker {
+  bottom: 35px;
 }
