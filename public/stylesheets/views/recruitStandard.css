@@ -1,0 +1,7 @@
+.body-header {
+  max-height: 132px;
+  height: 132px;
+  background: url(/media/bg/header.png) no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}

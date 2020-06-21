@@ -31,6 +31,7 @@
       "topStudentList": "api/v1/user/student/list/top",
       "signUp4Technology": "api/v1/course/sign_up/list/student",
       "company": "api/v1/customer/company/list",
+      "companyUsingTechnology": "api/v1/customer/company/list/using/technology",
 
       "courseDetail": "api/v1/course/any",
       "signUp4Student": "api/v1/course/sign_up/list/student",
@@ -103,7 +104,6 @@
       "buryingPoint": "/api/v1/burying_point/add",
       "suggestType": "/api/v1/sys_parm/suggest_type/list",
       "addSuggest": "/api/v1/suggest/add",
-      "companyUsingTechnology": "/api/v1/customer/company/list/using/technology",
       "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client"
     }
   }
