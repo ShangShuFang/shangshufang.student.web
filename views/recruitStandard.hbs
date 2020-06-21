@@ -41,9 +41,10 @@
               <div class="kt-widget__footer kt-margin-0">
                 <div class="row">
                   <div class="col-md-4">
-                    <button type="button" class="btn btn-outline-hover-danger kt-font-danger" @click="onShowDetail(company)">
-                      <i class="fa fa-heart"></i>
-                      关注
+                    <button type="button" class="btn" :class="{'btn-collect': company.isCollect == 0, 'kt-font-danger': company.isCollect == 1}" @click="onCollect(company)">
+                      <i class="la" :class="{'la-heart-o': company.isCollect == 0, 'la-heart': company.isCollect == 1}"></i>
+                      <span v-if="company.isCollect == 0">关注</span>
+                      <span v-if="company.isCollect == 1">已关注</span>
                     </button>
                   </div>
                   <div class="col-md-8">

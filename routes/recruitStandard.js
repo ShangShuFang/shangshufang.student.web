@@ -18,7 +18,7 @@ router.get('/list', (req, res, next) => {
 
   axios.get(requestUri)
       .then(result => {
-        let dataContent = buildUtils.buildRenderData(req.query.pageNumber, sysConfig.pageSize.all, result);
+        let dataContent = buildUtils.buildRenderData(req.query.pageNumber, sysConfig.pageSize.sixteen, result);
         res.json({
           err: !result.data.result,
           code: result.data.responseCode,

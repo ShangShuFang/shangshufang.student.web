@@ -5,3 +5,9 @@
   background-size: cover;
   box-sizing: border-box;
 }
+.btn-collect {
+  color: #6f6969;
+}
+.btn-collect:hover {
+  color: #fd27eb;
+}
