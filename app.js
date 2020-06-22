@@ -18,6 +18,7 @@ let abilityAnalysisListRouter = require('./routes/abilityAnalysisList');
 let growingMapRouter = require('./routes/growingMap');
 let recruitStandardRouter = require('./routes/recruitStandard');
 let collectionRouter = require('./routes/collection');
+let comprehensiveExercisesRouter = require('./routes/comprehensiveExercises');
 let commonRouter = require('./routes/common');
 
 let app = express();
@@ -47,6 +48,7 @@ app.use('/ability/analysis/list', abilityAnalysisListRouter);
 app.use('/growing_map', growingMapRouter);
 app.use('/recruit_standard', recruitStandardRouter);
 app.use('/collection', collectionRouter);
+app.use('/exercises/comprehensive', comprehensiveExercisesRouter);
 app.use('/common', commonRouter);
 
 // catch 404 and forward to error handler

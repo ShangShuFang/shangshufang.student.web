@@ -1,0 +1,20 @@
+.body-header {
+  max-height: 132px;
+  height: 132px;
+  background: url(/media/bg/header.png) no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}
+.comprehensive-exercises tr {
+  height: 45px;
+}
+
+.comprehensive-exercises .technology-name {
+  width: 30%;
+}
+.comprehensive-exercises .exercises-name {
+  width: 50%;
+}
+.comprehensive-exercises .option {
+  width: 20%;
+}

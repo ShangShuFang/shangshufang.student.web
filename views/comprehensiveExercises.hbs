@@ -1,0 +1,141 @@
+<link href="/stylesheets/views/comprehensiveExercises.css" rel="stylesheet" type="text/css" />
+<div id="app">
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+
+    </div>
+  </div>
+
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-2">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">研发方向：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedDirection.directionID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item" v-for="direction in directionList"
+              :class="{'kt-menu__item--here': selectedDirection.directionID == direction.directionID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection(direction)">
+                <span class="kt-menu__link-text" v-text="direction.directionName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">技术分类：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedCategory.categoryID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item" v-for="category in categoryList"
+              :class="{'kt-menu__item--here': selectedCategory.categoryID == category.technologyCategoryID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory(category)">
+                <span class="kt-menu__link-text" v-text="category.technologyCategoryName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
+        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+          <span class="filter-title">热点技术：</span>
+          <ul class="kt-menu__nav ">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedTechnology.technologyID == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology()">
+                <span class="kt-menu__link-text">全部</span>
+              </a>
+            </li>
+            <li class="kt-menu__item" v-for="technology in technologyList"
+              :class="{'kt-menu__item--here': selectedTechnology.technologyID == technology.technologyID}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology(technology)">
+                <span class="kt-menu__link-text" v-text="technology.technologyName"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-container kt-grid__item kt-grid__item--fluid">
+    <div class="alert alert-solid-warning alert-bold kt-margin-t-15" role="alert">
+      <div class="alert-text">收藏你想要挑战的综合测评习题，之后在个人中心查看并提交成果！</div>
+      <div class="alert-close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true"><i class="la la-close"></i></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="kt-margin-t-15">
+      <div v-cloak class="text-center" v-if="totalCount == 0">未查询到满足条件的综合测评内容</div>
+      <table v-cloak class="table comprehensive-exercises" v-if="totalCount > 0">
+        <thead>
+          <tr>
+            <th class="technology-name">热点技术</th>
+            <th class="exercises-name">综合练习</th>
+            <th class="option">收藏</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="data in dataList">
+            <td class="technology-name" v-text="data.technologyName"></td>
+            <td class="exercises-name">
+              <a :href="data.documentUrl" class="kt-link" target="_blank" v-text="data.exercisesName"></a>
+            </td>
+            <td class="option">
+              <button type="button" class="btn btn-sm btn-icon btn-circle" @click="onCollect(data)">
+                <i class="la" :class="{'la-heart-o': !data.isCollected, 'la-heart kt-font-danger': data.isCollected}"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle" v-if="maxPageNumber > 1">
+      <div class="kt-pagination__toolbar">
+      </div>
+      <ul class="kt-pagination__links">
+        <li class="kt-pagination__link--first kt-pagination" v-if="prePageNum !== -1">
+          <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+        </li>
+        <li class="kt-pagination__link--next" v-if="prePageNum !== -1">
+          <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+        </li>
+        <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
+          <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+        </li>
+        <li class="kt-pagination__link--prev" v-if="nextPageNum !== -1">
+          <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+        </li>
+        <li class="kt-pagination__link--last" v-if="nextPageNum !== -1">
+          <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+        </li>
+      </ul>
+    </div>
+    
+
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/comprehensiveExercises.js');
+  });
+</script>
