@@ -1,4 +1,4 @@
-<link href="/stylesheets/views/userCenter.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/views/userCenter.css" rel="stylesheet" type="text/css"/>
 <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
   <div class="kt-content  kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -11,13 +11,14 @@
           <h3 class="kt-sc__title">
             我的未来不是梦！
           </h3>
-
+          
         </div>
       </div>
     </div>
 
     <!-- end:: Hero -->
     <div class="kt-negative-spacing--8"></div>
+
     <!-- begin:: Section -->
     <div class="kt-container ">
       <div class="kt-portlet">
@@ -25,7 +26,7 @@
           <div class="kt-infobox">
             <div class="kt-infobox__body">
               <div class="row">
-                <div class="col-lg-2" style="border-right: 1px solid #f1f1f1;">
+                <div class="col-lg-2 border-right">
                   <span class="kt-nav-title">能力中心</span>
                   <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v4">
                     <li class="kt-nav__item">
@@ -38,13 +39,15 @@
                         <span class="kt-nav__link-text">参与项目</span>
                       </a>
                     </li> --}}
-                    <li class="kt-nav__item">
+                    <li class="kt-nav__item active">
                       <a class="kt-nav__link" href="/center/qa">
                         <span class="kt-nav__link-text">我的问答</span>
                       </a>
                     </li>
                   </ul>
+
                   <div class="kt-margin-t-15"></div>
+
                   <span class="kt-nav-title">职场就业</span>
                   <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v4">
                     <li class="kt-nav__item">
@@ -71,41 +74,16 @@
                         <span class="kt-nav__link-text">个人信息</span>
                       </a>
                     </li>
-                    <li class="kt-nav__item active">
+                    <li class="kt-nav__item ">
                       <a class="kt-nav__link" href="/center/changePassword">
                         <span class="kt-nav__link-text">密码修改</span>
                       </a>
                     </li>
                   </ul>
+
                 </div>
-                <div class="col-lg-10" id="kt_changePassword">
-                  <form class="kt-form" style="width: 60%; margin:0 auto; margin-top: 5rem" novalidate>
-                    <div class="form-group">
-                      <input type="password" class="form-control" :class="{'is-invalid': showOldPasswordAlert}"
-                        placeholder="请输入原始密码" maxlength="12" v-model.trim="oldPassword">
-                      <div class="invalid-feedback" v-if="showOldPasswordAlert" v-text="oldPasswordAlertMessage"></div>
-                    </div>
+                <div class="col-lg-10">
 
-                    <div class="form-group">
-                      <input type="password" class="form-control" :class="{'is-invalid': showPasswordAlert}"
-                        placeholder="请输入新密码" maxlength="12" v-model.trim="password">
-                      <div class="invalid-feedback" v-if="showPasswordAlert" v-text="passwordAlertMessage"></div>
-                    </div>
-
-                    <div class="form-group">
-                      <input type="password" class="form-control" :class="{'is-invalid': showConfirmPasswordAlert}"
-                        placeholder="请再次输入新密码" maxlength="12" v-model.trim="confirmPassword">
-                      <div class="invalid-feedback" v-if="showConfirmPasswordAlert"
-                        v-text="confirmPasswordAlertMessage"></div>
-                    </div>
-
-
-                    <div class="kt-login__actions">
-                      <button type="button" class="btn btn-primary btn-wide btn-elevate kt-login__btn-primary" @click="onChange">
-                        修改
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
@@ -119,9 +97,3 @@
     <!-- end:: Content -->
   </div>
 </div>
-
-<script>
-  $(document).ready(function () {
-    commonUtility.appendScript('/javascripts/views/changePassword.js');
-  });
-</script>

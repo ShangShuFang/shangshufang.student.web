@@ -1,117 +1,125 @@
 {
-  "shs": {
-    "host": "localhost",
-    "port": 8081,
-    "path": {
-      "login": "api/v1/user/student/login",
+    "shs": {
+        "host": "localhost",
+        "port": 8081,
+        "path": {
+            "login": "api/v1/user/student/login",
 
-      "universityList": "api/v1/customer/university/list",
-      "schoolList": "api/v1/customer/school/list",
-      "majorList": "api/v1/major/list",
-      "checkCellphone4Register": "api/v1/user/student/check/cellphone",
-      "register": "api/v1/user/student/add",
+            "universityList": "api/v1/customer/university/list",
+            "schoolList": "api/v1/customer/school/list",
+            "majorList": "api/v1/major/list",
+            "checkCellphone4Register": "api/v1/user/student/check/cellphone",
+            "register": "api/v1/user/student/add",
 
-      "checkCellphone4ChangePassword": "api/v1/user/student/check/cellphone",
-      "resetPassword": "api/v1/user/student/reset/password",
-      "changePassword": "api/v1/user/student/change/password",
+            "checkCellphone4ChangePassword": "api/v1/user/student/check/cellphone",
+            "resetPassword": "api/v1/user/student/reset/password",
+            "changePassword": "api/v1/user/student/change/password",
 
-      "checkStudentEmail": "api/v1/user/student/check/email",
-      "changeStudentInfo": "api/v1/user/student/change",
+            "checkStudentEmail": "api/v1/user/student/check/email",
+            "changeStudentInfo": "api/v1/user/student/change",
 
-      "directionList": "api/v1/develop_direction/list",
-      "technologyCategoryList": "api/v1/technology/category/list",
-      "technologySimple": "api/v1/technology/simple",
-      "courseListByContent": "api/v1/course/list/like",
-      "courseList": "api/v1/course/list",
-      "courseListByStudent": "api/v1/course/list/student",
-      "applyCourse": "api/v1/course/sign_up/add",
+            "directionList": "api/v1/develop_direction/list",
+            "technologyCategoryList": "api/v1/technology/category/list",
+            "technologySimple": "api/v1/technology/simple",
+            "courseListByContent": "api/v1/course/list/like",
+            "courseList": "api/v1/course/list",
+            "courseListByStudent": "api/v1/course/list/student",
+            "applyCourse": "api/v1/course/sign_up/add",
 
-      "technology": "api/v1/technology/any",
-      "knowledgeList": "api/v1/knowledge/list",
-      "topStudentList": "api/v1/user/student/list/top",
-      "signUp4Technology": "api/v1/course/sign_up/list/student",
-      "company": "api/v1/customer/company/list",
-      "companyUsingTechnology": "api/v1/customer/company/list/using/technology",
+            "technology": "api/v1/technology/any",
+            "knowledgeList": "api/v1/knowledge/list",
+            "topStudentList": "api/v1/user/student/list/top",
+            "signUp4Technology": "api/v1/course/sign_up/list/student",
+            "company": "api/v1/customer/company/list",
+            "companyUsingTechnology": "api/v1/customer/company/list/using/technology",
 
-      "courseDetail": "api/v1/course/any",
-      "signUp4Student": "api/v1/course/sign_up/list/student",
-      "exercises4Student": "api/v1/course/exercises/list/student",
-      "courseQuestionList": "api/v1/course/question/list",
-      "checkAppliedCourse": "api/v1/course/sign_up/check/sign_up",
-      "checkIsAssistant": "api/v1/course/sign_up/check/assistant",
-      "submitCourseQuestionLeaveMessage": "api/v1/course/answer/add",
-      "classExercisesReviewList": "api/v1/course/exercises/review/list",
-      "submitSourceCodeGitUrl": "api/v1/course/exercises/change",
-      "codeStandard": "api/v1/code_standard/list",
-      "addClassExercisesReview": "api/v1/course/exercises/review/add",
-      "courseExercises": "api/v1/knowledge/exercises/list/assigned",
+            "courseDetail": "api/v1/course/any",
+            "signUp4Student": "api/v1/course/sign_up/list/student",
+            "exercises4Student": "api/v1/course/exercises/list/student",
+            "courseQuestionList": "api/v1/course/question/list",
+            "checkAppliedCourse": "api/v1/course/sign_up/check/sign_up",
+            "checkIsAssistant": "api/v1/course/sign_up/check/assistant",
+            "submitCourseQuestionLeaveMessage": "api/v1/course/answer/add",
+            "classExercisesReviewList": "api/v1/course/exercises/review/list",
+            "submitSourceCodeGitUrl": "api/v1/course/exercises/change",
+            "codeStandard": "api/v1/code_standard/list",
+            "addClassExercisesReview": "api/v1/course/exercises/review/add",
+            "courseExercises": "api/v1/knowledge/exercises/list/assigned",
 
-      "studentAbilityResultList": "api/v1/analysis/ability/student/list",
-      "studentAbilityResultSummary": "api/v1/analysis/ability/student/any/student_summary",
-      "studentLearningTechnologyAbilityResultSummary": "api/v1/analysis/ability/student/list/learning_technology",
-      "studentAbility4knowledge": "api/v1/analysis/ability/student/any/knowledge_summary",
-      "studentAbility4codeStandard": "api/v1/analysis/ability/student/any/code_guideline",
-      "exerciseAnalysis": "api/v1/analysis/ability/student/list/exercise_number",
-      "exercisePercentAnalysis": "api/v1/analysis/ability/student/list/exercise_percent",
+            "studentAbilityResultList": "api/v1/analysis/ability/student/list",
+            "studentAbilityResultSummary": "api/v1/analysis/ability/student/any/student_summary",
+            "studentLearningTechnologyAbilityResultSummary": "api/v1/analysis/ability/student/list/learning_technology",
+            "studentAbility4knowledge": "api/v1/analysis/ability/student/any/knowledge_summary",
+            "studentAbility4codeStandard": "api/v1/analysis/ability/student/any/code_guideline",
+            "exerciseAnalysis": "api/v1/analysis/ability/student/list/exercise_number",
+            "exercisePercentAnalysis": "api/v1/analysis/ability/student/list/exercise_percent",
 
-      "finishKnowledgeList": "api/v1/analysis/ability/student/list/finish_knowledge",
-      "learningKnowledgeList": "/api/v1/analysis/ability/student/list/learning_knowledge",
-      "noLearningKnowledgeList": "api/v1/analysis/ability/student/list/noLearning_knowledge",
-      "weakKnowledgeList": "/api/v1/analysis/ability/student/list/weak_knowledge",
-      "studentExercisesList": "api/v1/course/exercises/list/student/technology",
+            "finishKnowledgeList": "api/v1/analysis/ability/student/list/finish_knowledge",
+            "learningKnowledgeList": "/api/v1/analysis/ability/student/list/learning_knowledge",
+            "noLearningKnowledgeList": "api/v1/analysis/ability/student/list/noLearning_knowledge",
+            "weakKnowledgeList": "/api/v1/analysis/ability/student/list/weak_knowledge",
+            "studentExercisesList": "api/v1/course/exercises/list/student/technology",
 
-      "growingMapList": "api/v1/growing_map/list/map",
-      "growingMap": "api/v1/growing_map/any/map",
-      "growingMapDetail": "api/v1/growing_map/list/detail",
+            "growingMapList": "api/v1/growing_map/list/map",
+            "growingMap": "api/v1/growing_map/any/map",
+            "growingMapDetail": "api/v1/growing_map/list/detail",
 
-      "studentCollectionList": "api/v1/student/collection/list",
-      "checkCollected": "api/v1/student/collection/check/collected",
-      "addStudentCollection": "api/v1/student/collection/add",
-      "deleteStudentCollection": "api/v1/student/collection/delete",
+            "studentCollectionList": "api/v1/student/collection/list",
+            "checkCollected": "api/v1/student/collection/check/collected",
+            "addStudentCollection": "api/v1/student/collection/add",
+            "deleteStudentCollection": "api/v1/student/collection/delete",
 
-      "comprehensiveExercisesList": "/api/v1/exercises/comprehensive/list",
-      
+            "comprehensiveExercisesList": "api/v1/exercises/comprehensive/list",
 
+            "studentComprehensiveExercisesList": "api/v1/student/exercises/comprehensive/list",
+            "checkComprehensiveExercisesCollected": "api/v1/student/exercises/comprehensive/check/collected",
+            "addStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/add",
+            "changeStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/change",
+            "deleteStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/delete",
 
-
-
-
-
-
-
-
+            "studentComprehensiveExercisesReviewList": "api/v1/student/exercises/comprehensive/review/list",
 
 
 
 
-      
-      "technologyList": "/api/v1/technology/client",
-      "learningTechnology": "/api/v1/technology/learning",
-      "developmentDirections": "/api/v1/develop_direction/list/direction",
-      "knowledgeSimpleList": "/api/v1/knowledge/list/simple",
-      "learningPhase": "/api/v1/sys_parm/learning_phase/list",
-      "usingLearningPhase": "/api/v1/sys_parm/learning_phase/list/has_knowledge",
-      "checkVerificationCode": "api/v1/verification_code/any",
-      "saveVerificationCode": "api/v1/verification_code/add",
-      "addCourse": "/api/v1/course/add",
-      "courseSimpleList": "/api/v1/course/list/simple",
-      "changeCourseStatus": "/api/v1/course/change/status",
-      "changeCourseBaseInfo": "/api/v1/course/change",
-      "checkCourse": "/api/v1/course/check/course",
-      "changeCourseSchedule": "/api/v1/course/schedule/change",
-      "coursePlanList": "/api/v1/course/plan/list",
-      "changeCoursePlan": "/api/v1/course/plan/change",
-      "finishClass": "/api/v1/course/plan/finish",
-      "signUp4Course": "/api/v1/course/sign_up/list/course",
-      "classExercises": "/api/v1/course/exercises/list",
-      "assignClassExercises": "/api/v1/course/exercises/assign",
-      "changeClassExercisesReview": "/api/v1/course/exercises/review/change",
-      "teachersList": "/api/v1/user/teacher/list",
-      "changeAssistant": "/api/v1/user/student/change/assistant",
-      "buryingPoint": "/api/v1/burying_point/add",
-      "suggestType": "/api/v1/sys_parm/suggest_type/list",
-      "addSuggest": "/api/v1/suggest/add",
-      "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client"
+
+
+
+
+
+
+
+
+
+
+
+            "technologyList": "/api/v1/technology/client",
+            "learningTechnology": "/api/v1/technology/learning",
+            "developmentDirections": "/api/v1/develop_direction/list/direction",
+            "knowledgeSimpleList": "/api/v1/knowledge/list/simple",
+            "learningPhase": "/api/v1/sys_parm/learning_phase/list",
+            "usingLearningPhase": "/api/v1/sys_parm/learning_phase/list/has_knowledge",
+            "checkVerificationCode": "api/v1/verification_code/any",
+            "saveVerificationCode": "api/v1/verification_code/add",
+            "addCourse": "/api/v1/course/add",
+            "courseSimpleList": "/api/v1/course/list/simple",
+            "changeCourseStatus": "/api/v1/course/change/status",
+            "changeCourseBaseInfo": "/api/v1/course/change",
+            "checkCourse": "/api/v1/course/check/course",
+            "changeCourseSchedule": "/api/v1/course/schedule/change",
+            "coursePlanList": "/api/v1/course/plan/list",
+            "changeCoursePlan": "/api/v1/course/plan/change",
+            "finishClass": "/api/v1/course/plan/finish",
+            "signUp4Course": "/api/v1/course/sign_up/list/course",
+            "classExercises": "/api/v1/course/exercises/list",
+            "assignClassExercises": "/api/v1/course/exercises/assign",
+            "changeClassExercisesReview": "/api/v1/course/exercises/review/change",
+            "teachersList": "/api/v1/user/teacher/list",
+            "changeAssistant": "/api/v1/user/student/change/assistant",
+            "buryingPoint": "/api/v1/burying_point/add",
+            "suggestType": "/api/v1/sys_parm/suggest_type/list",
+            "addSuggest": "/api/v1/suggest/add",
+            "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client"
+        }
     }
-  }
 }

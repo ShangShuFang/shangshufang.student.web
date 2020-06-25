@@ -1,0 +1,37 @@
+.form-dropdown {
+    border: none;
+    background-color: rgba(247, 247, 249, 0.7);
+    margin-top: 0 !important;
+    height: 39px !important;
+}
+
+.form-dropdown button {
+    width: 100%;
+    margin-top: 2px;
+    background-color: #fafafb;
+    color: #7a7c88;
+    border: none;
+}
+
+.form-dropdown .dropdown-menu {
+    width: 100%;
+    max-height: 360px;
+    overflow-y: auto;
+    position: absolute;
+    will-change: transform;
+    top: 0;
+    left: 0;
+    transform: translate3d(0px, 38px, 0px);
+}
+
+.form-dropdown button span {
+    float: left;
+}
+
+.form-dropdown button i {
+    float: right;
+    color: #8b8d9a;
+    font-size: 12px !important;
+    margin-right: -10px;
+    margin-top: 4px;
+}

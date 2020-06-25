@@ -1,20 +1,27 @@
 .body-header {
-  max-height: 132px;
-  height: 132px;
-  background: url(/media/bg/header.png) no-repeat;
-  background-size: cover;
-  box-sizing: border-box;
+    max-height: 132px;
+    height: 132px;
+    background: url(/media/bg/header.png) no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
 }
+
 .comprehensive-exercises tr {
-  height: 45px;
+    height: 45px;
 }
 
 .comprehensive-exercises .technology-name {
-  width: 30%;
+    width: 20%;
 }
+
 .comprehensive-exercises .exercises-name {
-  width: 50%;
+    width: 30%;
 }
+
+.comprehensive-exercises .file-name {
+    width: 30%;
+}
+
 .comprehensive-exercises .option {
-  width: 20%;
+    width: 20%;
 }

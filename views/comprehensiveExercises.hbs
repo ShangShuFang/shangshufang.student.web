@@ -85,30 +85,50 @@
 
     <div class="kt-margin-t-15">
       <div v-cloak class="text-center" v-if="totalCount == 0">未查询到满足条件的综合测评内容</div>
-      <table v-cloak class="table comprehensive-exercises" v-if="totalCount > 0">
-        <thead>
-          <tr>
-            <th class="technology-name">热点技术</th>
-            <th class="exercises-name">综合练习</th>
-            <th class="option">收藏</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="data in dataList">
-            <td class="technology-name" v-text="data.technologyName"></td>
-            <td class="exercises-name">
-              <a :href="data.documentUrl" class="kt-link" target="_blank" v-text="data.exercisesName"></a>
-            </td>
-            <td class="option">
-              <button type="button" class="btn btn-sm btn-icon btn-circle" @click="onCollect(data)">
-                <i class="la" :class="{'la-heart-o': !data.isCollected, 'la-heart kt-font-danger': data.isCollected}"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xl-3" v-for="data in dataList">
+          <div class="kt-portlet kt-portlet--height-fluid">
+            <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">
+              <img :src="data.technologyThumbnailRectangle" alt="" style="width: 100%;">
+            </div>
+            <div class="kt-portlet__body kt-padding-15">
+              <div class="kt-widget kt-widget--user-profile-2 ">
+                <div class="kt-widget__body kt-margin-b-0-">
+                  <div class="kt-widget__item">
+                    <div class="kt-widget__contact">
+                      <h4 class="ellipsis-2" :title="data.exercisesName" v-text="data.exercisesName" style="height: 46px;"></h4>
+                    </div>
+                    <div class="kt-widget__contact">
+                      <span class="kt-widget__data ellipsis-3" :title="data.memo"
+                        v-text="data.memo"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="kt-widget__footer kt-margin-t-10">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <button type="button" class="btn btn-collect no-border" @click="onCollect(data)">
+                        <i class="la" :class="{'la-heart-o': !data.isCollected, 'la-heart kt-font-danger': data.isCollected}"></i> 
+                        <span v-if="data.isCollected" class="kt-font-danger">取消收藏</span>
+                        <span v-if="!data.isCollected">收藏</span>
+                      </button>
+                    </div>
+                    <div class="col-md-7">
+                      <a :href="data.documentUrl" target="_blank" class="btn btn-warning btn-lg btn-upper">
+                        <i class="fa fa-file-pdf"></i>
+                        查看文档
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    
+
     <div class="kt-pagination  kt-pagination--warning kt-pagination--circle" v-if="maxPageNumber > 1">
       <div class="kt-pagination__toolbar">
       </div>
@@ -130,7 +150,7 @@
         </li>
       </ul>
     </div>
-    
+
 
   </div>
 </div>

@@ -1,16 +1,18 @@
-.user-info input{
-  text-align: left;
-  border: none
+.user-info input {
+    text-align: left;
+    /* border: none */
 }
+
 .form-dropdown-user {
-  margin-top: 0 !important;
-  background-color: #ffffff !important;
+    margin-top: 0 !important;
+    height: 39px !important;
 }
+
 .form-dropdown-user button {
-  background-color: #ffffff !important;
-  height: 39px !important;
+    height: 39px !important;
 }
+
 .invalid-feedback {
-  height: 39px;
-  padding-top: 0.3rem;
+    height: 39px;
+    padding-top: 0.3rem;
 }
