@@ -1,6 +1,7 @@
-<link href="/stylesheets/views/userCenter.css" rel="stylesheet" type="text/css"/>
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content  kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<link href="/stylesheets/views/userCenter.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/views/qaCenter.css" rel="stylesheet" type="text/css" />
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="app">
+  <div class="kt-content  kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
 
     <!-- begin:: Content -->
 
@@ -11,7 +12,7 @@
           <h3 class="kt-sc__title">
             我的未来不是梦！
           </h3>
-          
+
         </div>
       </div>
     </div>
@@ -80,9 +81,99 @@
                       </a>
                     </li>
                   </ul>
-
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-10 kt-padding-l-20 kt-padding-r-15">
+                  <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-warning" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#question" role="tab">
+                        我的提问</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#answer" role="tab">我的回答</a>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="question" role="tabpanel">
+                      <div v-cloak v-if="questionModel.totalCount > 0">
+                        <div class="kt-timeline-v2">
+                          <div class="kt-timeline-v2__items kt-padding-top-25 kt-padding-bottom-30">
+                            <div class="kt-timeline-v2__item" v-for="data in questionModel.dataList">
+                              <div class="kt-timeline-v2__item-cricle">
+                                <i class="fa fa-genderless kt-font-warning"></i>
+                              </div>
+                              <div class="kt-timeline-v2__item-text kt-padding-top-5">
+                                <div>
+                                  <span v-text="data.courseName"></span>
+                                  <span v-text="data.createTime"></span>
+                                </div>
+                                <div class="kt-margin-t-5" v-text="data.questionContent"></div>
+                                <div class="kt-margin-t-5">
+                                  <a href="javascript:" 
+                                    class="kt-link kt-link--brand kt-font-bolder"
+                                    v-if="data.leaveMessageCount > 0"
+                                    @click="onShowAnswerModal(data)">
+                                    已有<span v-text="data.leaveMessageCount"></span>条回复
+                                    <i class="fa fa-angle-right"></i>
+                                  </a>
+                                  <span v-if="data.leaveMessageCount == 0">暂无回复</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center kt-margin-t-15">
+                          <a href="javascript:" class="kt-link kt-link--brand kt-font-bolder"
+                            @click="loadMoreQuestion()"
+                            v-if="questionModel.pageNumber < questionModel.maxPageNumber">加载更多</a>
+                          <span
+                            v-if="questionModel.pageNumber == questionModel.maxPageNumber && questionModel.pageNumber != 1">没有更多问题了</span>
+                        </div>
+                      </div>
+                      <div v-cloak class="text-center" v-if="questionModel.totalCount == 0">
+                        您还没有对任何课程提问过问题，多问多练才能让自己更有竞争力，加油！
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="answer" role="tabpanel">
+                      <div v-cloak v-if="answerModel.totalCount > 0">
+                        <div class="kt-timeline-v2">
+                          <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
+                            <div class="kt-timeline-v2__item" v-for="data in answerModel.dataList">
+                              <div class="kt-timeline-v2__item-cricle">
+                                <i class="fa fa-genderless kt-font-warning"></i>
+                              </div>
+                              <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                                <div>
+                                  <span v-text="data.questionerName"></span>
+                                  <span v-text="data.courseName"></span>
+                                  <span v-text="data.createTime"></span>
+                                </div>
+                                <div class="kt-margin-t-5">
+                                  <span>问：</span>
+                                  <span v-text="data.questionContent"></span>
+                                </div>
+                                <div class="kt-margin-t-5">
+                                  <span>答：</span>
+                                  <span v-text="data.messageContent"></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center kt-margin-t-15">
+                          <a href="javascript:" class="kt-link kt-link--brand kt-font-bolder" @click="loadMoreAnswer()"
+                            v-if="answerModel.pageNumber < answerModel.maxPageNumber">加载更多</a>
+                          <span
+                            v-if="answerModel.pageNumber == answerModel.maxPageNumber && answerModel.pageNumber != 1">没有更多回答了</span>
+                        </div>
+                      </div>
+                      <div v-cloak class="text-center" v-if="answerModel.totalCount == 0">
+                        您还没有回答过问题，快去课程的在线答疑区给其他同学提供帮助吧，这 可以让更多企业发现你哦！
+                      </div>
+
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -91,9 +182,42 @@
         </div>
       </div>
     </div>
-
     <!-- end:: Section -->
+
+    <!-- begin:: Modal -->
+    <div class="modal fade show" id="modal_answer" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" v-text="dialogModel.modalTitle"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <h5>问：<span v-text="dialogModel.questionContent"></span></h5>
+              </div>
+              <div class="form-group answer-separator" v-for="data in dialogModel.dataList">
+                <p style="max-width: 550px;display: inline-block;" v-text="data.messageContent"></p>
+                <span class="kt-pull-right" v-text="data.updateTime"></span>
+                <span class="kt-pull-right kt-margin-r-10" v-text="data.commenterName"></span>
+              </div>
+          </div>
+          <div class="modal-footer no-border">
+            {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end:: Modal -->
+
 
     <!-- end:: Content -->
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/qaCenter.js');
+  });
+</script>

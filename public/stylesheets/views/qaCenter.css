@@ -1,0 +1,15 @@
+.kt-timeline-v2__item-cricle {
+    left: 0 !important;
+}
+
+.kt-timeline-v2:before {
+    left: 0.73rem !important;
+}
+
+.kt-timeline-v2__item-text {
+    padding: 0.5rem 0 0 0.3rem !important;
+}
+
+.answer-separator {
+    border-bottom: 1px solid #ebedf2;
+}

@@ -79,6 +79,10 @@
 
             "studentComprehensiveExercisesReviewList": "api/v1/student/exercises/comprehensive/review/list",
 
+            "studentQuestionList": "api/v1/course/question/list/student",
+            "questionAnswerList": "api/v1/course/answer/list/question",
+            "studentAnswerList": "api/v1/course/answer/list/student",
+
 
 
 
