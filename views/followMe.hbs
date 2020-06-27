@@ -1,6 +1,6 @@
 <link href="/stylesheets/views/userCenter.css" rel="stylesheet" type="text/css"/>
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content  kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="app">
+  <div class="kt-content  kt-content--fit-top  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
 
     <!-- begin:: Content -->
 
@@ -82,7 +82,104 @@
                   </ul>
 
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-10 kt-padding-l-20 kt-padding-r-15">
+                  <div v-cloak v-if="totalCount > 0">
+                    <div class="kt-margin-b-15">你已被 <span class="kt-font-warning kt-font-bolder" v-text="totalCount"></span> 家企业关注</div>
+                    <div class="row" v-for="data in dataList">
+                      <div class="col-md-4">
+                        <div class="kt-portlet">
+                          <div class="kt-portlet__body kt-margin-t-55">
+                            <div class="kt-widget kt-widget--user-profile-2 ">
+                              <div class="kt-widget__head">
+                                <div class="kt-widget__media"><img
+                                    :src="data.brand" alt="image"
+                                    class="kt-widget__img"></div>
+                                <div class="kt-widget__info">
+                                  <h4 href="javascript:;" class="kt-widget__username kt-font-bold" v-text="data.companyAbbreviation">小米北京</h4> 
+                                  <span class="kt-widget__desc">正在使用<span v-text="data.usingTechnologyCount"></span>项技术</span>
+                                </div>
+                              </div>
+                              <div class="kt-widget__body">
+                                <div class="kt-widget__item">
+                                  <div class="kt-widget__contact">
+                                    <p class="ellipsis-5" v-text="data.memo"></p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="kt-widget__footer kt-margin-0">
+                                <div class="row">
+                                  <div class="col-md-7" style="padding-top: 14px;">
+                                    <i class="la la-heart"></i> 
+                                    <span v-text="data.collectTotalCount + '人关注了该企业'"></span>
+                                  </div>
+                                  {{!-- <div class="col-md-5">
+                                    <button type="button" class="btn btn-collect" @click="onCancel(data)">
+                                      <span>取消关注</span>
+                                    </button>
+                                  </div> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="row">
+                          <div class="col-md-6" v-for="technology in data.technologyGapAnalysisList">
+                            <div class="kt-portlet">
+                              <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-15">
+                                <img :src="technology.technologyThumbnailRectangle" class="width-full" alt="">
+
+                              </div>
+                              <div class="kt-portlet__body kt-padding-15" style="padding-top: 0 !important;">
+                                <div class="kt-widget kt-widget--user-profile-2 ">
+                                  <div class="kt-widget__body kt-margin-b-0-">
+                                    <div class="kt-widget__item">
+                                      <div class="kt-widget__contact kt-margin-b-5">
+                                        <h4 v-text="technology.technologyName"></h4>
+                                      </div>
+                                      <div class="kt-widget__contact kt-margin-b-5">
+                                        <span class="kt-widget__data">起步级别: <h4 class="kt-block-inline" v-text="technology.recruitLevel"></h4></span> 
+                                        <span class="kt-widget__data">你的级别: <h4 class="kt-block-inline" v-text="technology.studentLevel"></h4></span>
+                                      </div>
+                                      <div class="kt-widget__contact kt-margin-b-5">
+                                        <span class="kt-widget__data">知识点: <span v-text="technology.requiredKnowledge"></span></span> 
+                                        <span class="kt-widget__data">已掌握: <span v-text="technology.finishKnowledgePercent + '%'"></span></span>
+                                      </div>
+                                      <div class="kt-widget__contact kt-margin-b-5">
+                                        <span class="kt-widget__data">综合练习: <span v-text="technology.requiredComprehensiveExercises"></span></span> 
+                                        <span class="kt-widget__data">已完成: <span v-text="technology.finishComprehensiveExercisesCount + '个'"></span></span>
+                                      </div>
+                                      <div class="kt-widget__contact kt-margin-b-5">
+                                        <span class="kt-widget__data">实战项目: <span v-text="technology.requiredProjectExercises"></span></span> 
+                                        <span class="kt-widget__data">已完成: <span v-text="technology.joinProjectExercisesCount + '个'"></span></span>
+                                      </div>
+
+                                      <div class="kt-widget__contact text-center">
+                                        <span class="kt-font-danger" v-if="technology.finishKnowledgePercent == 0 && technology.finishComprehensiveExercisesCount == 0 && technology.joinProjectExercisesCount == 0">你还没有开始学习该技术</span>
+                                        <span class="kt-font-warning" v-if="technology.finishKnowledgePercent != 0 || technology.finishComprehensiveExercisesCount != 0 || technology.joinProjectExercisesCount != 0">距离你的目标越来越近了，继续努力，加油！</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <a href="javascript:" 
+                          class="kt-link kt-link--brand kt-font-bolder"
+                          @click="onLoadMoreCollect()"
+                          v-if="pageNumber < maxPageNumber">加载更多</a>
+                      <span v-if="pageNumber >= maxPageNumber">没有更多内容了</span>
+                    </div>
+                  </div>
+                  <div v-cloak class="text-center" v-if="totalCount == 0">
+                    <h4>你还没有被任何企业关注</h4> 
+                    <p>多练、多问、多答疑，坚持不懈，会让更多企业看到你！</p> 
+                  </div>
 
                 </div>
               </div>
@@ -97,3 +194,10 @@
     <!-- end:: Content -->
   </div>
 </div>
+
+
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/followMe.js');
+  });
+</script>

@@ -47,7 +47,6 @@ app.use('/index', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/forgetPassword', forgetPasswordRouter);
-// app.use('/user', userRouter);
 app.use('/course/center', courseCenterRouter);
 app.use('/technology/info', technologyInfoRouter);
 app.use('/course/detail', courseDetailRouter);

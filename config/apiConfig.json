@@ -83,6 +83,7 @@
             "questionAnswerList": "api/v1/course/answer/list/question",
             "studentAnswerList": "api/v1/course/answer/list/student",
 
+            "companyCollectionList": "api/v1/company/collection/list",
 
 
 

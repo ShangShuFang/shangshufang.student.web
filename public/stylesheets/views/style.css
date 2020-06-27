@@ -33,6 +33,11 @@ body {
     margin-bottom: 10px;
 }
 
+.space-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .space-5 {
     margin-top: 5px;
     margin-bottom: 5px;
