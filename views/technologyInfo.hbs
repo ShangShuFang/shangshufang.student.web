@@ -78,8 +78,8 @@
       <div class="kt-portlet__head">
         <div class="kt-portlet__head-label">
           <h3 class="kt-portlet__head-title">
-            学霸榜
             <i class="flaticon2-cup" style="color: #f3bb3a"></i>
+            学霸榜（TOP10）
           </h3>
         </div>
       </div>
@@ -217,28 +217,31 @@
         <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
           <div class="kt-pagination__toolbar">
             <span class="pagination__desc">
-              显示第<span v-text="knowledgeModel.fromIndex"></span>到第<span v-text="knowledgeModel.toIndex"></span>条数据，共计<span v-text="knowledgeModel.totalCount"></span>条数据
+              该技术共有<span v-text="knowledgeModel.totalCount"></span>个知识点, 当前显示第<span v-text="knowledgeModel.fromIndex"></span>到第<span v-text="knowledgeModel.toIndex"></span>个知识点
             </span>
           </div>
           <ul class="kt-pagination__links">
-            <li class="kt-pagination__link--first kt-pagination" v-if="knowledgeModel.prePageNum !== -1">
-              <a href="javascript:" @click="onKnowledgeFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+            <li class="kt-pagination__link--first" :class="{'pagination-disabled': knowledgeModel.prePageNum == -1}">
+              <a href="javascript:" @click="onKnowledgeFirstPage"><i class="fa fa-angle-double-left kt-font-primary"></i></a>
             </li>
-            <li class="kt-pagination__link--next" v-if="knowledgeModel.prePageNum !== -1">
-              <a href="javascript:" @click="onKnowledgePrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+            <li class="kt-pagination__link--next" :class="{'pagination-disabled': knowledgeModel.prePageNum == -1}">
+              <a href="javascript:" @click="onKnowledgePrePage"><i class="fa fa-angle-left kt-font-primary"></i></a>
             </li>
+
             <li v-for="pagination in knowledgeModel.paginationArray"
                 :class="{'kt-pagination__link--active': knowledgeModel.pageNumber == pagination}">
               <a href="javascript:" v-text="pagination" @click="onKnowledgePagination(pagination)"></a>
             </li>
-            <li class="kt-pagination__link--prev" v-if="knowledgeModel.nextPageNum !== -1">
-              <a href="javascript:" @click="onKnowledgeNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+
+            <li class="kt-pagination__link--prev" :class="{'pagination-disabled': knowledgeModel.nextPageNum == -1}">
+              <a href="javascript:" @click="onKnowledgeNextPage"><i class="fa fa-angle-right kt-font-primary"></i></a>
             </li>
-            <li class="kt-pagination__link--last" v-if="knowledgeModel.nextPageNum !== -1">
-              <a href="javascript:" @click="onKnowledgeLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+            <li class="kt-pagination__link--last" :class="{'pagination-disabled': knowledgeModel.nextPageNum == -1}">
+              <a href="javascript:" @click="onKnowledgeLastPage"><i class="fa fa-angle-double-right kt-font-primary"></i></a>
             </li>
           </ul>
         </div>
+        
       </div>
     </div>
   </div>
@@ -349,25 +352,25 @@
         <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
           <div class="kt-pagination__toolbar">
               <span class="pagination__desc">
-                显示第<span v-text="studentModel.fromIndex"></span>到第<span v-text="studentModel.toIndex"></span>条数据，共计<span v-text="studentModel.totalCount"></span>条数据
+                共有<span v-text="studentModel.totalCount"></span>名同学正在学习该技术，当前显示第<span v-text="studentModel.fromIndex"></span>到第<span v-text="studentModel.toIndex"></span>条同学的信息
               </span>
           </div>
           <ul class="kt-pagination__links">
-            <li class="kt-pagination__link--first kt-pagination" v-if="studentModel.prePageNum !== -1">
-              <a href="javascript:" @click="onStudentFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+            <li class="kt-pagination__link--first" :class="{'pagination-disabled': studentModel.prePageNum == -1}">
+              <a href="javascript:" @click="onStudentFirstPage"><i class="fa fa-angle-double-left kt-font-primary"></i></a>
             </li>
-            <li class="kt-pagination__link--next" v-if="studentModel.prePageNum !== -1">
-              <a href="javascript:" @click="onStudentPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+            <li class="kt-pagination__link--next" :class="{'pagination-disabled': studentModel.prePageNum == -1}">
+              <a href="javascript:" @click="onStudentPrePage"><i class="fa fa-angle-left kt-font-primary"></i></a>
             </li>
             <li v-for="pagination in studentModel.paginationArray"
-                :class="{'kt-pagination__link--active': knowledgeModel.pageNumber == pagination}">
+                :class="{'kt-pagination__link--active': studentModel.pageNumber == pagination}">
               <a href="javascript:" v-text="pagination" @click="onStudentPagination(pagination)"></a>
             </li>
-            <li class="kt-pagination__link--prev" v-if="studentModel.nextPageNum !== -1">
-              <a href="javascript:" @click="onStudentNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+            <li class="kt-pagination__link--prev" :class="{'pagination-disabled': studentModel.nextPageNum == -1}">
+              <a href="javascript:" @click="onStudentNextPage"><i class="fa fa-angle-right kt-font-primary"></i></a>
             </li>
-            <li class="kt-pagination__link--last" v-if="studentModel.nextPageNum !== -1">
-              <a href="javascript:" @click="onStudentLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+            <li class="kt-pagination__link--last" :class="{'pagination-disabled': studentModel.nextPageNum == -1}">
+              <a href="javascript:" @click="onStudentLastPage"><i class="fa fa-angle-double-right kt-font-primary"></i></a>
             </li>
           </ul>
         </div>

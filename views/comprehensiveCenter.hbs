@@ -193,7 +193,7 @@
                                     <span>删除</span></button>
                                 </div>
                                 <div class="col-md-7">
-                                  <button type="button" class="btn btn-warning" @click="onShowDialog(data)">
+                                  <button type="button" class="btn btn-primary" @click="onShowDialog(data)">
                                     <i class="fab fa-github"></i>
                                     提交作品
                                   </button>
@@ -208,7 +208,7 @@
 
                   <div class="row" v-if="totalCount > 0">
                     <div class="col-md-12">
-                      <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
+                      <div class="kt-pagination kt-pagination--warning kt-pagination--circle">
                         <div class="kt-pagination__toolbar">
                           <span class="pagination__desc">
                             共收藏<span v-text="totalCount"></span>个就业测评，当前显示第<span v-text="fromIndex"></span>到第<span
@@ -231,10 +231,10 @@
                             <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
                           </li>
                           <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
-                            <a href="javascript:" @click="onNextPage()"><i class="fa fa-angle-right kt-font-warning"></i></a>
+                            <a href="javascript:" @click="onNextPage()"><i class="fa fa-angle-right"></i></a>
                           </li>
                           <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
-                            <a href="javascript:" @click="onLastPage()"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+                            <a href="javascript:" @click="onLastPage()"><i class="fa fa-angle-double-right"></i></a>
                           </li>
                         </ul>
                       </div>

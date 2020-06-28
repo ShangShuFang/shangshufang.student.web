@@ -1,16 +1,19 @@
 .body-header {
-  max-height: 132px;
-  height: 132px;
-  background: url(/media/bg/header.png) no-repeat;
-  background-size: cover;
-  box-sizing: border-box;
+    max-height: 132px;
+    height: 132px;
+    background: url(/media/bg/header.png) no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
 }
+
 .selected {
-  background-color: #f7f8fa;
+    background-color: #f7f8fa;
 }
+
 .selected span {
-  color: #edad37 !important;
+    color: #ff6700 !important;
 }
+
 .last-marker {
-  bottom: 35px;
+    bottom: 35px;
 }

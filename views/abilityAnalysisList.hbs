@@ -85,7 +85,7 @@
           <button type="button"
                   class="btn btn-pill btn-elevate btn-sm"
                   v-for="universityFilter in universityFilterList"
-                  :class="{'btn-info': selectedUniversityFilter.filterID == universityFilter.filterID, 'btn-outline-hover-info': selectedUniversityFilter.filterID != universityFilter.filterID}"
+                  :class="{'btn-primary': selectedUniversityFilter.filterID == universityFilter.filterID, 'btn-primary-hover-info': selectedUniversityFilter.filterID != universityFilter.filterID}"
                   v-text="universityFilter.filterName"
                   @click="onFilterByUniversity(universityFilter)"></button>
         </div>
@@ -208,7 +208,38 @@
         <!--End::Portlet-->
       </div>
     </div>
-    <div ng-cloak class="row" v-if="totalCount > 0">
+
+    <div class="kt-container kt-grid__item kt-grid__item--fluid kt-padding-0" v-if="totalCount > 0">
+      <div class="kt-pagination kt-pagination--warning kt-pagination--circle">
+        <div class="kt-pagination__toolbar">
+          <span class="pagination__desc">
+            共查询到<span v-text="totalCount"></span>个满足条件的同学信息，当前显示第<span v-text="fromIndex"></span>到第<span
+                                v-text="toIndex"></span>个同学的能力该要
+          </span>
+        </div>
+        <ul class="kt-pagination__links">
+          <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">
+            <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left"></i></a>
+          </li>
+          <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">
+            <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left"></i></a>
+          </li>
+
+          <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
+            <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+          </li>
+
+          <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
+            <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right"></i></a>
+          </li>
+          <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
+            <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {{!-- <div ng-cloak class="row" v-if="totalCount > 0">
       <div class="col-xl-12">
         <!--begin:: Components/Pagination/Default-->
         <div class="kt-portlet">
@@ -246,7 +277,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 </div>
 <script>

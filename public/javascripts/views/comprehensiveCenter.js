@@ -237,7 +237,7 @@ const app = new Vue({
                 buttons: {
                     confirm: {
                         label: '确认删除',
-                        className: 'btn-danger'
+                        className: 'btn-primary'
                     },
                     cancel: {
                         label: '取消',

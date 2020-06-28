@@ -41,14 +41,14 @@
               <div class="kt-widget__footer kt-margin-0">
                 <div class="row">
                   <div class="col-md-4">
-                    <button type="button" class="btn" :class="{'btn-collect': company.isCollect == 0, 'kt-font-danger': company.isCollect == 1}" @click="onCollect(company)">
+                    <button type="button" class="btn" :class="{'btn-collect': company.isCollect == 0, 'kt-font-primary': company.isCollect == 1}" @click="onCollect(company)">
                       <i class="la" :class="{'la-heart-o': company.isCollect == 0, 'la-heart': company.isCollect == 1}"></i>
                       <span v-if="company.isCollect == 0">关注</span>
-                      <span v-if="company.isCollect == 1">已关注</span>
+                      <span v-if="company.isCollect == 1" class="kt-font-primary">已关注</span>
                     </button>
                   </div>
                   <div class="col-md-8">
-                    <button type="button" class="btn btn-label-warning" @click="onShowDetail(company)">
+                    <button type="button" class="btn btn-primary" @click="onShowDetail(company)">
                       查看起步级别
                     </button>
                   </div>
@@ -60,13 +60,38 @@
       </div>
     </div>
 
-    <div class="row" v-if="companyList.length < totalCount">
+    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle" v-if="totalCount > 0">
+      <div class="kt-pagination__toolbar">
+        <span class="pagination__desc">
+          共查询到<span v-text="totalCount"></span>个合作企业，当前显示第<span v-text="fromIndex"></span>到第<span
+                              v-text="toIndex"></span>个企业
+      </div>
+      <ul class="kt-pagination__links">
+        <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">
+          <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+        </li>
+        <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">
+          <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+        </li>
+        <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
+          <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+        </li>
+        <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
+          <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+        </li>
+        <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
+          <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+        </li>
+      </ul>
+    </div>
+
+    {{!-- <div class="row" v-if="companyList.length < totalCount">
       <div class="col-xl-12 text-center">
         <button type="button" class="btn btn-secondary btn-elevate btn-pill" @click="onLoadMore()">
           <i class="fa fa-sync-alt"></i> 查看更多
         </button>
       </div>
-    </div>
+    </div> --}}
   </div>
 
   <div class="modal fade" id="modal_using_technology" tabindex="-1" role="dialog">

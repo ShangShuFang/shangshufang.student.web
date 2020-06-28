@@ -1,5 +1,6 @@
 body {
     font: 14px "Microsoft YaHei" !important;
+    color: #3e3e3e;
 }
 
 .invalid-feedback {
@@ -133,6 +134,7 @@ a.no-hand {
 
 .btn-option {
     cursor: pointer;
+    /* color: ; */
 }
 
 .shs-top-line {
@@ -427,16 +429,6 @@ a.no-hand {
     border: none;
 }
 
-.btn-collect:hover {
-    color: #fd27eb;
-}
-
-.btn-warning {
-    background-color: #fff0d5;
-    border-color: #fff0d5;
-    color: #f7a900;
-}
-
 
 /* begin: pagination */
 
@@ -451,8 +443,88 @@ a.no-hand {
 }
 
 .pagination-disabled a:hover {
-    cursor: default;
+    cursor: auto;
 }
 
 
 /* end: pagination */
+
+.font-color-white {
+    color: #fff !important;
+}
+
+
+/* begin: 修改框架样式 */
+
+.btn-primary {
+    background: #ff6700;
+    border-color: #ff6700;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #ff6700;
+    border-color: #ff6700;
+    color: #fff;
+}
+
+.btn-primary-hover-info:hover {
+    color: #ee702e;
+    border-color: #ee702e;
+    background-color: transparent;
+}
+
+.btn-collect:hover {
+    color: #ff6700;
+}
+
+.btn-warning {
+    background-color: #fff0d5;
+    border-color: #fff0d5;
+    color: #f7a900;
+}
+
+.kt-font-primary {
+    color: #ff6700 !important;
+}
+
+.alert.alert-solid-warning {
+    background: rgba(243, 174, 140, 0.1);
+}
+
+.alert.alert-solid-warning .alert-text {
+    color: #ff6700;
+}
+
+.kt-header__topbar-wrapper a:hover {
+    color: #ff6700 !important;
+}
+
+.kt-bg-danger {
+    background-color: #ff6700 !important;
+}
+
+.kt-label-bg-color-1 {
+    color: #6f7175 !important;
+    background-color: #e1e1ef !important;
+    border-color: #e1e1ef !important;
+}
+
+.kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--active {
+    background: #ff6700;
+}
+
+.nav-tabs.nav-tabs-line.nav-tabs-line-warning.nav.nav-tabs .nav-link:hover,
+.nav-tabs.nav-tabs-line.nav-tabs-line-warning.nav.nav-tabs .nav-link.active,
+.nav-tabs.nav-tabs-line.nav-tabs-line-warning a.nav-link:hover,
+.nav-tabs.nav-tabs-line.nav-tabs-line-warning a.nav-link.active {
+    color: #ff6700;
+    border-bottom: 1px solid #ff6700;
+}
+
+.kt-nav.kt-nav--v4 .kt-nav__item.active .kt-nav__link {
+    border-left: 3px solid #ff6700;
+}
+
+
+/* end: 修改框架样式 */

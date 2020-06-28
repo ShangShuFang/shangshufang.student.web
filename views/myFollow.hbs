@@ -108,8 +108,8 @@
                               </div>
                               <div class="kt-widget__footer kt-margin-0">
                                 <div class="row">
-                                  <div class="col-md-7" style="padding-top: 14px;">
-                                    <i class="la la-heart"></i> 
+                                  <div class="col-md-7" style="padding-top: 11px;">
+                                    <i class="la la-heart kt-font-primary"></i> 
                                     <span v-text="data.collectTotalCount + '人关注了该企业'"></span>
                                   </div>
                                   <div class="col-md-5">
@@ -157,7 +157,7 @@
 
                                       <div class="kt-widget__contact text-center">
                                         <span class="kt-font-danger" v-if="technology.finishKnowledgePercent == 0 && technology.finishComprehensiveExercisesCount == 0 && technology.joinProjectExercisesCount == 0">你还没有开始学习该技术</span>
-                                        <span class="kt-font-warning" v-if="technology.finishKnowledgePercent != 0 || technology.finishComprehensiveExercisesCount != 0 || technology.joinProjectExercisesCount != 0">距离你的目标越来越近了，继续努力，加油！</span>
+                                        <span class="kt-font-primary" v-if="technology.finishKnowledgePercent != 0 || technology.finishComprehensiveExercisesCount != 0 || technology.joinProjectExercisesCount != 0">距离你的目标越来越近了，继续努力，加油！</span>
                                       </div>
                                     </div>
                                   </div>

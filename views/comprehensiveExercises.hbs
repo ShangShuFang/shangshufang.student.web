@@ -91,30 +91,30 @@
             <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">
               <img :src="data.technologyThumbnailRectangle" alt="" style="width: 100%;">
             </div>
-            <div class="kt-portlet__body kt-padding-15">
+            <div class="kt-portlet__body kt-padding-10">
               <div class="kt-widget kt-widget--user-profile-2 ">
-                <div class="kt-widget__body kt-margin-b-0-">
+                <div class="kt-widget__body kt-margin-b-10">
                   <div class="kt-widget__item">
                     <div class="kt-widget__contact">
-                      <h4 class="ellipsis-2" :title="data.exercisesName" v-text="data.exercisesName" style="height: 46px;"></h4>
+                      <h5 class="ellipsis" :title="data.exercisesName" v-text="data.exercisesName"></h5>
                     </div>
                     <div class="kt-widget__contact">
-                      <span class="kt-widget__data ellipsis-3" :title="data.memo"
+                      <span class="kt-widget__data ellipsis-4" :title="data.memo"
                         v-text="data.memo"></span>
                     </div>
                   </div>
                 </div>
-                <div class="kt-widget__footer kt-margin-t-10">
+                <div class="kt-widget__footer kt-margin-b-10">
                   <div class="row">
                     <div class="col-md-5">
                       <button type="button" class="btn btn-collect no-border" @click="onCollect(data)">
-                        <i class="la" :class="{'la-heart-o': !data.isCollected, 'la-heart kt-font-danger': data.isCollected}"></i> 
-                        <span v-if="data.isCollected" class="kt-font-danger">取消收藏</span>
+                        <i class="la" :class="{'la-heart-o': !data.isCollected, 'la-heart kt-font-primary': data.isCollected}"></i> 
+                        <span v-if="data.isCollected" class="kt-font-primary">取消收藏</span>
                         <span v-if="!data.isCollected">收藏</span>
                       </button>
                     </div>
                     <div class="col-md-7">
-                      <a :href="data.documentUrl" target="_blank" class="btn btn-warning btn-lg btn-upper">
+                      <a :href="data.documentUrl" target="_blank" class="btn btn-primary btn-lg btn-upper">
                         <i class="fa fa-file-pdf"></i>
                         查看文档
                       </a>
@@ -126,26 +126,28 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle" v-if="maxPageNumber > 1">
+    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle" v-if="totalCount > 0">
       <div class="kt-pagination__toolbar">
+        <span class="pagination__desc">
+          共查询到<span v-text="totalCount"></span>个满足条件的就业测评，当前显示第<span v-text="fromIndex"></span>到第<span
+                              v-text="toIndex"></span>个测评
       </div>
       <ul class="kt-pagination__links">
-        <li class="kt-pagination__link--first kt-pagination" v-if="prePageNum !== -1">
+        <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">
           <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
         </li>
-        <li class="kt-pagination__link--next" v-if="prePageNum !== -1">
+        <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">
           <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
         </li>
         <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
           <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
         </li>
-        <li class="kt-pagination__link--prev" v-if="nextPageNum !== -1">
+        <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
           <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
         </li>
-        <li class="kt-pagination__link--last" v-if="nextPageNum !== -1">
+        <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
           <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
         </li>
       </ul>

@@ -33,6 +33,13 @@ const register = new Vue({
                     that.totalCount = res.data.dataContent.totalCount;
                     that.pageNumber = parseInt(res.data.dataContent.currentPageNum);
                     that.maxPageNumber = Math.ceil(res.data.dataContent.totalCount / res.data.dataContent.pageSize);
+                    that.paginationArray = res.data.dataContent.paginationArray;
+                    that.prePageNum = res.data.dataContent.prePageNum === undefined ? -1 : res.data.dataContent.prePageNum;
+                    that.nextPageNum = res.data.dataContent.nextPageNum === undefined ? -1 : res.data.dataContent.nextPageNum;
+                    that.fromIndex = res.data.dataContent.dataList === null ? 0 : (that.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_16 + 1;
+                    that.toIndex = res.data.dataContent.dataList === null ? 0 : (that.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_16 + res.data.dataContent.dataList.length;
+
+
                     if (!that.isLogin) {
                         res.data.dataContent.dataList.forEach((data) => {
                             data.isCollect = 0;
@@ -60,10 +67,47 @@ const register = new Vue({
                 });
         },
 
-        onLoadMore: function() {
+        onFirstPage: function() {
+            if (this.pageNumber === 1) {
+                return false;
+            }
+            this.pageNumber = 1;
+            this.loadCompany();
+        },
+        onPrePage: function() {
+            if (this.pageNumber === 1) {
+                return false;
+            }
+            this.pageNumber--;
+            this.loadCompany();
+        },
+        onPagination: function(pageNumber) {
+            if (this.pageNumber === pageNumber) {
+                return false;
+            }
+            this.pageNumber = pageNumber;
+            this.loadCompany();
+        },
+        onNextPage: function() {
+            if (this.pageNumber === this.maxPageNumber) {
+                return false;
+            }
             this.pageNumber++;
             this.loadCompany();
         },
+        onLastPage: function() {
+            if (this.pageNumber === this.maxPageNumber) {
+                return false;
+            }
+            this.pageNumber = this.maxPageNumber;
+            this.loadCompany();
+        },
+
+
+        // onLoadMore: function() {
+        //     this.pageNumber++;
+        //     this.loadCompany();
+        // },
 
         onShowDetail: function(company) {
             this.companyModalTitle = company.companyAbbreviation;

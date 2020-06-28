@@ -90,14 +90,14 @@
       <div class="col-md-6">
         <div class="filter-bar">
           <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in universityFilterList"
-                  :class="{'btn-info': selectedUniversityFilter.filterID == filter.filterID, 'btn-outline-hover-info': selectedUniversityFilter.filterID != filter.filterID}"
+                  :class="{'btn-primary': selectedUniversityFilter.filterID == filter.filterID, 'btn-primary-hover-info': selectedUniversityFilter.filterID != filter.filterID}"
                   v-text="filter.filterName" @click="onFilterByUniversity(filter)"></button>
         </div>
       </div>
       <div class="col-md-6">
         <div class="filter-bar kt-pull-right">
-          <button type="button" class="btn btn-pill btn-elevate btn-sm" v-for="filter in courseFilterList"
-                  :class="{'btn-info': selectedCourseFilter.filterID == filter.filterID, 'btn-outline-hover-info': selectedCourseFilter.filterID != filter.filterID}"
+          <button type="button" class="btn btn-pill btn-elevate1 btn-sm" v-for="filter in courseFilterList"
+                  :class="{'btn-primary': selectedCourseFilter.filterID == filter.filterID, 'btn-primary-hover-info': selectedCourseFilter.filterID != filter.filterID}"
                   v-text="filter.filterName" @click="onFilterByStudent(filter)"></button>
         </div>
       </div>
@@ -131,7 +131,7 @@
                   <div class="kt-widget__contact kt-margin-b-10">
                     <a :href="'/course/detail?universityCode='+data.universityCode+'&schoolID='+data.schoolID+'&courseID='+data.courseID"
                        target="_blank"
-                       class="course-name ellipsis" v-text="data.courseName"></a>
+                       class="course-name kt-link kt-link--info ellipsis" v-text="data.courseName"></a>
                   </div>
                   <div class="kt-widget__contact kt-margin-b-10">
                     <span class="kt-widget__data course-memo ellipsis-2" :title="data.courseIntroduction" v-text="data.courseIntroduction"></span>
@@ -143,10 +143,10 @@
                   <div class="kt-widget__contact kt-margin-b-10">
                     <div class="row width-full">
                       <div class="col-md-5">
-                        已报名<span class="kt-widget__data" v-text="data.courseSingUpCount"></span>人
+                        <span class="kt-widget__data" v-text="'已报名' + data.courseSingUpCount + '人'"></span>
                       </div>
                       <div class="col-md-7 kt-padding-0 kt-align-right">
-                        共有<span class="kt-widget__data" v-text="data.courseTechnologyUsingCompanyCount"></span>家企业使用该技术
+                        <span class="kt-widget__data" v-text="'共有' + data.courseTechnologyUsingCompanyCount + '家企业使用该技术'"></span>
                       </div>
                     </div>
                   </div>
@@ -158,7 +158,7 @@
                       <div class="kt-widget__stats ng-binding" v-text="data.courseProcess"></div>
                     </div>
                    <span class="kt-badge kt-badge--inline course-status"
-                        :class="{ 'kt-badge--brand': data.dataStatus == '0', 'kt-badge--success': data.dataStatus == '1', 'kt-badge--light': data.dataStatus == '2' }" 
+                        :class="{ 'kt-badge--brand': data.dataStatus == '0', 'kt-badge--success': data.dataStatus == '1', 'kt-label-bg-color-1 font-color-white': data.dataStatus == '2' }" 
                         v-text="data.dataStatusText"></span>
                   </div>
                 </div>
@@ -168,13 +168,12 @@
                   <div class="col-md-4">
                     <a :href="'/technology/info?technologyID='+data.technologyID"
                        target="_blank"
-                       class="btn btn-link">技术详情</a>
+                       class="btn kt-link kt-link--info">技术详情</a>
                   </div>
                   <div class="col-md-8">
                     <a :href="'/course/detail?universityCode='+data.universityCode+'&schoolID='+data.schoolID+'&courseID='+data.courseID"
-                       target="_blank"
                        class="btn btn-lg btn-upper"
-                       :class="{'btn-outline-success disabled': data.dataStatus === '2', 'btn-success': data.dataStatus !== '2' && data.isApplied === true, 'btn-warning': data.dataStatus !== '2' && data.isApplied === false}"
+                       :class="{'btn-secondary disabled': data.dataStatus === '2', 'btn-outline-success': data.dataStatus !== '2' && data.isApplied === true, 'btn-primary': data.dataStatus !== '2' && data.isApplied === false}"
                        v-text="data.actionText">
                     </a>
                   </div>
@@ -191,27 +190,30 @@
     未查询到满足条件的课程
   </div>
   <div class="kt-container kt-grid__item kt-grid__item--fluid" v-if="totalCount > 0">
-    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle">
+    <div class="kt-pagination kt-pagination--warning kt-pagination--circle">
       <div class="kt-pagination__toolbar">
         <span class="pagination__desc">
-          显示第<span v-text="fromIndex"></span>到第<span v-text="toIndex"></span>条数据，共计<span v-text="totalCount"></span>条数据
+          共查询到<span v-text="totalCount"></span>个满足条件的课程，当前显示第<span v-text="fromIndex"></span>到第<span
+                              v-text="toIndex"></span>个课程
         </span>
       </div>
       <ul class="kt-pagination__links">
-        <li class="kt-pagination__link--first kt-pagination" v-if="prePageNum !== -1">
-          <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
+        <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">
+          <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left"></i></a>
         </li>
-        <li class="kt-pagination__link--next" v-if="prePageNum !== -1">
-          <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
+        <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">
+          <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left"></i></a>
         </li>
+
         <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
           <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
         </li>
-        <li class="kt-pagination__link--prev" v-if="nextPageNum !== -1">
-          <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
+
+        <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
+          <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right"></i></a>
         </li>
-        <li class="kt-pagination__link--last" v-if="nextPageNum !== -1">
-          <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
+        <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
+          <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right"></i></a>
         </li>
       </ul>
     </div>
