@@ -6,7 +6,7 @@ const sysConfig = require('../config/sysConfig.json');
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('comprehensiveExercises', { title: '综合测评' });
+    res.render('comprehensiveExercises', { title: '就业测评' });
 });
 
 router.get('/list', (req, res, next) => {
