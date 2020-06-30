@@ -1,0 +1,106 @@
+<div class="kt-subheader kt-grid__item">
+  <div class="kt-container">
+    <div class="kt-subheader__main">
+      <h3 class="kt-subheader__title"></h3>
+    </div>
+  </div>
+</div>
+
+<div class="kt-container  kt-grid__item kt-grid__item--fluid" id="app">
+  <div class="row">
+    <div class="col-md-6">
+      <!--Begin::Portlet-->
+      <div class="kt-portlet">
+        <div class="kt-portlet__head">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+              上書房能力级别 L1 ~ L4
+            </h3>
+          </div>
+        </div>
+        <div class="kt-portlet__body">
+          <div class="kt-notes">
+            <div class="kt-notes__items" v-for="data in abilityLevelList1">
+              <div class="kt-notes__item">
+                <div class="kt-notes__media">
+                  <span class="kt-notes__icon kt-font-bold level-icon"
+                        v-text="data.level"
+                        :class="{'ability-level-1': data.level == 'L1', 'ability-level-2': data.level == 'L2', 'ability-level-3': data.level == 'L3', 'ability-level-4': data.level == 'L4', 'ability-level-5': data.level == 'L5', 'ability-level-6': data.level == 'L6', 'ability-level-7': data.level == 'L7', 'ability-level-8': data.level == 'L8'}"></span>
+                </div>
+                <div class="kt-notes__content">
+                  <div class="kt-notes__section">
+                    <div class="kt-notes__info">
+                      <span class="kt-notes__title kt-font-bolder"
+                            :class="{'ability-level-1': data.level == 'L1', 'ability-level-2': data.level == 'L2', 'ability-level-3': data.level == 'L3', 'ability-level-4': data.level == 'L4', 'ability-level-5': data.level == 'L5', 'ability-level-6': data.level == 'L6', 'ability-level-7': data.level == 'L7', 'ability-level-8': data.level == 'L8'}"
+                            v-text="data.levelFullName"></span>
+
+                      <span class="kt-badge kt-badge--brand kt-badge--inline" v-text="data.mappingCompany"></span>
+                    </div>
+                  </div>
+                  <span class="kt-notes__body">
+                    <p>掌握知识点：<span class="kt-font-bold" v-text="data.finishKnowledge"></span></p>
+                    <p>完成综合练习：<span class="kt-font-bold" v-text="data.finishComprehensiveExercises"></span></p>
+                    <p>参与实战项目：<span class="kt-font-bold" v-text="data.joinProject"></span></p>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End::Portlet-->
+    </div>
+    <div class="col-md-6">
+    <!--Begin::Portlet-->
+    <div class="kt-portlet">
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            上書房能力级别 L5 ~ L8
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <div class="kt-notes">
+          <div class="kt-notes__items">
+            <div class="kt-notes__items" v-for="data in abilityLevelList2">
+              <div class="kt-notes__item">
+                <div class="kt-notes__media">
+                  <span class="kt-notes__icon kt-font-bold"
+                        v-text="data.level"
+                        style="font-size: 1.3rem"
+                        :class="{'ability-level-1': data.level == 'L1', 'ability-level-2': data.level == 'L2', 'ability-level-3': data.level == 'L3', 'ability-level-4': data.level == 'L4', 'ability-level-5': data.level == 'L5', 'ability-level-6': data.level == 'L6', 'ability-level-7': data.level == 'L7', 'ability-level-8': data.level == 'L8'}"></span>
+                </div>
+                <div class="kt-notes__content">
+                  <div class="kt-notes__section">
+                    <div class="kt-notes__info">
+                      <span class="kt-notes__title kt-font-bolder"
+                            :class="{'ability-level-1': data.level == 'L1', 'ability-level-2': data.level == 'L2', 'ability-level-3': data.level == 'L3', 'ability-level-4': data.level == 'L4', 'ability-level-5': data.level == 'L5', 'ability-level-6': data.level == 'L6', 'ability-level-7': data.level == 'L7', 'ability-level-8': data.level == 'L8'}"
+                            v-text="data.levelFullName"></span>
+
+                      <span class="kt-badge kt-badge--brand kt-badge--inline" v-text="data.mappingCompany"></span>
+                    </div>
+                  </div>
+                  <span class="kt-notes__body">
+                    <p>掌握知识点：<span class="kt-font-bold" v-text="data.finishKnowledge"></span></p>
+                    <p>完成综合练习：<span class="kt-font-bold" v-text="data.finishComprehensiveExercises"></span></p>
+                    <p>参与实战项目：<span class="kt-font-bold" v-text="data.joinProject"></span></p>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!--End::Portlet-->
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/abilityLevel.js');
+  });
+</script>

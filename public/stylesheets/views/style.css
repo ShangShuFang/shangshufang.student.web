@@ -464,13 +464,13 @@ a.no-hand {
 
 .btn-primary:hover {
     background: #ff6700;
-    border-color: #ff6700;
+    border: 1px solid #ff6700;
     color: #fff;
 }
 
 .btn-primary-hover-info:hover {
-    color: #ee702e;
-    border-color: #ee702e;
+    color: #ee702e !important;
+    border-color: #ee702e !important;
     background-color: transparent;
 }
 

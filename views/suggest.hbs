@@ -1,0 +1,108 @@
+<link href="/stylesheets/views/suggest.css" rel="stylesheet" type="text/css" />
+<div class="kt-container kt-grid__item kt-grid__item--fluid" id="app">
+  <div class="kt-subheader kt-grid__item">
+    <div class="kt-container">
+      <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title"></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="kt-portlet" v-if="!isSubmitSuccess" >
+    <form class="kt-form" name="myForm" novalidate>
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            请选择问题发生的场景
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <div class="row suggest-option">
+          <div class="col-md-12">
+            <button type="button"
+                    class="btn"
+                    v-for="suggestType in suggestTypeList" 
+                    :class="{'btn-primary': selectedSuggestType.suggestTypeID == suggestType.suggestTypeID}"
+                    @click="onChooseSuggestType(suggestType)">
+              <i class="fa fa-check" v-if="selectedSuggestType.suggestTypeID == suggestType.suggestTypeID"></i>
+              <span v-text="suggestType.suggestType"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            请描述您的问题（500字以内）
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <div class="row suggest-option">
+          <div class="col-md-12">
+            <textarea class="form-control" rows="10" maxlength="500" name="suggestContent" v-model="suggestContent"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">
+            请填写您的手机号码，以便我们及时回复您
+          </h3>
+        </div>
+      </div>
+      <div class="kt-portlet__body">
+        <div class="row suggest-option">
+          <div class="col-md-6">
+            <input type="tel"
+                   class="form-control"
+                   maxlength="11"
+                   name="cellphone"
+                   v-model="cellphone"
+                   @blur="onCellphoneBlur()">
+            <div class="invalid-feedback" v-if="isCellphoneInvalid == 1">您输入的不是有效的手机号码，请重新输入</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-portlet__foot">
+        <div class="kt-form__actions">
+          <button type="button"
+                  id="btnSubmitSuggest"
+                  class="btn btn-primary btn-wide"
+                  @click="onSubmit()">提 交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <form class="kt-form" v-if="isSubmitSuccess">
+    <div class="form-group">
+      <div class="kt-section__content">
+        <div class="kt-demo">
+          <div class="kt-demo__preview">
+            <div class="alert alert-success" role="alert">
+              <div class="alert-text">
+                <h4 class="alert-heading">
+                  <i class="flaticon2-check-mark"></i>
+                  您的反馈意见提交成功!
+                </h4>
+                <p>非常感谢您对上书房支持，我将会对您的反馈信息进行仔细调研，并有可能和您取得联系，请保持手机畅通，谢谢！</p>
+                <hr>
+                <p class="mb-0">感谢您使用上书房智慧教育平台，上书房——智能教育的领航者.（TODO...）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/suggest.js');
+  });
+</script>

@@ -8,7 +8,6 @@ let indexRouter = require('./routes/index');
 let loginRouter = require('./routes/login');
 let registerRouter = require('./routes/register');
 let forgetPasswordRouter = require('./routes/forgetPassword');
-// let userRouter = require('./routes/user');
 let courseCenterRouter = require('./routes/courseCenter');
 let technologyInfoRouter = require('./routes/technologyInfo');
 let courseDetailRouter = require('./routes/courseDetail');
@@ -18,7 +17,6 @@ let growingMapRouter = require('./routes/growingMap');
 let recruitStandardRouter = require('./routes/recruitStandard');
 let collectionRouter = require('./routes/collection');
 let comprehensiveExercisesRouter = require('./routes/comprehensiveExercises');
-
 let comprehensiveCenterRouter = require('./routes/comprehensiveCenter');
 let projectCenterRouter = require('./routes/projectCenter');
 let qaCenterRouter = require('./routes/qaCenter');
@@ -27,6 +25,8 @@ let followMeRouter = require('./routes/followMe');
 let myInterviewRouter = require('./routes/myInterview');
 let userInfoRouter = require('./routes/userInfo');
 let changePasswordRouter = require('./routes/changePassword');
+let abilityLevelRouter = require('./routes/abilityLevel');
+let suggestRouter = require('./routes/suggest');
 
 
 let commonRouter = require('./routes/common');
@@ -56,19 +56,16 @@ app.use('/growing_map', growingMapRouter);
 app.use('/recruit_standard', recruitStandardRouter);
 app.use('/collection', collectionRouter);
 app.use('/exercises/comprehensive', comprehensiveExercisesRouter);
-
 app.use('/center/comprehensive', comprehensiveCenterRouter);
 app.use('/center/project', projectCenterRouter);
 app.use('/center/qa', qaCenterRouter);
-
 app.use('/center/my/follow', myFollowRouter);
 app.use('/center/follow/me', followMeRouter);
 app.use('/center/my/interview', myInterviewRouter);
-
 app.use('/center/my/info', userInfoRouter);
 app.use('/center/changePassword', changePasswordRouter);
-
-
+app.use('/ability/level', abilityLevelRouter);
+app.use('/suggest', suggestRouter);
 app.use('/common', commonRouter);
 
 // catch 404 and forward to error handler
