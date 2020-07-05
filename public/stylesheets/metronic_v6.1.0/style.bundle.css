@@ -39668,7 +39668,7 @@ td>.kt-radio.kt-radio--single {
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--next,
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--prev,
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--last {
-    background: rgba(243, 174, 140, 0.1);
+    background: rgba(255, 88, 6, 0.1);
 }
 
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--active {

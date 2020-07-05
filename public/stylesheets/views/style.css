@@ -249,16 +249,16 @@ a.no-hand {
 .btn-login {
     width: 70px;
     border-radius: 1.5rem;
-    color: #edaa2e !important;
-    border-color: #edaa2e;
+    color: #ff6700 !important;
+    border-color: #ff6700;
 }
 
 .btn-register {
     width: 70px;
     border-radius: 1.5rem;
-    color: #ffffff !important;
-    background-color: #edaa2e;
-    border-color: #edaa2e;
+    color: rgb(255, 255, 255) !important;
+    background-color: #ff6700;
+    border-color: #ff6700;
 }
 
 .kt-header-menu .kt-menu__link:hover {
