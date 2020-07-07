@@ -1,7 +1,7 @@
 .body-header {
-    max-height: 132px;
-    height: 132px;
-    background: url(/media/bg/header.png) no-repeat;
+    max-height: 150px;
+    height: 150px;
+    background: url(/media/banner/learning_center_header.jpg) no-repeat;
     background-size: cover;
     box-sizing: border-box;
 }

@@ -1,13 +1,15 @@
 .body-header {
-  max-height: 132px;
-  height: 132px;
-  background: url(/media/bg/header.png) no-repeat;
-  background-size: cover;
-  box-sizing: border-box;
+    max-height: 150px;
+    height: 150px;
+    background: url(/media/banner/company_header.jpg) no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
 }
+
 .btn-collect {
-  color: #6f6969;
+    color: #6f6969;
 }
+
 .btn-collect:hover {
-  color: #fd27eb;
+    color: #fd27eb;
 }
