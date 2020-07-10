@@ -18,18 +18,15 @@
       <!-- region header -->
       <div id="kt_header" class="kt-header kt-grid__item kt-header--fixed " data-ktheader-minimize="on">
         <div class="kt-header__top">
-          <div class="kt-container container-head">
-            <div class="kt-header__brand kt-grid__item" id="kt_header_brand">
-              <div class="kt-header__brand-logo">
-                <a href="/index">
-                  <img alt="logo" src="/media/logos/logo_temp2_220.png" class="website-logo"/>
-                </a>
-              </div>
-            </div>
-
+          <div class="kt-container container-head-">
             <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
               <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
-                <ul class="kt-menu__nav main-menu_nav">
+                <div id="kt-header-logo">
+                    <a href="/index">
+                      <img alt="logo" src="/media/logos/logo_temp2_220.png" class="website-logo" />
+                    </a>
+                  </div>
+                <ul class="kt-menu__nav main-menu_nav kt-margin-l-35">
                   <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel">
                     <a href="/index" class="kt-menu__link">
                       <span class="kt-menu__link-text">首页</span>
@@ -76,7 +73,7 @@
               </div>
             </div>
 
-            <div class="kt-header__topbar header-logout">
+            <div class="kt-header__topbar header-logout kt-hidden">
               <div class="kt-header__topbar-item kt-header__topbar-item--user">
                 <button type="button" class="btn btn-login" @click="onLogin">登 陆</button>
                 &nbsp;

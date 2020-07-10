@@ -48361,7 +48361,7 @@ body .kt-container .kt-container {
 
 @media (min-width: 1025px) {
     .kt-container {
-        padding: 0 30px;
+        padding: 0 10px;
     }
     .kt-body>.kt-container {
         padding-right: 0 !important;
