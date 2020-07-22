@@ -42,9 +42,9 @@
                 <div class="row">
                   <div class="col-md-4">
                     <button type="button" class="btn" :class="{'btn-collect': company.isCollect == 0, 'kt-font-primary': company.isCollect == 1}" @click="onCollect(company)">
-                      <i class="la" :class="{'la-heart-o': company.isCollect == 0, 'la-heart': company.isCollect == 1}"></i>
+                      <i class="la" :class="{'la-heart-o': company.isCollect == 0, 'la-heart kt-font-collect': company.isCollect == 1}"></i>
                       <span v-if="company.isCollect == 0">关注</span>
-                      <span v-if="company.isCollect == 1" class="kt-font-primary">已关注</span>
+                      <span v-if="company.isCollect == 1" class="kt-font-collect">已关注</span>
                     </button>
                   </div>
                   <div class="col-md-8">

@@ -2,8 +2,7 @@
     max-height: 150px;
     height: 150px;
     background: url(/media/banner/job_evaluation_header.jpg) no-repeat;
-    background-size: cover;
-    box-sizing: border-box;
+    background-size: 100% 100%;
 }
 
 .comprehensive-exercises tr {

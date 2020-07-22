@@ -183,7 +183,31 @@ a.no-hand {
 }
 
 .shs-login-left {
-    background-image: url(/media/banner/banner_login.png);
+    background-image: url(/media/bg/bg_left_1.jpg);
+    background-size: 100% 100% !important;
+    -moz-background-size: 100% 100% !important;
+}
+
+.shs-register-left {
+    background-image: url(/media/bg/bg_left_2.jpg);
+    background-size: 100% 100% !important;
+    -moz-background-size: 100% 100% !important;
+}
+
+.shs-forget-left {
+    background-image: url(/media/bg/bg_left_4.jpg);
+    background-size: 100% 100% !important;
+    -moz-background-size: 100% 100% !important;
+}
+
+.shs-user-info-left {
+    background-image: url(/media/bg/bg_left_6.jpg);
+    background-size: 100% 100% !important;
+    -moz-background-size: 100% 100% !important;
+}
+
+.shs-change-password-left {
+    background-image: url(/media/bg/bg_left_9.jpg);
     background-size: 100% 100% !important;
     -moz-background-size: 100% 100% !important;
 }
@@ -249,16 +273,16 @@ a.no-hand {
 .btn-login {
     width: 70px;
     border-radius: 1.5rem;
-    color: #ff6700 !important;
-    border-color: #ff6700;
+    color: #3d94fb !important;
+    border-color: #3d94fb;
 }
 
 .btn-register {
     width: 70px;
     border-radius: 1.5rem;
     color: rgb(255, 255, 255) !important;
-    background-color: #ff6700;
-    border-color: #ff6700;
+    background-color: #3d94fb;
+    border-color: #3d94fb;
 }
 
 .kt-header-menu .kt-menu__link:hover {
@@ -268,11 +292,6 @@ a.no-hand {
 .kt-sticky-toolbar {
     width: 60px;
 }
-
-
-/* .kt-header-menu-wrapper {
-    width: 760px;
-} */
 
 .kt-sticky-toolbar .kt-sticky-toolbar__item:not(:last-child) {
     padding: 3px;
@@ -458,25 +477,29 @@ a.no-hand {
 /* begin: 修改框架样式 */
 
 .btn-primary {
-    background: #ff6700;
-    border-color: #ff6700;
+    background: #3d94fb !important;
+    border-color: #3d94fb;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background: #ff6700;
-    border: 1px solid #ff6700;
+    background: #3d94fb;
+    border: 1px solid #3d94fb;
     color: #fff;
 }
 
 .btn-primary-hover-info:hover {
-    color: #ee702e !important;
-    border-color: #ee702e !important;
+    color: #3d94fb !important;
+    border-color: #3d94fb !important;
     background-color: transparent;
 }
 
 .btn-collect:hover {
-    color: #ff6700;
+    color: #ff3d3d;
+}
+
+.kt-font-collect {
+    color: #ff3d3d;
 }
 
 .btn-warning {
@@ -486,23 +509,19 @@ a.no-hand {
 }
 
 .kt-font-primary {
-    color: #ff6700 !important;
+    color: #3d94fb !important;
 }
 
 .alert.alert-solid-warning {
-    background: rgba(243, 174, 140, 0.1);
+    background: rgba(179, 211, 241, 0.1);
 }
 
 .alert.alert-solid-warning .alert-text {
-    color: #ff6700;
+    color: #3d94fb;
 }
 
 .kt-header__topbar-wrapper a:hover {
-    color: #ff6700 !important;
-}
-
-.kt-bg-danger {
-    background-color: #ff6700 !important;
+    color: #3d94fb !important;
 }
 
 .kt-label-bg-color-1 {
@@ -512,19 +531,19 @@ a.no-hand {
 }
 
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--active {
-    background: #ff6700;
+    background: #3d94fb;
 }
 
 .nav-tabs.nav-tabs-line.nav-tabs-line-warning.nav.nav-tabs .nav-link:hover,
 .nav-tabs.nav-tabs-line.nav-tabs-line-warning.nav.nav-tabs .nav-link.active,
 .nav-tabs.nav-tabs-line.nav-tabs-line-warning a.nav-link:hover,
 .nav-tabs.nav-tabs-line.nav-tabs-line-warning a.nav-link.active {
-    color: #ff6700;
-    border-bottom: 1px solid #ff6700;
+    color: #3d94fb;
+    border-bottom: 1px solid #3d94fb;
 }
 
 .kt-nav.kt-nav--v4 .kt-nav__item.active .kt-nav__link {
-    border-left: 3px solid #ff6700;
+    border-left: 3px solid #3d94fb;
 }
 
 

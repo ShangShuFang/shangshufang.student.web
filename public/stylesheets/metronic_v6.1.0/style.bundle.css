@@ -2750,14 +2750,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #5867dd;
-    border-color: #5867dd;
+    background-color: #3d94fb;
+    border-color: #3d94fb;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #384ad7;
-    border-color: #2e40d4;
+    background-color: #3d94fb;
+    border-color: #3d94fb;
 }
 
 .btn-primary:focus,
@@ -12064,18 +12064,19 @@ button.btn {
     display: none;
 }
 
-.btn-primary {
+
+/* .btn-primary {
     color: #fff;
-    background-color: #5867dd;
-    border-color: #5867dd;
+    background-color: #3d94fb;
+    border-color: #3d94fb;
     color: #ffffff;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #384ad7;
-    border-color: #2e40d4;
-}
+    background-color: #3d94fb;
+    border-color: #3d94fb;
+} */
 
 .btn-primary:focus,
 .btn-primary.focus {
@@ -16270,7 +16271,7 @@ code {
 .nav-tabs.nav-tabs-line a.nav-link.active {
     background-color: transparent;
     color: #595d6e;
-    border-bottom: 1px solid #ff6700;
+    border-bottom: 1px solid #3d94fb;
 }
 
 .nav-tabs.nav-tabs-line.nav.nav-tabs .nav-link:hover>i,
@@ -37554,7 +37555,7 @@ td>.kt-radio.kt-radio--single {
 .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub)>.kt-nav__link .kt-nav__link-icon,
 .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub)>.kt-nav__link .kt-nav__link-text,
 .kt-nav .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub)>.kt-nav__link .kt-nav__link-arrow {
-    color: #ff6700;
+    color: #3d94fb;
 }
 
 .kt-nav .kt-nav__item.kt-nav__item--active>.kt-nav__link .kt-nav__link-icon g [fill],
@@ -39668,7 +39669,7 @@ td>.kt-radio.kt-radio--single {
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--next,
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--prev,
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--last {
-    background: rgba(255, 88, 6, 0.1);
+    background: rgba(179, 211, 241, 0.1);
 }
 
 .kt-pagination.kt-pagination--warning .kt-pagination__links .kt-pagination__link--active {
@@ -39676,7 +39677,7 @@ td>.kt-radio.kt-radio--single {
 }
 
 .kt-pagination.kt-pagination--warning .kt-pagination__links li:hover {
-    background: #ff6700;
+    background: #3d94fb;
     -webkit-transition: color 0.3s ease;
     transition: color 0.3s ease;
 }
@@ -49685,7 +49686,7 @@ body .kt-container .kt-container {
         background-color: #ffffff;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--here>.kt-menu__link .kt-menu__link-text {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--here>.kt-menu__link>.kt-menu__hor-arrow {
         color: #ffffff;
@@ -49696,13 +49697,13 @@ body .kt-container .kt-container {
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-icon,
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-icon {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-icon svg g [fill],
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-icon svg g [fill] {
         -webkit-transition: fill 0.3s ease;
         transition: fill 0.3s ease;
-        fill: #ff6700;
+        fill: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-icon svg:hover g [fill],
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-icon svg:hover g [fill] {
@@ -49711,15 +49712,15 @@ body .kt-container .kt-container {
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--dot>span,
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--dot>span {
-        background-color: #ff6700;
+        background-color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--line>span,
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--line>span {
-        background-color: #ff6700;
+        background-color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-text,
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link .kt-menu__link-text {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item:hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link>.kt-menu__hor-arrow,
     .kt-header-menu .kt-menu__nav>.kt-menu__item.kt-menu__item--hover:not(.kt-menu__item--here):not(.kt-menu__item--active)>.kt-menu__link>.kt-menu__hor-arrow {
@@ -49758,34 +49759,34 @@ body .kt-container .kt-container {
         background-color: #f8f8fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-icon {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-icon svg g [fill] {
         -webkit-transition: fill 0.3s ease;
         transition: fill 0.3s ease;
-        fill: #ff6700;
+        fill: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-icon svg:hover g [fill] {
         -webkit-transition: fill 0.3s ease;
         transition: fill 0.3s ease;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--dot>span {
-        background-color: #ff6700;
+        background-color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--line>span {
-        background-color: #ff6700;
+        background-color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-text {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--active>.kt-menu__link>.kt-menu__hor-arrow {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--here>.kt-menu__link {
         background-color: #f8f8fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--here>.kt-menu__link .kt-menu__link-icon {
-        color: #ff6700;
+        color: #3d94fb;
     }
     .kt-header-menu .kt-menu__nav>.kt-menu__item .kt-menu__submenu>.kt-menu__subnav>.kt-menu__item.kt-menu__item--here>.kt-menu__link .kt-menu__link-icon svg g [fill] {
         -webkit-transition: fill 0.3s ease;
