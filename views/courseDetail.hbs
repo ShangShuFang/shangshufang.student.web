@@ -159,7 +159,7 @@
               <a class="nav-link" data-toggle="tab" href="#kt_tabs_4" role="tab" aria-selected="false">报名同学</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#kt_tabs_8" role="tab" aria-selected="false">课程练习库</a>
+              <a class="nav-link" data-toggle="tab" href="#kt_tabs_8" role="tab" aria-selected="false">随堂练习</a>
             </li>
             <li class="nav-item">
               <a class="nav-link kt-font-primary kt-font-bolder" data-toggle="tab" href="#kt_tabs_5" role="tab"
@@ -195,7 +195,7 @@
                   <div class="form-group row">
                     <label for="example-email-input" class="col-2 col-form-label">课程简介</label>
                     <div class="col-10">
-                      <p class="col-form-label" v-text="courseModel.detail.courseIntroduction"></p>
+                      <p class="col-form-label ellipsis-5 course-introduction" :title="courseModel.detail.courseIntroduction" v-text="courseModel.detail.courseIntroduction"></p>
                     </div>
                   </div>
                 </div>
@@ -411,7 +411,9 @@
                           </span>
                         </td>
                         <td class="kt-datatable__cell text-center" style="width: 20%">
+                          <span v-if="data.exercisesTotalCount == 0">共计0个编程练习</span>
                           <a href="javascript:;" class="kt-widget__value kt-font-brand"
+                            v-if="data.exercisesTotalCount > 0"
                             @click="onShowKnowledgeExercisesModal(data)">共计\{{data.exercisesTotalCount}}个编程练习</a>
                         </td>
                         <td class="kt-datatable__cell text-center" style="width: 15%">

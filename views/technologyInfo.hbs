@@ -1,23 +1,47 @@
 <link href="/stylesheets/views/technologyInfo.css" rel="stylesheet" type="text/css" />
 
 <div id="app">
-  <div class="kt-subheader kt-grid__item breadcrumbs" id="kt_subheader">
-    <div class="kt-container">
-      <div class="kt-subheader__main">
-        <div class="kt-subheader__breadcrumbs">
-          <span class="kt-subheader__breadcrumbs-link" v-text="technologyModel.directionName"></span>
-          <span class="fa fa-angle-right"></span>
-          <span class="kt-subheader__breadcrumbs-link" v-text="technologyModel.categoryName"></span>
-          <span class="fa fa-angle-right"></span>
-          <span class="kt-subheader__breadcrumbs-link" v-text="technologyModel.technologyName"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
     <div class="kt-container kt-grid__item kt-grid__item--fluid">
-      <div class="row">
+      <div class="technology-header-portlet">
+        <div class="kt-portlet__body">
+          <div class="kt-widget kt-widget--user-profile-3">
+            <div class="kt-widget__top">
+              <div class="kt-font-boldest kt-font-light technology-name">
+                <div class="kt-widget__media text-center">
+                  <img :src="technologyModel.technologyThumbnailSquare" class="technology-img" alt="image">
+                </div>
+                <div class="kt-widget__media text-center kt-padding-t-10">
+                <span class="kt-widget__desc">
+                  <i class="la la-star star-selected" v-for="star in technologyModel.technologyStars"></i>
+                </span>
+                </div>
+              </div>
+              <div class="kt-widget__content">
+                <div class="color-white">
+                  <h4>
+                    <span v-text="technologyModel.technologyName"></span><span>简介</span>
+                    <span class="kt-font-bold kt-badge kt-badge--inline kt-badge--pill"
+                      :class="{'kt-badge--info': technologyModel.difficultyLevel == 'J', 'kt-badge--warning': technologyModel.difficultyLevel == 'M', 'kt-badge--danger': technologyModel.difficultyLevel == 'S'}"
+                      v-text="technologyModel.difficultyLevelText">
+                    </span>
+                  </h4>
+                </div>
+
+                <div class="kt-widget__info kt-margin-t-15">
+                  <div class="kt-widget__desc">
+                    <p class="technology-memo color-white" v-text="technologyModel.technologyMemo"></p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {{!-- <div class="row">
         <div class="col-md-2 text-center">
           <img :src="technologyModel.technologyThumbnailSquare" alt="">
         </div>
@@ -36,7 +60,9 @@
             <p class="technology-memo" v-text="technologyModel.technologyMemo"></p>
           </div>
         </div>
-      </div>
+      </div> --}}
+
+
     </div>
   </div>
 
