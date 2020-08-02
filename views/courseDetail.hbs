@@ -327,7 +327,8 @@
                         <span style="width: 140px;" v-text="data.studentSchoolName"></span>
                       </td>
                       <td class="kt-datatable__cell">
-                        <span style="width: 100px;" v-text="data.enrollmentYear+'年'"></span>
+                        <span style="width: 100px;" v-if="data.enrollmentYear !== ''" v-text="data.enrollmentYear+'年'"></span>
+                        <span style="width: 100px;" v-if="data.enrollmentYear === ''"> </span>
                       </td>
                       <td class="kt-datatable__cell">
                         <span style="width: 100px;">
