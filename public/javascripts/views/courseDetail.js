@@ -959,7 +959,7 @@ const app = new Vue({
                 buttons: {
                     confirm: {
                         label: '确认',
-                        className: 'btn-warning'
+                        className: 'btn-primary'
                     },
                     cancel: {
                         label: '取消',
