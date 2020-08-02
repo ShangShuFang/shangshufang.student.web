@@ -631,6 +631,8 @@ const app = new Vue({
             this.reviewModel.reviewResult = REVIEW_RESULT.INIT;
             this.reviewModel.reviewMemo = '';
 
+            this.reviewModel.codeStandardErrorList = [];
+
             $.each($('input[name="codeStandard"]'), (index, obj) => {
                 $(obj).prop("checked", "");
             });
