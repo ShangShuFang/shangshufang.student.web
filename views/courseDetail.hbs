@@ -837,6 +837,9 @@
               </div>
             </div>
             <div class="tab-pane" id="kt_tabs_7" role="tabpanel">
+              <div class="kt-margin-b-15">
+                <button type="button" class="btn btn-brand" @click="onShowQuestionModal">我要提问</button>
+              </div>
               <div class="alert alert-secondary" role="alert" v-if="courseOnlineQuestionModel.totalCount == 0">
                 <div class="alert-text text-center">
                   该课程暂时没有相关咨询的问题。
@@ -891,6 +894,37 @@
 
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="kt_modal_question_message" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form name="leaveMessageForm">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                提交问题
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <textarea class="form-control" maxlength="1000" rows="10" v-model="studentQuestionModel.question"
+                    placeholder="输入你的问题（最多1000字）"></textarea>
+                  <div class="invalid-feedback" v-if="studentQuestionModel.showAlert">请输入你的问题</div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-primary" id="btnSubmitQuestion" @click="onSubmitQuestion">
+                提交
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -53,6 +53,10 @@ const app = new Vue({
             maxPageNumber: 0,
             dataList: []
         },
+        studentQuestionModel: {
+            question: '',
+            showAlert: false
+        },
         leaveMessageModel: {
             questionID: 0,
             questionerName: '',
@@ -362,6 +366,48 @@ const app = new Vue({
                 .catch(err => {
                     message.error(localMessage.NETWORK_ERROR);
                 })
+        },
+        onShowQuestionModal: function() {
+            this.studentQuestionModel.question = '';
+            $('#kt_modal_question_message').modal('show');
+        },
+        onSubmitQuestion: function() {
+            if (commonUtility.isEmpty(this.studentQuestionModel.question)) {
+                this.studentQuestionModel.showAlert = true;
+                return false;
+            }
+            let btn = $('#btnSubmitQuestion');
+            $(btn).attr('disabled', true);
+            KTApp.progress(btn);
+            this.studentQuestionModel.showAlert = false;
+            let that = this;
+            axios.post('/course/detail/question', {
+                    courseUniversityCode: this.commonModel.universityCode,
+                    courseSchoolID: this.commonModel.schoolID,
+                    courseID: this.commonModel.courseID,
+                    questionerUniversityCode: this.commonModel.loginUser.universityCode,
+                    questionerSchoolID: this.commonModel.loginUser.schoolID,
+                    questionerID: this.commonModel.loginUser.studentID,
+                    questionContent: this.studentQuestionModel.question,
+
+                    loginUser: this.commonModel.loginUser.studentID
+                })
+                .then(function(res) {
+                    if (res.data.err) {
+                        KTApp.unprogress(btn);
+                        $(btn).removeAttr('disabled');
+                        message.error(localMessage.exception(res.data.code, res.data.msg));
+                        return false;
+                    }
+                    KTApp.unprogress(btn);
+                    $(btn).removeAttr('disabled');
+                    $('#kt_modal_question_message').modal('hide');
+                    that.courseOnlineQuestionModel.dataList = [];
+                    that.loadOnlineQuestion();
+                })
+                .catch(function(error) {
+                    message.error(localMessage.NETWORK_ERROR);
+                });
         },
         loadOnlineQuestion: function() {
             axios.get('/course/detail/question'

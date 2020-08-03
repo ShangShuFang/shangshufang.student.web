@@ -37,6 +37,9 @@
             "signUp4Student": "api/v1/course/sign_up/list/student",
             "exercises4Student": "api/v1/course/exercises/list/student",
             "courseQuestionList": "api/v1/course/question/list",
+            "addCourseQuestion": "api/v1/course/question/add",
+
+
             "checkAppliedCourse": "api/v1/course/sign_up/check/sign_up",
             "checkIsAssistant": "api/v1/course/sign_up/check/assistant",
             "submitCourseQuestionLeaveMessage": "api/v1/course/answer/add",
