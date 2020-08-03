@@ -160,7 +160,7 @@ const register = new Vue({
             if (!commonUtility.isEmpty(this.email)) {
                 this.showEmailAlert = !commonUtility.isEmail(this.email);
                 this.emailAlertMessage = !commonUtility.isEmail(this.email) ? localMessage.EMAIL_INVALID : '';
-                checkPass = !checkPass ? checkPass : commonUtility.isCellphoneNumber(this.cellphone);
+                checkPass = !checkPass ? checkPass : commonUtility.isEmail(this.email);
             }
 
             return checkPass;
