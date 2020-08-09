@@ -139,7 +139,7 @@ $(document).ready(function() {
                 }
                 $('.student-university').text(result.detail.universityName);
                 $('.student-school').text(result.detail.schoolName);
-                $('.student-enrollment-year').text(result.detail.enrollmentYear + '年');
+                $('.student-enrollment-year').text(result.detail.enrollmentYear.substr(0, 4) + '年');
                 $('.student-cellphone').text(result.detail.cellphone);
                 $('.student-email').text(result.detail.email);
                 if (!commonUtility.isEmpty(result.detail.photo)) {
