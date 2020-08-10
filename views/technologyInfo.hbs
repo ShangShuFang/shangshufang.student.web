@@ -333,7 +333,7 @@
                 <span class="student-name">
                   <div class="kt-user-card-v2">
                     <div class="kt-user-card-v2__pic">
-                      <a href="javascript:" target="_blank">
+                      <a :href="'/ability/analysis/detail?s=o&universityCode=' + data.studentUniversityCode + '&schoolID=' + data.studentSchoolID + '&studentID=' + data.studentID" target="_blank">
                         <img class="kt-badge kt-badge--xl" :src="data.studentPhoto" alt="">
                       </a>
                     </div>
@@ -362,7 +362,7 @@
                 <span class="cellphone" v-text="data.cellphone"></span>
               </td>
               <td class="kt-datatable__cell">
-                <span class="enrollment-year" v-text="data.enrollmentYear"></span>
+                <span class="enrollment-year" v-text="data.enrollmentYear + '年'"></span>
               </td>
               <td class="kt-datatable__cell">
                 <span class="apply-status">
