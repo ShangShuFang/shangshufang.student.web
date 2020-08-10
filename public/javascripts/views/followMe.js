@@ -9,7 +9,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(3);
+            commonUtility.setUserCenterActive();
             this.loadCollectionList();
         },
         loadCollectionList: function() {

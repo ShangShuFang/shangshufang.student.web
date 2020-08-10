@@ -40,17 +40,19 @@
     font-weight: 600;
 }
 
-.kt-nav.kt-nav--v4 .kt-nav__item.active .kt-nav__link {
+
+/* .kt-nav.kt-nav--v4 .kt-nav__item.active .kt-nav__link {
     border-left: 3px solid #f7a900;
-}
+} */
 
 .kt-nav.kt-nav--bold .kt-nav__item .kt-nav__link .kt-nav__link-text {
     font-weight: 400;
 }
 
-.kt-nav__link:hover {
+
+/* .kt-nav__link:hover {
     color: #f7a900 !important;
-}
+} */
 
 .border-right {
     border-right: 1px solid #e8e8e8;

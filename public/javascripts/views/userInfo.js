@@ -43,6 +43,7 @@ const register = new Vue({
                 location.href = '/login';
                 return false;
             }
+            commonUtility.setUserCenterActive();
             this.studentName = this.loginUser.fullName;
             this.photo = commonUtility.isEmpty(this.loginUser.photo) ? this.defaultPhoto : this.loginUser.photo;
             this.sex = this.loginUser.sex;

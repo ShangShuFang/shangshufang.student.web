@@ -21,6 +21,7 @@ const register = new Vue({
                 location.href = '/login';
                 return false;
             }
+            commonUtility.setUserCenterActive();
         },
         checkPreChange: function() {
             let checkPass = true;

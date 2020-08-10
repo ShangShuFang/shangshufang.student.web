@@ -74,7 +74,7 @@
   </div>
 
   <div class="kt-container kt-grid__item kt-grid__item--fluid">
-    <div class="alert alert-solid-warning alert-bold kt-margin-t-15" role="alert">
+    <div class="alert alert-solid-warning alert-bold kt-margin-t-15" v-if="totalCount > 0" role="alert">
       <div class="alert-text">收藏你想要挑战的就业测评习题，之后在个人中心查看并提交成果！</div>
       <div class="alert-close">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -84,8 +84,8 @@
     </div>
 
     <div class="kt-margin-t-15">
-      <div v-cloak class="text-center" v-if="totalCount == 0">未查询到满足条件的就业测评内容</div>
-      <div class="row">
+      <div v-cloak class="text-center" v-if="totalCount == 0">未查询到满足条件的就业测评</div>
+      <div class="row" v-if="totalCount > 0">
         <div class="col-md-3 col-sm-3 col-xl-3" v-for="data in dataList">
           <div class="kt-portlet kt-portlet--height-fluid">
             <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">

@@ -32,7 +32,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
-            // commonUtility.setNavActive(2);
+            commonUtility.setUserCenterActive();
             this.loadDirectionList();
             this.loadTechnologyCategoryList();
             this.loadTechnologyList();

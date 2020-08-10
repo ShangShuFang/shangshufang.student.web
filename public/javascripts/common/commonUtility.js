@@ -3,6 +3,10 @@ commonUtility.setNavActive = function(index) {
     $(`ul.main-menu_nav li:nth-child(${index})`).addClass('kt-menu__item--here');
 };
 
+commonUtility.setUserCenterActive = function() {
+    $('a[href="/center/comprehensive"]').addClass('kt-font-primary kt-font-bolder');
+};
+
 commonUtility.isEmpty = function(value) {
     return value === '' || value === undefined || value === null;
 };
