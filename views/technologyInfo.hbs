@@ -362,7 +362,8 @@
                 <span class="cellphone" v-text="data.cellphone"></span>
               </td>
               <td class="kt-datatable__cell">
-                <span class="enrollment-year" v-text="data.enrollmentYear + '年'"></span>
+                <span class="enrollment-year" v-if="data.enrollmentYear.length > 0" v-text="data.enrollmentYear + '年'"></span>
+                <span class="enrollment-year" v-if="data.enrollmentYear.length == 0"> </span>
               </td>
               <td class="kt-datatable__cell">
                 <span class="apply-status">
