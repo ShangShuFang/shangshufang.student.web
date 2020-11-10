@@ -1,0 +1,212 @@
+<div id="app">
+	<div v-cloak v-if="!isShow">
+		<div class="kt-container kt-grid__item kt-grid__item--fluid kt-margin-t-25">
+			<div class="alert alert-solid-warning alert-bold text-center" role="alert">
+				<div class="alert-text" v-text="message"></div>
+			</div>
+		</div>
+		
+	</div>
+
+	<div v-cloak v-if="isShow">
+		<div class="kt-margin-t-25 text-center">
+			<h3 v-text="title"></h3>
+		</div>
+
+		<div class="kt-container kt-grid__item kt-grid__item--fluid kt-margin-t-25">
+			<form class="kt-form kt-form--label-right">
+				<div class="kt-portlet__body">
+					<div class="form-group row kt-margin-b-0">
+						<label for="example-text-input" class="col-1 col-form-label">下发时间：</label>
+						<div class="col-10">
+							<label for="example-text-input" class="col-form-label text-left" v-text="createTime"></label>
+						</div>
+					</div>
+					<div class="form-group row kt-margin-b-0">
+						<label for="example-text-input" class="col-1 col-form-label">学生：</label>
+						<div class="col-10">
+							<label for="example-text-input" class="col-form-label text-left" v-text="studentName"></label>
+						</div>
+					</div>
+					<div class="form-group row kt-margin-b-0">
+						<label for="example-text-input" class="col-1 col-form-label">状态：</label>
+						<div class="col-10">
+							<label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
+								:class="{'kt-badge--primary': dataStatus == 'P', 'kt-badge--warning': dataStatus == 'C', 'kt-badge--danger': dataStatus == 'R', 'kt-badge--success': dataStatus == 'S'}"
+								v-text="dataStatusText" style="margin-top: 8px; font-size:0.8rem"></label>
+						</div>
+					</div>
+					<div class="form-group row kt-margin-b-0">
+						<label for="example-text-input" class="col-1 col-form-label">提交时间：</label>
+						<div class="col-10">
+							<label for="example-text-input" class="col-form-label text-left" v-text="submitTime"></label>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="kt-container kt-grid__item kt-grid__item--fluid kt-margin-t-15 exercises-list">
+			<div class="choice-list" v-if="singleChoiceList.length > 0 || multipleChoiceList.length > 0">
+				<h4 class="kt-padding-l-25">选择题</h4>
+				<ol>
+					<li v-for="choice in singleChoiceList" :class="{'kt-margin-t-15' : choice.correctResult == 'P', 'kt-margin-t-10' : choice.correctResult != 'P'}">
+						<div>
+							<strong class="pre-wrap markdown-body" 
+							:class="{'kt-font-danger': choice.noAnswer == true}" v-html="choice.exercisesTitleHtml"></strong>
+						</div>
+						<div style="margin-top: -20px;">
+							<small>习题来源：</small>
+							<small v-text="choice.exercisesSource"></small>
+						</div>
+						<div class="kt-margin-t-5">
+							<small>考察知识点：</small>
+							<small v-text="choice.knowledgeName"></small>
+						</div>
+						<div class="kt-margin-t-10">
+							<div class="kt-radio-list">
+								<label class="kt-radio" 
+									v-for="option in choice.optionList" 
+									:class="{'kt-radio--disabled': choice.correctResult == 'Y'}" >
+									<input type="radio" 
+									:name="choice.courseExercisesDetailID" 
+									:value="option.optionID" 
+									:disabled="choice.correctResult == 'Y'"
+									v-model="choice.selectedOptionID"> \{{option.optionText}}
+									<span></span>
+								</label> 
+							</div>
+						</div>
+						<div class="kt-margin-t-15" v-if="dataStatus != 'P'">
+							<label>批改结果：</label>
+							<label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
+								:class="{'kt-badge--success': choice.correctResult == 'Y', 'kt-badge--danger': choice.correctResult == 'N'}">
+								<span v-if="choice.correctResult == 'Y'"> <i class="fa fa-check"></i> 正确</span>	
+								<span v-if="choice.correctResult == 'N'"> <i class="fa fa-times"></i> 错误</span>	
+							</label>
+						</div>
+					</li>
+					<li v-for="choice in multipleChoiceList" class="kt-margin-t-5-">
+						<div>
+							<strong class="pre-wrap markdown-body" :class="{'kt-font-danger': choice.noAnswer == true}" v-html="choice.exercisesTitleHtml"></strong>
+						</div>
+						<div style="margin-top: -20px;">
+							<small>习题来源：</small>
+							<small v-text="choice.exercisesSource"></small>
+						</div>
+						<div class="kt-margin-t-5">
+							<small>考察知识点：</small>
+							<small v-text="choice.knowledgeName"></small>
+						</div>
+						<div class="kt-margin-t-10">
+							<div class="kt-checkbox-list">
+								<label class="kt-checkbox" v-for="option in choice.optionList">
+									<input type="checkbox" 
+									:name="choice.courseExercisesDetailID" 
+									:value="option.optionID" 
+									:disabled="choice.correctResult == 'Y'"
+									v-model="choice.selectedOptionList"> \{{option.optionText}}
+									<span></span>
+								</label>
+							</div>
+						</div>
+						<div class="kt-margin-t-15" v-if="dataStatus != 'P'">
+							<label>批改结果：</label>
+							<label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
+								:class="{'kt-badge--success': choice.correctResult == 'Y', 'kt-badge--danger': choice.correctResult == 'N'}">
+								<span v-if="choice.correctResult == 'Y'"> <i class="fa fa-check"></i> 正确</span>	
+								<span v-if="choice.correctResult == 'N'"> <i class="fa fa-times"></i> 错误</span>	
+							</label>
+						</div>
+
+					</li>
+				</ol>
+			</div>
+
+			<div class="blank-list kt-margin-t-25" v-if="blankList.length > 0">
+				<h4 class="kt-padding-l-25">填空题</h4>
+				<ol>
+					<li v-for="blank in blankList" :class="{'kt-margin-t-15' : blank.correctResult == 'P', 'kt-margin-t-10' : blank.correctResult != 'P'}">
+						<div>
+							<strong class="pre-wrap markdown-body" :class="{'kt-font-danger': blank.noAnswer == true}" v-html="blank.exercisesTitleHtml"></strong>
+						</div>
+						<div style="margin-top: -20px;">
+							<small>习题来源：</small>
+							<small v-text="blank.exercisesSource"></small>
+						</div>
+						<div class="kt-margin-t-5">
+							<small>考察知识点：</small>
+							<small v-text="blank.knowledgeName"></small>
+						</div>
+						<div class="kt-margin-t-10">
+							<input type="text" class="form-control input-blank" v-model="blank.fillInContent" :disabled="blank.correctResult == 'Y'" placeholder="请填写答案">
+						</div>
+						<div class="kt-margin-t-15" v-if="dataStatus != 'P'">
+							<label>批改结果：</label>
+							<label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
+								:class="{'kt-badge--success': blank.correctResult == 'Y', 'kt-badge--danger': blank.correctResult == 'N'}">
+								<span v-if="blank.correctResult == 'Y'"> <i class="fa fa-check"></i> 正确</span>	
+								<span v-if="blank.correctResult == 'N'"> <i class="fa fa-times"></i> 错误</span>	
+							</label>
+						</div>
+					</li>
+				</ol>
+			</div>
+
+			<div class="program-list kt-margin-t-25" v-if="programList.length > 0">
+				<h4 class="kt-padding-l-25">编程题</h4>
+				<ol>
+					<li v-for="program in programList" :class="{'kt-margin-t-15' : program.correctResult == 'P', 'kt-margin-t-10' : program.correctResult != 'P'}">
+						<div v-if="program.exercisesSourceType == 1">
+							<strong class="pre-wrap markdown-body" :class="{'kt-font-danger': program.noAnswer == true}" v-html="program.exercisesTitleHtml"></strong>
+						</div>
+						<div v-if="program.exercisesSourceType == 0">
+							<strong :class="{'kt-font-danger': program.noAnswer == true}">请按照以下文件中的要求编写程序：</strong> <br>
+							<a :href="program.exercisesDocUri" class="kt-link kt-link--brand kt-margin-t-5" target="_blank"
+								v-text="program.exercisesTitle"></a>
+						</div>
+						<div v-if="program.exercisesSourceType == 1" style="margin-top: -20px;">
+							<small>习题来源：</small>
+							<small v-text="program.exercisesSource">题目来源</small>
+						</div>
+						<div class="kt-margin-t-5">
+							<small>考察知识点：</small>
+							<small v-text="program.knowledgeName"></small>
+						</div>
+						<div class="kt-margin-t-10">
+							<input type="text" class="form-control input-blank" v-model="program.sourceCodeUrl" :disabled="program.correctResult == 'Y'" placeholder="请填写保存代码的Git地址">
+							<a href="javascript:" class="kt-link kt-link--success kt-margin-t-10" v-if="program.correctResult !== 'P'">查看批改结果</a>
+						</div>
+						<div class="kt-margin-t-15" v-if="dataStatus != 'P'">
+							<label>批改结果：</label>
+							<label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
+								:class="{'kt-badge--warning': program.correctResult == 'P', 'kt-badge--success': program.correctResult == 'Y', 'kt-badge--danger': program.correctResult == 'N'}">
+								<span v-if="program.correctResult == 'P'">批改中</span>	
+								<span v-if="program.correctResult == 'Y'"> <i class="fa fa-check"></i> 正确</span>	
+								<span v-if="program.correctResult == 'N'"> <i class="fa fa-times"></i> 错误</span>	
+							</label>
+						</div>
+					</li>
+				</ol>
+			</div>
+
+			<div class="text-center">
+				<button type="button" 
+				id="btnSubmit"
+				class="btn btn-primary btn-elevate btn-elevate-air btn-wide" 
+				v-if = "dataStatus != 'S'"
+				@click="onSubmit()">
+				提交作业
+				</button>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
+<script>
+	$(document).ready(function () {
+		commonUtility.appendScript('/javascripts/views/courseExercises.js');
+	});
+</script>

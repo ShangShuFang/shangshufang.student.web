@@ -1,6 +1,6 @@
 body {
     font: 14px "Microsoft YaHei" !important;
-    color: #3e3e3e;
+    color: #646c9a;
 }
 
 .invalid-feedback {
@@ -541,3 +541,14 @@ a.no-hand {
 
 
 /* end: 修改框架样式 */
+
+.input-blank {
+	width: 600px;
+	padding: 0.5rem 0 !important;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	border-radius: 0.2rem;
+	border: none;
+	border-bottom: 1px solid #cccccc;
+	background-color: #fbfafb;
+}

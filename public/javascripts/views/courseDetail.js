@@ -67,9 +67,6 @@ const app = new Vue({
             messageContent: '',
             showAlert: false
         },
-        courseExercisesModel: {
-            dataList: []
-        },
         knowledgeExercisesModel: {
             courseClass: 0,
             dataList: []
@@ -88,20 +85,7 @@ const app = new Vue({
             filterStatus: 'NULL',
             studentName: 'NULL'
         },
-        courseOtherExercisesModel: {
-            isShow: false,
-            fromIndex: 0,
-            toIndex: 0,
-            pageNumber: 1,
-            totalCount: 0,
-            maxPageNumber: 0,
-            dataList: [],
-            paginationArray: [],
-            prePageNum: -1,
-            nextPageNum: -1,
-            filterStatus: 'NULL',
-            studentName: ''
-        },
+        
         reviewHistoryModel: {
             exercisesID: 0,
             exercisesName: '',
@@ -160,10 +144,8 @@ const app = new Vue({
             this.getParameter();
             this.loadCourseDetail();
             this.loadApplyStudent();
-            this.loadCourseExercises();
-            this.loadOnlineQuestion();
             this.loadMyExercises();
-            this.loadOtherExercises();
+            this.loadOnlineQuestion();
         },
         checkParameter: function() {
             let universityCode = commonUtility.getUriParameter('universityCode');
@@ -213,7 +195,7 @@ const app = new Vue({
                     this.courseModel.detail = res.data.courseDetail;
                     this.loadCourseSchedule(res.data.courseDetail.courseScheduleList);
                     this.loadCoursePlan(res.data.courseDetail.coursePlanList);
-                    this.loadCodeStandard();
+                    // this.loadCodeStandard();
                 })
                 .catch(err => {
                     message.error(localMessage.NETWORK_ERROR);
@@ -311,29 +293,6 @@ const app = new Vue({
                     }
                 }
             });
-        },
-        loadCourseExercises: function() {
-            axios.get('/course/detail/exercises/course'
-                    .concat(`?universityCode=${this.commonModel.universityCode}`)
-                    .concat(`&schoolID=${this.commonModel.schoolID}`)
-                    .concat(`&courseID=${this.commonModel.courseID}`))
-                .then(res => {
-                    if (res.data.err) {
-                        message.error(localMessage.exception(res.data.code, res.data.msg));
-                        return false;
-                    }
-                    res.data.dataList.forEach(function(courseExercises) {
-                        let exercisesTotalCount = 0;
-                        courseExercises.knowledgeList.forEach(function(knowledge) {
-                            exercisesTotalCount += knowledge.knowledgeExercisesList.length;
-                        });
-                        courseExercises.exercisesTotalCount = exercisesTotalCount;
-                    });
-                    this.courseExercisesModel.dataList = res.data.dataList;
-                })
-                .catch(err => {
-                    message.error(localMessage.NETWORK_ERROR);
-                })
         },
         loadApplyStudent: function() {
             axios.get('/course/detail/student'
@@ -499,24 +458,10 @@ const app = new Vue({
             this.checkLoginUserIsAppliedCourse(
                 this.loadExercises,
                 this.courseMyExercisesModel.pageNumber,
-                this.courseMyExercisesModel.filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
+                this.courseMyExercisesModel.filterStatus);
         },
-        loadOtherExercises: function() {
-            if (commonUtility.isEmpty(this.commonModel.loginUser)) {
-                this.courseMyExercisesModel.isShow = false;
-                return false;
-            }
-            this.checkLoginUserIsAppliedCourse(
-                this.loadExercises,
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false,
-                this.checkIsAssistant);
-        },
-        checkLoginUserIsAppliedCourse: function(loadExercisesCallback, pageNumber, dataStatus, studentName, isSelf, checkIsAssistantCallback) {
+        
+        checkLoginUserIsAppliedCourse: function(loadExercisesCallback, pageNumber, dataStatus) {
             axios.get('/course/detail/check/applied'
                     .concat(`?studentID=${this.commonModel.loginUser.studentID}`)
                     .concat(`&universityCode=${this.commonModel.universityCode}`)
@@ -532,70 +477,33 @@ const app = new Vue({
                         this.courseOtherExercisesModel.isShow = false;
                         return false;
                     }
-                    if (checkIsAssistantCallback === undefined) {
-                        loadExercisesCallback(pageNumber, dataStatus, studentName, isSelf);
-                        return false;
-                    }
-                    checkIsAssistantCallback(loadExercisesCallback, pageNumber, dataStatus, studentName, isSelf);
+                    loadExercisesCallback(pageNumber, dataStatus);
                 })
                 .catch(err => {
                     message.error(localMessage.NETWORK_ERROR);
                 })
         },
-        checkIsAssistant: function(loadExercisesCallback, pageNumber, dataStatus, studentName, isSelf) {
-            axios.get('/course/detail/check/assistant'
-                    .concat(`?studentID=${this.commonModel.loginUser.studentID}`)
-                    .concat(`&universityCode=${this.commonModel.universityCode}`)
-                    .concat(`&schoolID=${this.commonModel.schoolID}`)
-                    .concat(`&courseID=${this.commonModel.courseID}`))
-                .then(res => {
-                    if (res.data.err) {
-                        message.error(localMessage.exception(res.data.code, res.data.msg));
-                        return false;
-                    }
-                    if (!res.data.result) {
-                        this.courseOtherExercisesModel.isShow = false;
-                        return false;
-                    }
-                    loadExercisesCallback(pageNumber, dataStatus, studentName, isSelf);
-                })
-                .catch(err => {
-                    message.error(localMessage.NETWORK_ERROR);
-                })
-        },
-        loadExercises: function(pageNumber, dataStatus, studentName, isSelf) {
-            let fullName = commonUtility.isEmpty(studentName) ? 'NULL' : studentName;
-
+        loadExercises: function(pageNumber, dataStatus) {
             axios.get('/course/detail/exercises'
-                    .concat(`?pageNumber=${pageNumber}`)
+										.concat(`?pageNumber=${pageNumber}`)
+										.concat(`&courseID=${this.commonModel.courseID}`)
                     .concat(`&studentID=${this.commonModel.loginUser.studentID}`)
-                    .concat(`&courseID=${this.commonModel.courseID}`)
-                    .concat(`&dataStatus=${dataStatus}`)
-                    .concat(`&studentName=${fullName}`)
-                    .concat(`&isSelf=${isSelf}`))
+                    .concat(`&dataStatus=${dataStatus}`))
                 .then(res => {
                     if (res.data.err) {
                         message.error(localMessage.exception(res.data.code, res.data.msg));
                         return false;
                     }
-                    let exercisesModel = isSelf ? this.courseMyExercisesModel : this.courseOtherExercisesModel;
-                    if (!commonUtility.isEmptyList(res.data.dataContent.dataList)) {
-                        res.data.dataContent.dataList.forEach((data) => {
-                            if (commonUtility.isEmpty(data.studentPhoto)) {
-                                data.studentPhoto = '/media/users/customer_photo_demo.png';
-                            }
-                        })
-                    }
-                    exercisesModel.totalCount = res.data.dataContent.totalCount;
-                    exercisesModel.dataList = res.data.dataContent.dataList;
-                    exercisesModel.pageNumber = parseInt(res.data.dataContent.currentPageNum);
-                    exercisesModel.maxPageNumber = Math.ceil(res.data.dataContent.totalCount / res.data.dataContent.pageSize);
-                    exercisesModel.paginationArray = res.data.dataContent.paginationArray;
-                    exercisesModel.prePageNum = res.data.dataContent.prePageNum === undefined ? -1 : parseInt(res.data.dataContent.prePageNum);
-                    exercisesModel.nextPageNum = res.data.dataContent.nextPageNum === undefined ? -1 : parseInt(res.data.dataContent.nextPageNum);
-                    exercisesModel.fromIndex = res.data.dataContent.dataList === null ? 0 : (exercisesModel.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + 1;
-                    exercisesModel.toIndex = res.data.dataContent.dataList === null ? 0 : (exercisesModel.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + exercisesModel.dataList.length;
-                    exercisesModel.isShow = true;
+                    this.courseMyExercisesModel.totalCount = res.data.dataContent.totalCount;
+                    this.courseMyExercisesModel.dataList = res.data.dataContent.dataList;
+                    this.courseMyExercisesModel.pageNumber = parseInt(res.data.dataContent.currentPageNum);
+                    this.courseMyExercisesModel.maxPageNumber = Math.ceil(res.data.dataContent.totalCount / res.data.dataContent.pageSize);
+                    this.courseMyExercisesModel.paginationArray = res.data.dataContent.paginationArray;
+                    this.courseMyExercisesModel.prePageNum = res.data.dataContent.prePageNum === undefined ? -1 : parseInt(res.data.dataContent.prePageNum);
+                    this.courseMyExercisesModel.nextPageNum = res.data.dataContent.nextPageNum === undefined ? -1 : parseInt(res.data.dataContent.nextPageNum);
+                    this.courseMyExercisesModel.fromIndex = res.data.dataContent.dataList === null ? 0 : (parseInt(res.data.dataContent.currentPageNum) - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + 1;
+                    this.courseMyExercisesModel.toIndex = res.data.dataContent.dataList === null ? 0 : (parseInt(res.data.dataContent.currentPageNum) - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + res.data.dataContent.dataList.length;
+                    this.courseMyExercisesModel.isShow = true;
                 })
                 .catch(err => {
                     message.error(localMessage.NETWORK_ERROR);
@@ -636,16 +544,16 @@ const app = new Vue({
                     message.error(localMessage.NETWORK_ERROR);
                 })
         },
-        onShowReviewHistoryModal: function(data) {
-            this.reviewHistoryModel.exercisesID = data.studentExercisesID;
-            this.reviewHistoryModel.exercisesName = data.exercisesDocumentUrl.substr(data.exercisesDocumentUrl.lastIndexOf('/') + 1);
-            this.reviewHistoryModel.totalCount = 0;
-            this.reviewHistoryModel.maxPageNumber = 0;
-            this.reviewHistoryModel.pageNumber = 1;
-            this.reviewHistoryModel.dataList = [];
-            this.loadReviewHistory();
-            $('#kt_modal_review_list').modal('show');
-        },
+        // onShowReviewHistoryModal: function(data) {
+        //     this.reviewHistoryModel.exercisesID = data.studentExercisesID;
+        //     this.reviewHistoryModel.exercisesName = data.exercisesDocumentUrl.substr(data.exercisesDocumentUrl.lastIndexOf('/') + 1);
+        //     this.reviewHistoryModel.totalCount = 0;
+        //     this.reviewHistoryModel.maxPageNumber = 0;
+        //     this.reviewHistoryModel.pageNumber = 1;
+        //     this.reviewHistoryModel.dataList = [];
+        //     this.loadReviewHistory();
+        //     $('#kt_modal_review_list').modal('show');
+        // },
         onShowReview: function(data) {
             this.reviewModel.courseUniversityCode = data.courseUniversityCode;
             this.reviewModel.courseSchoolID = data.courseSchoolID;
@@ -685,30 +593,9 @@ const app = new Vue({
 
             $('#kt_modal_review').modal('show');
         },
-        loadCodeStandard: function() {
-            axios.get('/course/detail/codeStandard'
-                    .concat(`?languageID=${this.courseModel.detail.languageID}`))
-                .then(res => {
-                    if (res.data.err) {
-                        message.error(localMessage.exception(res.data.code, res.data.msg));
-                        return false;
-                    }
-                    this.reviewModel.codeStandardList = res.data.dataList;
-                })
-                .catch(err => {
-                    message.error(localMessage.NETWORK_ERROR);
-                })
-        },
         onLoadMoreReviewHistory: function() {
             this.reviewHistoryModel.pageNumber++;
             this.loadReviewHistory();
-        },
-        onShowExercisesCodeSourceModal: function(data) {
-            this.exercisesGitModel.courseClass = data.courseClass;
-            this.exercisesGitModel.studentExercisesID = data.studentExercisesID;
-            this.exercisesGitModel.exercisesName = data.exercisesDocumentUrl.substr(data.exercisesDocumentUrl.lastIndexOf('/') + 1);
-            this.exercisesGitModel.sourceCodeGitUrl = data.sourceCodeGitUrl;
-            $('#kt_modal_resource_uri').modal('show');
         },
         checkDataPreSubmitReview: function() {
             let alterMessage = '请选择以下批改意见：';
@@ -787,7 +674,6 @@ const app = new Vue({
                     KTApp.unprogress(btn);
                     $(btn).removeAttr('disabled');
                     $('#kt_modal_review').modal('hide');
-                    that.loadOtherExercises();
                 })
                 .catch(function(error) {
                     message.error(localMessage.NETWORK_ERROR);
@@ -831,141 +717,42 @@ const app = new Vue({
         onFilterCourseMyExercises: function(filterStatus) {
             this.courseMyExercisesModel.filterStatus = filterStatus;
             this.courseMyExercisesModel.pageNumber = 1;
-            this.loadExercises(
-                this.courseMyExercisesModel.pageNumber,
-                filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
+            this.loadExercises(this.courseMyExercisesModel.pageNumber, filterStatus);
         },
         onMyExercisesFirstPage: function() {
             if (this.courseMyExercisesModel.pageNumber === 1) {
                 return false;
             }
             this.courseMyExercisesModel.pageNumber = 1;
-            this.loadExercises(
-                this.courseMyExercisesModel.pageNumber,
-                this.courseMyExercisesModel.filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
+            this.loadExercises(this.courseMyExercisesModel.pageNumber, this.courseMyExercisesModel.filterStatus);
         },
         onMyExercisesPrePage: function() {
             if (this.courseMyExercisesModel.pageNumber === 1) {
                 return false;
             }
             this.courseMyExercisesModel.pageNumber--;
-            this.loadExercises(
-                this.courseMyExercisesModel.pageNumber,
-                this.courseMyExercisesModel.filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
+            this.loadExercises(this.courseMyExercisesModel.pageNumber, this.courseMyExercisesModel.filterStatus);
         },
         onMyExercisesPagination: function(pageNumber) {
             if (this.courseMyExercisesModel.pageNumber === pageNumber) {
                 return false;
             }
             this.courseMyExercisesModel.pageNumber = pageNumber;
-            this.loadExercises(
-                this.courseMyExercisesModel.pageNumber,
-                this.courseMyExercisesModel.filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
+            this.loadExercises(this.courseMyExercisesModel.pageNumber, this.courseMyExercisesModel.filterStatus);
         },
         onMyExercisesNextPage: function() {
             if (this.courseMyExercisesModel.pageNumber === this.courseMyExercisesModel.maxPageNumber) {
                 return false;
             }
             this.courseMyExercisesModel.pageNumber++;
-            this.loadExercises(
-                this.courseMyExercisesModel.pageNumber,
-                this.courseMyExercisesModel.filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
+            this.loadExercises(this.courseMyExercisesModel.pageNumber, this.courseMyExercisesModel.filterStatus);
         },
         onMyExercisesLastPage: function() {
             if (this.courseMyExercisesModel.pageNumber === this.courseMyExercisesModel.maxPageNumber) {
                 return false;
             }
             this.courseMyExercisesModel.pageNumber = this.courseMyExercisesModel.maxPageNumber;
-            this.loadExercises(
-                this.courseMyExercisesModel.pageNumber,
-                this.courseMyExercisesModel.filterStatus,
-                this.courseMyExercisesModel.studentName,
-                true);
-        },
-        onFilterOtherCourseExercises: function(filterStatus) {
-            this.courseOtherExercisesModel.filterStatus = filterStatus;
-            this.courseOtherExercisesModel.pageNumber = 1;
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
-        },
-        onOtherExercisesFirstPage: function() {
-            if (this.courseOtherExercisesModel.pageNumber === 1) {
-                return false;
-            }
-            this.courseOtherExercisesModel.pageNumber = 1;
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
-        },
-        onOtherExercisesPrePage: function() {
-            if (this.courseOtherExercisesModel.pageNumber === 1) {
-                return false;
-            }
-            this.courseOtherExercisesModel.pageNumber--;
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
-        },
-        onOtherExercisesPagination: function(pageNumber) {
-            if (this.courseOtherExercisesModel.pageNumber === pageNumber) {
-                return false;
-            }
-            this.courseOtherExercisesModel.pageNumber = pageNumber;
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
-        },
-        onOtherExercisesNextPage: function() {
-            if (this.courseOtherExercisesModel.pageNumber === this.courseOtherExercisesModel.maxPageNumber) {
-                return false;
-            }
-            this.courseOtherExercisesModel.pageNumber++;
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
-        },
-        onOtherExercisesLastPage: function() {
-            if (this.courseOtherExercisesModel.pageNumber === this.courseOtherExercisesModel.maxPageNumber) {
-                return false;
-            }
-            this.courseOtherExercisesModel.pageNumber = this.courseOtherExercisesModel.maxPageNumber;
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
-        },
-        onOtherExercisesKeydown: function(e) {
-            let keyCode = e.keyCode;
-            if (keyCode !== 13) {
-                return false;
-            }
-            this.loadExercises(
-                this.courseOtherExercisesModel.pageNumber,
-                this.courseOtherExercisesModel.filterStatus,
-                this.courseOtherExercisesModel.studentName,
-                false);
+            this.loadExercises(this.courseMyExercisesModel.pageNumber, this.courseMyExercisesModel.filterStatus);
         },
         submitSourceCodeGitUrl: function() {
             if (commonUtility.isEmpty(this.exercisesGitModel.sourceCodeGitUrl)) {

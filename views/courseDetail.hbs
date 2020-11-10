@@ -159,18 +159,11 @@
               <a class="nav-link" data-toggle="tab" href="#kt_tabs_4" role="tab" aria-selected="false">报名同学</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#kt_tabs_8" role="tab" aria-selected="false">随堂练习</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link kt-font-primary kt-font-bolder" data-toggle="tab" href="#kt_tabs_5" role="tab"
                 aria-selected="false">我的练习</a>
             </li>
-            <li class="nav-item" v-if="courseOtherExercisesModel.isShow === true">
-              <a class="nav-link tab-label-color-2 kt-font-bolder" data-toggle="tab" href="#kt_tabs_6" role="tab"
-                aria-selected="false">小小助教</a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link tab-label-color-3 kt-font-bolder" data-toggle="tab" href="#kt_tabs_7" role="tab"
+              <a class="nav-link tab-label-color-3 kt-font-bolder" data-toggle="tab" href="#kt_tabs_6" role="tab"
                 aria-selected="false">在线提问/答疑</a>
             </li>
           </ul>
@@ -201,6 +194,7 @@
                 </div>
               </form>
             </div>
+
             <div class="tab-pane" id="kt_tabs_2" role="tabpanel">
               <form class="kt-form">
                 <div class="kt-portlet__body kt-padding-t-0">
@@ -230,6 +224,7 @@
                 </div>
               </form>
             </div>
+
             <div class="tab-pane" id="kt_tabs_3" role="tabpanel">
               <form class="kt-form">
                 <div class="kt-portlet__body" style="padding-top: 0">
@@ -268,9 +263,8 @@
                   </div>
                 </div>
               </form>
-
-
             </div>
+
             <div class="tab-pane" id="kt_tabs_4" role="tabpanel">
               <div class="alert alert-secondary" role="alert" v-if="courseStudentModel.totalCount == 0">
                 <div class="alert-text text-center">
@@ -293,9 +287,6 @@
                       </th>
                       <th class="kt-datatable__cell">
                         <span style="width: 100px;">入学年份</span>
-                      </th>
-                      <th class="kt-datatable__cell">
-                        <span style="width: 100px;">课程助教</span>
                       </th>
                       <th class="kt-datatable__cell">
                         <span style="width: 100px;">报名状态</span>
@@ -329,12 +320,6 @@
                       <td class="kt-datatable__cell">
                         <span style="width: 100px;" v-if="data.enrollmentYear !== ''" v-text="data.enrollmentYear+'年'"></span>
                         <span style="width: 100px;" v-if="data.enrollmentYear === ''"> </span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="width: 100px;">
-                          <span class="kt-badge kt-badge--dot kt-badge--danger" v-if="data.assistant == 1"></span>&nbsp;
-                          <span class="kt-font-bold v-texting kt-font-danger" v-if="data.assistant == 1">助教</span>
-                        </span>
                       </td>
                       <td class="kt-datatable__cell">
                         <span style="width: 100px;">
@@ -387,53 +372,11 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane" id="kt_tabs_8" role="tabpanel">
-              <div class="kt-portlet__body" style="padding-top: 0">
-                <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded"
-                  style="width: 85%; margin: 0 auto">
-                  <table class="kt-datatable__table" style="display: block;">
-                    <thead class="kt-datatable__head">
-                      <tr class="kt-datatable__row" style="left: 0;">
-                        <th class="kt-datatable__cell kt-datatable__cell--sort text-center" style="width: 10%">节次</th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort text-center" style="width: 10%">技术</th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort text-center" style="width: 45%">覆盖知识点
-                        </th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort text-center" style="width: 20%">习题库数量
-                        </th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort text-center" style="width: 15%">状态</th>
-                      </tr>
-                    </thead>
-                    <tbody class="kt-datatable__body">
-                      <tr class="kt-datatable__row" style="left: 0;" v-for="data in courseExercisesModel.dataList">
-                        <td class="kt-datatable__cell text-center" style="width: 10%">第\{{data.courseClass}}节</td>
-                        <td class="kt-datatable__cell text-center" style="width: 10%">\{{data.technologyName}}</td>
-                        <td class="kt-datatable__cell text-center" style="width: 45%">
-                          <span v-for="knowledge in data.knowledgeList" v-text="knowledge.knowledgeName">
-                          </span>
-                        </td>
-                        <td class="kt-datatable__cell text-center" style="width: 20%">
-                          <span v-if="data.exercisesTotalCount == 0">共计0个编程练习</span>
-                          <a href="javascript:;" class="kt-widget__value kt-font-brand"
-                            v-if="data.exercisesTotalCount > 0"
-                            @click="onShowKnowledgeExercisesModal(data)">共计\{{data.exercisesTotalCount}}个编程练习</a>
-                        </td>
-                        <td class="kt-datatable__cell text-center" style="width: 15%">
-                          <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--success"
-                            style="color: #ffffff; display: inline-flex;" v-if="data.dataStatus === '2'">练习已下发</span>
-                          <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--primary"
-                            style="color: #ffffff;  display: inline-flex;" v-if="data.dataStatus === 'P'">练习未下发</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+
             <div class="tab-pane" id="kt_tabs_5" role="tabpanel">
               <div class="alert alert-secondary" role="alert" v-if="commonModel.loginUser == null">
                 <div class="alert-text text-center">
-                  同学，你还没有登陆，快去<a
-                    :href="'/login?backUrl=/course/detail?universityCode=' + commonModel.universityCode + '&schoolID=' + commonModel.schoolID + '&courseID=' + commonModel.courseID">登陆</a>，开启你的专业之旅吧！
+                  同学，你还没有登陆，快去<a :href="'/login?backUrl=/course/detail?universityCode=' + commonModel.universityCode + '&schoolID=' + commonModel.schoolID + '&courseID=' + commonModel.courseID">登陆</a>，开启你的专业之旅吧！
                 </div>
               </div>
 
@@ -459,12 +402,12 @@
                           <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
                             :class="{'btn-primary': courseMyExercisesModel.filterStatus == 'P', 'btn-primary-hover-info': courseMyExercisesModel.filterStatus != 'P'}"
                             @click="onFilterCourseMyExercises('P')">
-                            未练习
+                            待提交
                           </a>
                           <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
                             :class="{'btn-primary': courseMyExercisesModel.filterStatus == 'W', 'btn-primary-hover-info': courseMyExercisesModel.filterStatus != 'W'}"
                             @click="onFilterCourseMyExercises('W')">
-                            待批改
+                            批改中
                           </a>
                           <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
                             :class="{'btn-primary': courseMyExercisesModel.filterStatus == 'R', 'btn-primary-hover-info': courseMyExercisesModel.filterStatus != 'R'}"
@@ -474,7 +417,7 @@
                           <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
                             :class="{'btn-primary': courseMyExercisesModel.filterStatus == 'S', 'btn-primary-hover-info': courseMyExercisesModel.filterStatus != 'S'}"
                             @click="onFilterCourseMyExercises('S')">
-                            已通过
+                            已完成
                           </a>
                         </div>
                       </div>
@@ -486,25 +429,19 @@
                     <thead class="kt-datatable__head">
                       <tr class="kt-datatable__row" style="left: 0px;">
                         <th class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 148px;">学生</span>
+                          <span style="width: 150px;">节次</span>
+                        </th>
+												<th class="kt-datatable__cell kt-datatable__cell--sort">
+                          <span style="width: 150px;">学生</span>
                         </th>
                         <th class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 80px;">节次</span>
+                          <span style="width: 150px;">下发时间</span>
                         </th>
                         <th class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 128px;">知识点</span>
+                          <span style="width: 150px;">提交时间</span>
                         </th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 148px;">练习题</span>
-                        </th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 148px;">提交时间</span>
-                        </th>
-                        <th class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 148px;">批改人</span>
-                        </th>
-                        <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort">
-                          <span style="width: 148px;">当前状态</span>
+												<th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort">
+                          <span style="width: 150px;">当前状态</span>
                         </th>
                         <th data-field="Actions" data-autohide-disabled="false"
                           class="kt-datatable__cell kt-datatable__cell--sort">
@@ -515,46 +452,18 @@
                     <tbody class="kt-datatable__body" style="">
                       <tr class="kt-datatable__row" style="left: 0px;" v-for="data in courseMyExercisesModel.dataList">
                         <td class="kt-datatable__cell">
-                          <span style="width: 148px;">
-                            <div class="kt-user-card-v2">
-                              <div class="kt-user-card-v2__pic">
-                                <img class="kt-badge kt-badge--xl" :src="data.studentPhoto">
-                              </div>
-                              <div class="kt-user-card-v2__details">
-                                <span class="kt-user-card-v2__name" v-text="data.studentName"></span>
-                                <span class="kt-user-card-v2__desc" v-text="data.abilityLevel"
-                                  :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}"></span>
-                              </div>
-                            </div>
-                          </span>
+                          <span style="width: 150px;" v-text="'第' + data.courseClass + '节'"></span>
                         </td>
+												<td class="kt-datatable__cell">
+													<span style="width: 150px;" class="kt-user-card-v2__name" v-text="data.studentName"></span>
+                        </td>
+                        
                         <td class="kt-datatable__cell">
-                          <span style="width: 80px;" v-text="'第' + data.courseClass + '节'"></span>
+                          <span style="width: 150px;" v-text="data.createTime"></span>
                         </td>
-                        <td class="kt-datatable__cell">
-                          <span style="width: 128px;" v-text="data.knowledgeName"></span>
-                        </td>
-                        <td data-field="ShipDate" class="kt-datatable__cell">
-                          <span
-                            style="width: 148px; max-width: 148px;  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                            <a :href="data.exercisesDocumentUrl" target="_blank" :title="data.exercisesDocumentUrl"
-                              class="kt-widget4__title"
-                              v-text="data.exercisesDocumentUrl.substr(data.exercisesDocumentUrl.lastIndexOf('/') + 1)"></a>
-                          </span>
-                        </td>
-                        <td data-field="CompanyName" class="kt-datatable__cell">
-                          <span style="width: 148px;" v-if="data.dataStatus == 'P'">&nbsp;</span>
-                          <span style="width: 148px;" v-if="data.dataStatus != 'P'">
-                            <a :href="data.sourceCodeGitUrl" target="_blank" style="width: 148px;"
-                              v-text="data.updateTime"></a>
-                          </span>
-                        </td>
-                        <td data-field="CompanyName" class="kt-datatable__cell">
-                          <span style="width: 148px;" v-if="data.reviewerType == 'T'"
-                            v-text="data.reviewerNameTeacher"></span>
-                          <span style="width: 148px;" v-if="data.reviewerType == 'S'"
-                            v-text="data.reviewerNameStudent"></span>
-                          <span style="width: 148px;" v-if="data.reviewerType == null">&nbsp;</span>
+												<td class="kt-datatable__cell">
+                          <span style="width: 150px;" v-text="data.updateTime" v-if="data.dataStatus !== 'P'"></span>
+                          <span style="width: 150px;" v-if="data.dataStatus == 'P'"> &nbsp; </span>
                         </td>
                         <td data-field="Status" class="kt-datatable__cell">
                           <span style="width: 148px;">
@@ -565,31 +474,12 @@
                           </span>
                         </td>
                         <td data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell">
-                          <span v-if="data.dataStatus == 'P'" style="width: 110px;">
-                            <a href="javascript:" title="提交练习" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                              @click="onShowExercisesCodeSourceModal(data)">
-                              <i class="la la-edit"></i>
+                          <span style="width: 110px;">
+                            <a :href="'/course/exercises?courseExercisesID=' + data.courseExercisesID" target="_blank" class="kt-link kt-link--primary">
+															<span v-if="data.dataStatus == 'P'">写作业</span>
+															<span v-if="data.dataStatus == 'C' || data.dataStatus == 'R'">修改作业</span>
+															<span v-if="data.dataStatus == 'S'">查看作业</span>
                             </a>
-                          </span>
-                          <span v-if="data.dataStatus == 'W' || data.dataStatus == 'S'" style="width: 110px;">
-                            <a href="javascript:" title="批改历史" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                              @click="onShowReviewHistoryModal(data)">
-                              <i class="la la-search"></i>
-                            </a>
-                          </span>
-                          <span v-if="data.dataStatus == 'R'" style="width: 110px;">
-                            <a href="javascript:" title="提交练习" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                              @click="onShowExercisesCodeSourceModal(data)">
-                              <i class="la la-edit"></i>
-                            </a>
-                            <a href="javascript:" title="批改历史" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                              @click="onShowReviewHistoryModal(data)">
-                              <i class="la la-search"></i>
-                            </a>
-                          </span>
-                          <span style="overflow: visible; position: relative; width: 110px;"
-                            v-if="data.dataStatus == 'P'">
-                            &nbsp;
                           </span>
                         </td>
                       </tr>
@@ -635,209 +525,10 @@
                   </div>
                 </div>
               </div>
-
-
             </div>
+
             <div class="tab-pane" id="kt_tabs_6" role="tabpanel">
-              <div class="shs-search-bar shs-top-line shs-under-line kt-padding-5">
-                <div class="kt-portlet__body kt-padding-0">
-                  <div class="form-group row kt-margin-0">
-                    <label class="col-form-label col-md-1 text-center">状态过滤：</label>
-                    <div class="col-md-5 shs-padding-top-2">
-                      <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
-                        :class="{'btn-primary': courseOtherExercisesModel.filterStatus == 'NULL', 'btn-primary-hover-info': courseOtherExercisesModel.filterStatus != 'NULL'}"
-                        @click="onFilterOtherCourseExercises('NULL')">
-                        全部
-                      </a>
-                      <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
-                        :class="{'btn-primary': courseOtherExercisesModel.filterStatus == 'P', 'btn-primary-hover-info': courseOtherExercisesModel.filterStatus != 'P'}"
-                        @click="onFilterOtherCourseExercises('P')">
-                        未完成
-                      </a>
-                      <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
-                        :class="{'btn-primary': courseOtherExercisesModel.filterStatus == 'W', 'btn-primary-hover-info': courseOtherExercisesModel.filterStatus != 'W'}"
-                        @click="onFilterOtherCourseExercises('W')">
-                        待批改
-                      </a>
-                      <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
-                        :class="{'btn-primary': courseOtherExercisesModel.filterStatus == 'R', 'btn-primary-hover-info': courseOtherExercisesModel.filterStatus != 'R'}"
-                        @click="onFilterOtherCourseExercises('R')">
-                        待修改
-                      </a>
-                      <a href="javascript:" class="btn btn-elevate btn-square btn-sm"
-                        :class="{'btn-primary': courseOtherExercisesModel.filterStatus == 'S', 'btn-primary-hover-info': courseOtherExercisesModel.filterStatus != 'S'}"
-                        @click="onFilterOtherCourseExercises('S')">
-                        已通过
-                      </a>
-                    </div>
-                    <div class="col-md-6 shs-padding-top-2">
-                      <div class="kt-input-icon kt-input-icon--right kt-pull-right" style="width: 300px">
-                        <input type="text" class="form-control" v-model="courseOtherExercisesModel.studentName"
-                          @keydown="onOtherExercisesKeydown($event)" placeholder="输入姓名，按姓名与状态联合查询">
-                        <span class="kt-input-icon__icon kt-input-icon__icon--right">
-                          <span><i class="la la-search"></i></span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded"
-                style="width: 100%; margin: 0 auto">
-                <table class="kt-datatable__table" style="display: block;">
-                  <thead class="kt-datatable__head">
-                    <tr class="kt-datatable__row" style="left: 0px;">
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 140px;">学生</span>
-                      </th>
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 130px;">就读院校</span>
-                      </th>
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 60px;">节次</span>
-                      </th>
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 130px;">知识点</span>
-                      </th>
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 150px;">习题</span>
-                      </th>
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 120px;">提交时间</span>
-                      </th>
-                      <th class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 80px;">批改人</span>
-                      </th>
-                      <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 60px;">当前状态</span>
-                      </th>
-                      <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort">
-                        <span style="width: 100px;">操作</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="kt-datatable__body" style="">
-                    <tr class="kt-datatable__row" style="left: 0;" v-for="data in courseOtherExercisesModel.dataList">
-                      <td class="kt-datatable__cell">
-                        <span style="width: 140px;">
-                          <div class="kt-user-card-v2">
-                            <div class="kt-user-card-v2__pic">
-                              <img class="kt-badge kt-badge--xl" :src="data.studentPhoto">
-                            </div>
-                            <div class="kt-user-card-v2__details">
-                              <span class="kt-user-card-v2__name" v-text="data.studentName"></span>
-                              <span class="kt-user-card-v2__desc" v-text="data.abilityLevel"
-                                :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}"></span>
-                            </div>
-                          </div>
-                        </span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="width: 130px;">
-                          \{{data.studentUniversityName}} <br> \{{data.studentSchoolName}}
-                        </span>
-                      </td>
-
-                      <td class="kt-datatable__cell">
-                        <span style="width: 60px;">第\{{data.courseClass}}节</span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="width: 130px;" v-text="data.knowledgeName"></span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                          <a :href="data.exercisesDocumentUrl" target="_blank" :title="data.exercisesDocumentUrl"
-                            class="kt-widget4__title"
-                            v-text="data.exercisesDocumentUrl.substr(data.exercisesDocumentUrl.lastIndexOf('/') + 1)"></a>
-                        </span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="width: 120px;" v-if="data.dataStatus == 'P'">&nbsp;</span>
-                        <span style="width: 120px;" v-text="data.updateTime" v-if="data.dataStatus != 'P'"></span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="width: 80px;" v-if="data.reviewerType == 'T'"
-                          v-text="data.reviewerNameTeacher"></span>
-                        <span style="width: 80px;" v-if="data.reviewerType == 'S'"
-                          v-text="data.reviewerNameStudent"></span>
-                        <span style="width: 80px;" v-if="data.reviewerType == null">&nbsp;</span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span style="width: 60px;">
-                          <span class="kt-badge kt-badge--inline kt-badge--pill"
-                            :class="{'kt-badge--primary': data.dataStatus == 'P', 'kt-badge--warning': data.dataStatus == 'W', 'kt-badge--danger': data.dataStatus == 'R', 'kt-badge--success': data.dataStatus == 'S'}"
-                            v-text="data.dataStatusText">
-                          </span>
-                        </span>
-                      </td>
-                      <td class="kt-datatable__cell">
-                        <span v-if="data.dataStatus == 'W'" style="width: 100px;">
-                          <a href="javascript:" title="批改练习" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                            @click="onShowReview(data)">
-                            <i class="la la-edit"></i>
-                          </a>
-                          <a href="javascript:" title="批改历史" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                            @click="onShowReviewHistoryModal(data)">
-                            <i class="la la-search"></i>
-                          </a>
-                        </span>
-                        <span v-if="data.dataStatus == 'R' || data.dataStatus == 'S'" style="width: 100px;">
-                          <a href="javascript:" title="批改历史" class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                            @click="onShowReviewHistoryModal(data)">
-                            <i class="la la-search"></i>
-                          </a>
-                        </span>
-                        <span style="overflow: visible; position: relative; width: 100px;"
-                          v-if="data.dataStatus == 'P'">
-                          &nbsp;
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <div class="kt-pagination kt-pagination--warning kt-pagination--circle kt-padding-25"
-                    v-if="courseOtherExercisesModel.totalCount > 0">
-                    <div class="kt-pagination__toolbar">
-                      <span class="pagination__desc">
-                        共有<span v-text="courseOtherExercisesModel.totalCount"></span>名满足条件同学, 当前显示第<span
-                          v-text="courseOtherExercisesModel.fromIndex"></span>到第<span
-                          v-text="courseOtherExercisesModel.toIndex"></span>名同学的信息
-                      </span>
-                    </div>
-                    <ul class="kt-pagination__links">
-                      <li class="kt-pagination__link--first"
-                        :class="{'pagination-disabled': courseOtherExercisesModel.prePageNum == -1}">
-                        <a href="javascript:" @click="onOtherExercisesFirstPage"><i
-                            class="fa fa-angle-double-left kt-font-primary"></i></a>
-                      </li>
-                      <li class="kt-pagination__link--next"
-                        :class="{'pagination-disabled': courseOtherExercisesModel.prePageNum == -1}">
-                        <a href="javascript:" @click="onOtherExercisesPrePage"><i
-                            class="fa fa-angle-left kt-font-primary"></i></a>
-                      </li>
-
-                      <li v-for="pagination in courseOtherExercisesModel.paginationArray"
-                        :class="{'kt-pagination__link--active': courseOtherExercisesModel.pageNumber == pagination}">
-                        <a href="javascript:" v-text="pagination" @click="onOtherExercisesPagination(pagination)"></a>
-                      </li>
-
-                      <li class="kt-pagination__link--prev"
-                        :class="{'pagination-disabled': courseOtherExercisesModel.nextPageNum == -1}">
-                        <a href="javascript:" @click="onOtherExercisesNextPage"><i
-                            class="fa fa-angle-right kt-font-primary"></i></a>
-                      </li>
-                      <li class="kt-pagination__link--last"
-                        :class="{'pagination-disabled': courseOtherExercisesModel.nextPageNum == -1}">
-                        <a href="javascript:" @click="onOtherExercisesLastPage"><i
-                            class="fa fa-angle-double-right kt-font-primary"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="kt_tabs_7" role="tabpanel">
-              <div class="kt-margin-b-15">
+              <div class="kt-margin-b-15" v-if="commonModel.loginUser != null">
                 <button type="button" class="btn btn-brand" @click="onShowQuestionModal">我要提问</button>
               </div>
               <div class="alert alert-secondary" role="alert" v-if="courseOnlineQuestionModel.totalCount == 0">
