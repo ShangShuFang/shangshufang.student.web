@@ -5,6 +5,7 @@ const app = new Vue({
 		courseID: 0,
 		courseClass: 0,
 		courseExercisesID: 0,
+		courseExercisesDetailID: 0,
 		title: '',
 		studentName: '',
 		dataStatus: '',
@@ -17,7 +18,11 @@ const app = new Vue({
 		programList: [],
 		loginUser: null,
 		isShow: false,
-		message: ''
+		message: '',
+		reviewHistoryModel: {
+			title: '',
+			dataList: []
+		}
 	},
 	methods: {
 		initPage: function () {
@@ -116,6 +121,9 @@ const app = new Vue({
 						data.noAnswer = true;
 						checkResult = false;
 					}
+					if (!(data.sourceCodeUrl.indexOf('http://') >= 0 || data.sourceCodeUrl.indexOf('https://') >= 0)) {
+						checkResult = false;
+					}
 				});
 			}
 
@@ -167,9 +175,28 @@ const app = new Vue({
 			});
 			return JSON.stringify(programAnswerList);
 		},
+		showMarkHistoryDialog: function (program) {
+			this.courseExercisesID = program.courseExercisesID;
+			this.courseExercisesDetailID = program.courseExercisesDetailID;
+			this.reviewHistoryModel.title = program.exercisesTitle;
+			axios.get('/course/exercises/review/program'
+					.concat(`?courseExercisesID=${this.courseExercisesID}`)
+					.concat(`&courseExercisesDetailID=${this.courseExercisesDetailID}`))
+					.then(response => {
+						if (response.data.err) {
+							message.error(localMessage.exception(response.data.code, response.data.msg));
+							return false;
+						}
+						this.reviewHistoryModel.dataList = response.data.dataList;
+						$('#kt_modal_review_history').modal('show');
+					})
+					.catch(err => {
+						message.error(localMessage.NETWORK_ERROR);
+					})
+		},
 		onSubmit: function () {
 			if (!this.checkData()) {
-				message.info("你还有未完成的习题，请完成所有习题后再提交！");
+				message.info("你还有未完成的习题或者代码地址不正确，请完成所有习题后再提交！");
 				return false;
 			}
 			let btn = $('#btnSubmit');
@@ -194,6 +221,8 @@ const app = new Vue({
 			})
 				.then(function (res) {
 					if (res.data.err) {
+						KTApp.unprogress(btn);
+						$(btn).removeAttr('disabled');
 						message.error(localMessage.exception(res.data.code, res.data.msg));
 						return false;
 					}

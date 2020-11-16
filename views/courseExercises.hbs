@@ -174,18 +174,49 @@
 							<small v-text="program.knowledgeName"></small>
 						</div>
 						<div class="kt-margin-t-10">
-							<input type="text" class="form-control input-blank" v-model="program.sourceCodeUrl" :disabled="program.correctResult == 'Y'" placeholder="请填写保存代码的Git地址">
-							<a href="javascript:" class="kt-link kt-link--success kt-margin-t-10" v-if="program.correctResult !== 'P'">查看批改结果</a>
+							<input type="url"
+                     class="form-control input-blank"
+                     v-model="program.sourceCodeUrl"
+                     :disabled="program.correctResult == 'Y'"
+                     placeholder="请填写保存代码的Git地址(以http://或https://开头)"/>
 						</div>
-						<div class="kt-margin-t-15" v-if="dataStatus != 'P'">
+
+            <div class="kt-margin-t-5" v-if="program.correctResult != 'P' && program.correctResult != 'W'">
+              <label>批改明细：</label>
+              <span class="kt-badge kt-badge--inline kt-badge--pill"
+                    :class="{'kt-badge--success': program.compilationResult == 'S', 'kt-badge--danger': program.compilationResult == 'N'}">
+                <i class="fa fa-check" v-if="program.compilationResult == 'S'"></i>
+                <i class="fa fa-times" v-if="program.compilationResult == 'N'"></i>&nbsp;
+                编译
+              </span>
+              <span class="kt-badge kt-badge--inline kt-badge--pill"
+                    :class="{'kt-badge--success': program.runResult == 'S', 'kt-badge--danger': program.runResult == 'N'}">
+                <i class="fa fa-check" v-if="program.runResult == 'S'"></i>
+                <i class="fa fa-times" v-if="program.runResult == 'N'"></i>&nbsp;
+                运行
+              </span>
+              <span class="kt-badge kt-badge--inline kt-badge--pill"
+                    :class="{'kt-badge--success': program.codeStandardResult == 'S', 'kt-badge--warning': program.codeStandardResult == 'N'}">
+                <i class="fa fa-check" v-if="program.codeStandardResult == 'S'"></i>
+                <i class="fa fa-exclamation" v-if="program.codeStandardResult == 'N'"></i>&nbsp;
+                代码规范
+              </span>
+            </div>
+						<div class="kt-margin-t-5" v-if="dataStatus != 'P'">
 							<label>批改结果：</label>
 							<label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
-								:class="{'kt-badge--warning': program.correctResult == 'P', 'kt-badge--success': program.correctResult == 'Y', 'kt-badge--danger': program.correctResult == 'N'}">
-								<span v-if="program.correctResult == 'P'">批改中</span>	
-								<span v-if="program.correctResult == 'Y'"> <i class="fa fa-check"></i> 正确</span>	
-								<span v-if="program.correctResult == 'N'"> <i class="fa fa-times"></i> 错误</span>	
+								:class="{'kt-badge--warning': program.correctResult == 'W', 'kt-badge--success': program.correctResult == 'Y', 'kt-badge--danger': program.correctResult == 'R'}">
+								<span v-if="program.correctResult == 'W'">待批改</span>
+								<span v-if="program.correctResult == 'R'">待修改</span>
+								<span v-if="program.correctResult == 'Y'"> <i class="fa fa-check"></i> 通过</span>
 							</label>
 						</div>
+            <div>
+              <a href="javascript:" v-if="program.correctResult == 'R' || program.correctResult == 'Y'" class="kt-link kt-link--brand" @click="showMarkHistoryDialog(program)">
+                <i class="fa fa-search"></i>
+                批改历史
+              </a>
+            </div>
 					</li>
 				</ol>
 			</div>
@@ -201,6 +232,123 @@
 			</div>
 		</div>
 	</div>
+
+  <div class="modal fade" id="kt_modal_review_history" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">程序批改历史: \{{reviewHistoryModel.title}} </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body shs-form-label kt-padding-25">
+          <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionExample2">
+
+            <div class="card" v-for="(data, index) in reviewHistoryModel.dataList">
+              <div class="card-header" :id="'head'+index">
+                <div class="card-title collapsed" data-toggle="collapse" :data-target="'#collapse'+index" aria-expanded="false" aria-controls="collapseOne2">
+                  <label class="col-form-label">
+                    <span class="ng-scope"> <i class="fa fa-edit"></i> \{{data.createTime}}</span><!-- end ngIf: program.correctResult == 'Y' -->
+                  </label>
+                  &nbsp;
+                  &nbsp;
+                  <label class="col-form-label text-left kt-badge kt-badge--inline kt-badge--pill"
+                         :class="{'kt-badge--success': data.reviewResult == 'S', 'kt-badge--danger': data.reviewResult == 'N'}">
+                    <span v-if="data.reviewResult == 'S'"> 通过</span>
+                    <span v-if="data.reviewResult == 'N'"> 待修改</span>
+                  </label>
+                </div>
+              </div>
+              <div :id="'collapse'+index" class="collapse" :aria-labelledby="'head'+index" data-parent="#accordionExample2" style="">
+                <div class="card-body kt-margin-b-0">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="kt-section">
+                        <h3 class="kt-section__title text-center">代码批改明细</h3>
+                      </div>
+                      <form class="kt-form kt-form--label-right">
+                        <div class="kt-portlet__body">
+                          <div class="form-group row kt-margin-b-5">
+                            <label for="example-text-input" class="col-2 col-form-label">编译结果：</label>
+                            <div class="col-10">
+                              <label for="example-text-input" class="col-form-label">
+                                <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill" v-if="data.compilationResult == 'S'">
+                                  <i class="fa fa-check"></i>&nbsp;
+                                  成功
+                                </span>
+                                <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill" v-if="data.compilationResult == 'N'">
+                                  <i class="fa fa-check"></i>&nbsp;
+                                  失败
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group row kt-margin-b-5">
+                            <label for="example-text-input" class="col-2 col-form-label">运行结果：</label>
+                            <div class="col-10">
+                              <label for="example-text-input" class="col-form-label">
+                                <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill" v-if="data.runResult == 'S'">
+                                  <i class="fa fa-check"></i>&nbsp;
+                                  正确
+                                </span>
+                                <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill" v-if="data.runResult == 'N'">
+                                  <i class="fa fa-check"></i>&nbsp;
+                                  错误
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group row kt-margin-b-5">
+                            <label for="example-text-input" class="col-2 col-form-label">代码规范：</label>
+                            <div class="col-10">
+                              <label for="example-text-input" class="col-form-label">
+                               <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill" v-if="data.codeStandardResult == 'S'">
+                                  <i class="fa fa-check"></i>&nbsp;
+                                  很好
+                                </span>
+                                <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill" v-if="data.codeStandardResult == 'N'">
+                                  <i class="fa fa-exclamation"></i>&nbsp;
+                                  不规范
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group row kt-margin-b-5">
+                            <label for="example-text-input" class="col-2 col-form-label">批改评语：</label>
+                            <div class="col-10">
+                              <p class="col-form-label pre-wrap" v-text="data.reviewMemo"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="kt-section">
+                        <h3 class="kt-section__title text-center">代码不规范的问题</h3>
+                      </div>
+                      <div class="kt-section__content">
+                        <div class="kt-list-timeline">
+                          <div class="kt-list-timeline__items">
+                            <div class="kt-list-timeline__item" v-for="codeStandard in data.codeStandardErrorList">
+                              <span class="kt-list-timeline__badge kt-list-timeline__badge--danger"></span>
+                              <span class="kt-list-timeline__text" v-text="codeStandard.codeStandardName"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
