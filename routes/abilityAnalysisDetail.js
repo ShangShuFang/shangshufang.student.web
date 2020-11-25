@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/studentInfo', (req, res, next) => {
   const apiKey = 'studentAbilityResultSummary';
-  const parameters = [req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID];
+  const parameters = [req.query.studentID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
@@ -20,7 +20,7 @@ router.get('/studentInfo', (req, res, next) => {
           err: !result.data.result,
           code: result.data.responseCode,
           msg: result.data.responseMessage,
-          detail: result.data.responseData
+          studentInfo: result.data.responseData
         });
       })
       .catch(error => {
@@ -33,8 +33,8 @@ router.get('/studentInfo', (req, res, next) => {
 });
 
 router.get('/learningTechnology', (req, res, next) => {
-  const apiKey = 'studentLearningTechnologyAbilityResultSummary';
-  const parameters = [req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID];
+  const apiKey = 'studentLearningTechnology';
+  const parameters = [req.query.studentID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
@@ -80,7 +80,7 @@ router.get('/technologyAnalysis', (req, res, next) => {
 
 router.get('/knowledgeAnalysis', (req, res, next) => {
   const apiKey = 'studentAbility4knowledge';
-  const parameters = [req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const parameters = [req.query.studentID, req.query.technologyID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
@@ -103,7 +103,7 @@ router.get('/knowledgeAnalysis', (req, res, next) => {
 
 router.get('/codeStandardAnalysis', (req, res, next) => {
   const apiKey = 'studentAbility4codeStandard';
-  const parameters = [req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.languageID];
+  const parameters = [req.query.studentID, req.query.languageID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
@@ -172,31 +172,7 @@ router.get('/exercisePercentAnalysis', (req, res, next) => {
 
 router.get('/knowledge/finish', (req, res, next) => {
   const apiKey = 'finishKnowledgeList';
-  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
-  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
-
-  axios.get(requestUri)
-      .then(result => {
-        res.json({
-          err: !result.data.result,
-          code: result.data.responseCode,
-          msg: result.data.responseMessage,
-          totalCount: result.data.totalCount,
-          list: result.data.responseData
-        });
-      })
-      .catch(error => {
-        res.json({
-          err: true,
-          code: error.code,
-          msg: customerMessage[error.code]
-        });
-      });
-});
-
-router.get('/knowledge/learning', (req, res, next) => {
-  const apiKey = 'learningKnowledgeList';
-  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentID, req.query.technologyID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
@@ -220,7 +196,7 @@ router.get('/knowledge/learning', (req, res, next) => {
 
 router.get('/knowledge/noLearning', (req, res, next) => {
   const apiKey = 'noLearningKnowledgeList';
-  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentUniversityCode, req.query.studentSchoolID, req.query.studentID, req.query.technologyID];
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentID, req.query.technologyID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
@@ -243,19 +219,19 @@ router.get('/knowledge/noLearning', (req, res, next) => {
 });
 
 router.get('/knowledge/weak', (req, res, next) => {
-  const apiKey = 'weakKnowledgeList';
-  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.universityCode, req.query.schoolID, req.query.studentID, req.query.technologyID];
+  const apiKey = 'weaknessKnowledgeList';
+  const parameters = [req.query.pageNumber, sysConfig.pageSize.all, req.query.studentID, req.query.technologyID];
   const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
   axios.get(requestUri)
       .then(result => {
-        let dataContent = buildUtils.buildRenderData(req.query.pageNumber, sysConfig.pageSize.all, result);
+        //let dataContent = buildUtils.buildRenderData(req.query.pageNumber, sysConfig.pageSize.all, result);
         res.json({
           err: !result.data.result,
           code: result.data.responseCode,
           msg: result.data.responseMessage,
           totalCount: result.data.totalCount,
-          dataContent: dataContent
+          list: result.data.responseData
         });
       })
       .catch(error => {

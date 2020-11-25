@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/data', function(req, res, next) {
-  const apiKey = 'studentAbilityResultList';
+  const apiKey = 'studentAbilityList';
   const pageNumber = req.query.pageNumber;
   const pageSize = sysConfig.pageSize.sixteen;
   const directionID = req.query.directionID;

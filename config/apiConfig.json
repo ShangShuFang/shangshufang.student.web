@@ -40,17 +40,21 @@
       "codeStandard": "api/v1/code_standard/list",
       "addClassExercisesReview": "api/v1/course/exercises/review/add",
       "courseExercises": "api/v1/knowledge/exercises/list/assigned",
-      "studentAbilityResultList": "api/v1/analysis/ability/student/list",
-      "studentAbilityResultSummary": "api/v1/analysis/ability/student/any/student_summary",
-      "studentLearningTechnologyAbilityResultSummary": "api/v1/analysis/ability/student/list/learning_technology",
-      "studentAbility4knowledge": "api/v1/analysis/ability/student/any/knowledge_summary",
-      "studentAbility4codeStandard": "api/v1/analysis/ability/student/any/code_guideline",
+
+      "studentAbilityList": "/api/v1/analysis/ability/student/list",
+
+      "studentAbilityResultSummary": "api/v1/analysis/ability/student/summary",
+      "studentLearningTechnology": "api/v1/analysis/ability/student/list/technology",
+      "studentAbility4knowledge": "api/v1/analysis/ability/student//any/technology",
+      "studentAbility4codeStandard": "api/v1/analysis/ability/student/any/guideline",
       "exerciseAnalysis": "api/v1/analysis/ability/student/list/exercise_number",
       "exercisePercentAnalysis": "api/v1/analysis/ability/student/list/exercise_percent",
-      "finishKnowledgeList": "api/v1/analysis/ability/student/list/finish_knowledge",
-      "learningKnowledgeList": "/api/v1/analysis/ability/student/list/learning_knowledge",
-      "noLearningKnowledgeList": "api/v1/analysis/ability/student/list/noLearning_knowledge",
-      "weakKnowledgeList": "/api/v1/analysis/ability/student/list/weak_knowledge",
+
+      "finishKnowledgeList": "/api/v1/analysis/ability/student/list/knowledge/learned",
+      "weaknessKnowledgeList": "/api/v1/analysis/ability/student/list/knowledge/weakness",
+      "noLearningKnowledgeList": "/api/v1/analysis/ability/student/list/knowledge/nolearn",
+
+
       "studentExercisesList": "api/v1/course/exercises/list/student/technology",
       "growingMapList": "api/v1/growing_map/list/map",
       "growingMap": "api/v1/growing_map/any/map",

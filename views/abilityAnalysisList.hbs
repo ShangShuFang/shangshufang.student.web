@@ -134,14 +134,8 @@
                 <div class="kt-widget__info">
                 <span class="kt-widget__username">
                   <span v-text="data.studentName"></span>
-                  <span v-text="data.abilityLevel"
-                        class="ability-level"
-                        :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}"></span>
                 </span>
-                  <span class="kt-widget__desc">
-                  超越站内<span class="position-site" v-text="data.positionSite + '%'"></span>的同学
-                </span>
-                  <span class="kt-widget__desc">
+                <span class="kt-widget__desc">
                   已被<span class="position-site">0</span>家企业关注
                 </span>
                 </div>
@@ -150,11 +144,11 @@
                 <div class="kt-widget__section">
                   <div>
                     <span>掌握知识点</span>
-                    <span class="kt-widget12__stat learning-percent-text finish-knowledge-percent kt-font-bold" v-text="data.finishKnowledgePercent + '%'"></span>
+                    <span class="kt-widget12__stat learning-percent-text finish-knowledge-percent kt-font-bold" v-text="data.finishedKnowledgePercent + '%'"></span>
                   </div>
                   <div class="progress kt-progress--sm">
                     <div class="progress-bar bg-success" role="progressbar"
-                         :style="{'width': data.finishKnowledgePercent + '%'}">
+                         :style="{'width': data.finishedKnowledgePercent + '%'}">
                     </div>
                   </div>
                 </div>
@@ -175,26 +169,30 @@
                     <span class="kt-widget__label">技术:</span>
                     <span class="kt-widget__data" v-text="data.technologyName"></span>
                   </div>
+
                   <div class="kt-widget__contact">
-                    <span class="kt-widget__label finish-exercises-count">练习题完成数量:</span>
-                    <span class="kt-widget__data finish-exercises-count kt-font-bold" v-text="data.finishExercisesCount"></span>
-                  </div>
-                  <div class="kt-widget__contact">
-                    <span class="kt-widget__label once-compilation-success-rate">平均一次性编译通过率:</span>
-                    <span class="kt-widget__data once-compilation-success-rate kt-font-bold" v-text="data.onceCompilationSuccessRate + '%'"></span>
-                  </div>
-                  <div class="kt-widget__contact">
-                    <span class="kt-widget__label once-run-success-rate">平均一次性运行正确率:</span>
-                    <span class="kt-widget__data once-run-success-rate kt-font-bold" v-text="data.onceRunSuccessRate + '%'"></span>
+                    <span class="kt-widget__label">能力级别:</span>
+                    <span v-text="data.abilityLevel"
+                          class="kt-widget__data kt-font-bolder"
+                          :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}">
+                    </span>
                   </div>
 
                   <div class="kt-widget__contact">
+                    <span class="kt-widget__label">站内排名:</span>
+                    <span class="kt-widget__desc">
+                      超越站内<span class="position-site" v-text="data.positionSite + '%'"></span>的同学
+                    </span>
+                  </div>
+
+
+                  <div class="kt-widget__contact">
                     <span class="kt-widget__label finish-comprehensive-exercises">综合练习完成数量:</span>
-                    <span class="kt-widget__data finish-comprehensive-exercises kt-font-bold">0</span>
+                    <span class="kt-widget__data finish-comprehensive-exercises kt-font-bold" v-text="data.finishedUnitExercisesCount"></span>
                   </div>
                   <div class="kt-widget__contact">
                     <span class="kt-widget__label finish-project-count">参与实战项目数量:</span>
-                    <span class="kt-widget__data finish-project-count kt-font-bold">0</span>
+                    <span class="kt-widget__data finish-project-count kt-font-bold" v-text="data.joinedProjectCount"></span>
                   </div>
 
                 </div>
