@@ -18,30 +18,39 @@ router.get('/data', function (req, res, next) {
 	axios.get(requestUri)
 		.then(result => {
 			if (result.data.responseData !== null) {
-				result.data.responseData.singleChoiceExercisesList.forEach((data) => {
-					data.noAnswer = false;
-					data.exercisesTitleHtml = marked(data.exercisesTitle);
-				});
-				result.data.responseData.multipleChoiceExercisesList.forEach((data) => {
-
-					data.noAnswer = false;
-					data.exercisesTitleHtml = marked(data.exercisesTitle);
-				});
-				result.data.responseData.blankExercisesList.forEach((data) => {
-					data.noAnswer = false;
-					data.exercisesTitleHtml = marked(data.exercisesTitle);
-				});
-				result.data.responseData.programExercisesList.forEach((data) => {
-					data.noAnswer = false;
-					data.sourceCodeUrl = data.submitSourceCodeUrl
-					data.originalSourceCodeUrl = data.submitSourceCodeUrl;
-					if (data.exercisesSourceType === 0) {
-						data.exercisesDocUri = data.exercisesTitle;
-						data.exercisesTitle = data.exercisesTitle.substr(data.exercisesTitle.lastIndexOf('/') + 1);
-					} else {
+				if (result.data.responseData.singleChoiceExercisesList !== null) {
+					result.data.responseData.singleChoiceExercisesList.forEach((data) => {
+						data.noAnswer = false;
 						data.exercisesTitleHtml = marked(data.exercisesTitle);
-					}
-				});
+					});
+				}
+				if (result.data.responseData.multipleChoiceExercisesList !== null) {
+					result.data.responseData.multipleChoiceExercisesList.forEach((data) => {
+						data.noAnswer = false;
+						data.exercisesTitleHtml = marked(data.exercisesTitle);
+					});
+				}
+
+				if (result.data.responseData.blankExercisesList !== null) {
+					result.data.responseData.blankExercisesList.forEach((data) => {
+						data.noAnswer = false;
+						data.exercisesTitleHtml = marked(data.exercisesTitle);
+					});
+				}
+
+				if (result.data.responseData.programExercisesList !== null) {
+					result.data.responseData.programExercisesList.forEach((data) => {
+						data.noAnswer = false;
+						data.sourceCodeUrl = data.submitSourceCodeUrl
+						data.originalSourceCodeUrl = data.submitSourceCodeUrl;
+						if (data.exercisesSourceType === 0) {
+							data.exercisesDocUri = data.exercisesTitle;
+							data.exercisesTitle = data.exercisesTitle.substr(data.exercisesTitle.lastIndexOf('/') + 1);
+						} else {
+							data.exercisesTitleHtml = marked(data.exercisesTitle);
+						}
+					});
+				}
 			}
 			res.json({
 				err: !result.data.result,

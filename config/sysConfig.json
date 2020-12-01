@@ -1,6 +1,7 @@
 {
   "pageSize": {
     "ten": 10,
+    "twelve": 12,
     "sixteen": 16,
     "all": 9999
   },

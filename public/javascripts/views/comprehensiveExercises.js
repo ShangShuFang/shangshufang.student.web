@@ -28,7 +28,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(6);
+            commonUtility.setNavActive(5);
             this.loadDirectionList();
             this.loadTechnologyCategoryList();
             this.loadTechnologyList();

@@ -7,7 +7,7 @@ const app = new Vue({
   },
   methods: {
     initPage: function () {
-      commonUtility.setNavActive(3);
+      commonUtility.setNavActive(2);
       this.loadGrowingList();
     },
     loadGrowingList: function () {

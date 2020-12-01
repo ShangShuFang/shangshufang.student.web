@@ -27,6 +27,7 @@
       "signUp4Technology": "api/v1/course/sign_up/list/student",
       "company": "api/v1/customer/company/list",
       "companyUsingTechnology": "api/v1/customer/company/list/using/technology",
+      "usingTechnologyCompany": "/api/v1/technology/using/company/list",
       "courseDetail": "api/v1/course/any",
       "signUp4Student": "api/v1/course/sign_up/list/student",
       "exercises4Student": "api/v1/course/exercises/list/student",

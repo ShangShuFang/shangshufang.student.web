@@ -22,8 +22,8 @@
           <div class="col-md-12">
             <button type="button"
                     class="btn"
-                    v-for="suggestType in suggestTypeList" 
-                    :class="{'btn-primary': selectedSuggestType.suggestTypeID == suggestType.suggestTypeID}"
+                    v-for="suggestType in suggestTypeList"
+                    :class="{'btn-brand': selectedSuggestType.suggestTypeID == suggestType.suggestTypeID, 'btn-outline-brand': selectedSuggestType.suggestTypeID != suggestType.suggestTypeID}"
                     @click="onChooseSuggestType(suggestType)">
               <i class="fa fa-check" v-if="selectedSuggestType.suggestTypeID == suggestType.suggestTypeID"></i>
               <span v-text="suggestType.suggestType"></span>

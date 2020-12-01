@@ -235,46 +235,46 @@ router.get('/codeStandard', function (req, res, next) {
 		});
 });
 
-router.get('/exercises/course', function (req, res, next) {
-	const apiKey = 'courseExercises';
-	const universityCode = req.query.universityCode;
-	const schoolID = req.query.schoolID;
-	const courseID = req.query.courseID;
-
-	const parameters = [universityCode, schoolID, courseID];
-	const requestUri = encodeURI(buildUtils.buildRequestApiUri(apiKey, parameters));
-
-	axios.get(requestUri)
-		.then(result => {
-			if (result.data.responseData !== null) {
-				result.data.responseData.forEach((data) => {
-					if (data.knowledgeList !== null) {
-						data.knowledgeList.forEach((knowledge) => {
-							if (knowledge.knowledgeExercisesList !== null) {
-								knowledge.knowledgeExercisesList.forEach(function (exercises) {
-									exercises.answerUrl = '';
-								});
-							}
-						})
-					}
-				})
-			}
-			res.json({
-				err: !result.data.result,
-				code: result.data.responseCode,
-				msg: result.data.responseMessage,
-				totalCount: result.data.totalCount,
-				dataList: result.data.responseData
-			});
-		})
-		.catch(error => {
-			res.json({
-				err: true,
-				code: error.code,
-				msg: customerMessage[error.code]
-			});
-		});
-});
+// router.get('/exercises/course', function (req, res, next) {
+// 	const apiKey = 'courseExercises';
+// 	const universityCode = req.query.universityCode;
+// 	const schoolID = req.query.schoolID;
+// 	const courseID = req.query.courseID;
+//
+// 	const parameters = [universityCode, schoolID, courseID];
+// 	const requestUri = encodeURI(buildUtils.buildRequestApiUri(apiKey, parameters));
+//
+// 	axios.get(requestUri)
+// 		.then(result => {
+// 			if (result.data.responseData !== null) {
+// 				result.data.responseData.forEach((data) => {
+// 					if (data.knowledgeList !== null) {
+// 						data.knowledgeList.forEach((knowledge) => {
+// 							if (knowledge.knowledgeExercisesList !== null) {
+// 								knowledge.knowledgeExercisesList.forEach(function (exercises) {
+// 									exercises.answerUrl = '';
+// 								});
+// 							}
+// 						})
+// 					}
+// 				})
+// 			}
+// 			res.json({
+// 				err: !result.data.result,
+// 				code: result.data.responseCode,
+// 				msg: result.data.responseMessage,
+// 				totalCount: result.data.totalCount,
+// 				dataList: result.data.responseData
+// 			});
+// 		})
+// 		.catch(error => {
+// 			res.json({
+// 				err: true,
+// 				code: error.code,
+// 				msg: customerMessage[error.code]
+// 			});
+// 		});
+// });
 
 router.post('/question', (req, res, next) => {
 	let apiKey = 'addCourseQuestion';

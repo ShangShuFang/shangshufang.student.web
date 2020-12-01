@@ -1,16 +1,16 @@
 .suggest-option button {
     width: 163px;
     border: 1px solid #e2e5ec;
-    /* color: #595d6e; */
+    color: #595d6e;
     margin-bottom: 15px;
     margin-right: 10px;
 }
 
-.suggest-option button:hover {
-    background: #ff6700;
-    border-color: #ff6700;
-    color: #fff;
-}
+/*.suggest-option button:hover {*/
+/*    background: #ff6700;*/
+/*    border-color: #ff6700;*/
+/*    color: #fff;*/
+/*}*/
 
 .suggest-option .btn-brand {
     color: #ffffff;

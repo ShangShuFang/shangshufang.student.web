@@ -29,7 +29,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(5);
+            commonUtility.setNavActive(4);
             this.loadDirectionList();
             this.loadTechnologyCategoryList();
             this.loadTechnologyList();

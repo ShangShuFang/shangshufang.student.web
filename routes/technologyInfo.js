@@ -33,6 +33,33 @@ router.get('/data', function(req, res, next) {
     });
 });
 
+router.get('/using/company', (req, res, next) => {
+  const apiKey = 'usingTechnologyCompany';
+  const pageNumber = 1;
+  const pageSize = sysConfig.pageSize.twelve;
+  const technologyID = req.query.technologyID;
+  const parameters = [pageNumber, pageSize, technologyID];
+  const requestUri = encodeURI(buildUtils.buildRequestApiUri(apiKey, parameters));
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          totalCount:result.data.totalCount,
+          dataList: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
 router.get('/knowledge/list', function(req, res, next) {
   const apiKey = 'knowledgeList';
   const pageNumber = req.query.pageNumber;

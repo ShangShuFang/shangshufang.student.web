@@ -17,6 +17,7 @@ const app = new Vue({
             technologyMemo: ''
         },
         companyModel: {
+            totalCount: 0,
             dataList: []
         },
         topStudentModel: {
@@ -48,7 +49,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(2);
+            commonUtility.setNavActive(1);
             if (!this.checkParameter()) {
                 message.error(localMessage.PARAMETER_ERROR_TECHNOLOGY_ID);
                 return false;
@@ -90,12 +91,13 @@ const app = new Vue({
                 });
         },
         loadCompanyList: function() {
-            axios.get('/common/company/list/top')
+            axios.get(`/technology/info/using/company?technologyID=${this.commonModel.technologyID}`)
                 .then(res => {
                     if (res.data.err) {
                         message.error(localMessage.exception(res.data.code, res.data.msg));
                         return false;
                     }
+                    this.companyModel.totalCount = res.data.totalCount;
                     this.companyModel.dataList = res.data.dataList;
                 })
                 .catch(err => {

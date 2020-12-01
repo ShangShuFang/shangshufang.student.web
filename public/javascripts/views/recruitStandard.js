@@ -14,7 +14,7 @@ const register = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(7);
+            commonUtility.setNavActive(6);
             this.loadCompany();
         },
         loadCompany: function() {

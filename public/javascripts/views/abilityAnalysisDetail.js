@@ -67,10 +67,10 @@ $(document).ready(function () {
   function setMenuActive() {
     switch (model.source) {
       case SOURCE_MY:
-        commonUtility.setNavActive(4);
+        commonUtility.setNavActive(3);
         break;
       case SOURCE_OTHER:
-        commonUtility.setNavActive(5);
+        commonUtility.setNavActive(4);
         break;
     }
   }
@@ -125,6 +125,21 @@ $(document).ready(function () {
           return false;
         }
         if (result.studentInfo === null) {
+          let loginUser = commonUtility.getLoginUser();
+          if (commonUtility.isEmpty(loginUser)) {
+            return false;
+          }
+          $('.student-name').text(loginUser.fullName);
+          $('.student-university').text(loginUser.universityName);
+          $('.student-school').text(loginUser.schoolName);
+          $('.student-enrollment-year').text(loginUser.enrollmentYear.substr(0, 4) + '年');
+          $('.student-cellphone').text(loginUser.cellphone);
+          $('.student-email').text(loginUser.email);
+          if (commonUtility.isEmpty(loginUser.sex) || loginUser.sex === 'M') {
+            $('.student-sex').addClass('fa-male kt-font-primary');
+          } else {
+            $('.student-sex').addClass('fa-female kt-font-danger');
+          }
           return false;
         }
         $('.student-name').text(result.studentInfo.fullName);

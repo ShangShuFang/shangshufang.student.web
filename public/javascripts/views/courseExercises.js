@@ -26,7 +26,7 @@ const app = new Vue({
 	},
 	methods: {
 		initPage: function () {
-			commonUtility.setNavActive(2);
+			commonUtility.setNavActive(1);
 			this.loadExercises();
 		},
 		loadExercises: function () {
@@ -49,7 +49,7 @@ const app = new Vue({
 						this.isShow = false;
 						this.message = '没有查询到您的练习题！';
 						return false;
-					};
+					}
 
 					this.studentID = response.data.courseExercises.studentID;
 					this.courseID = response.data.courseExercises.courseID;
@@ -63,16 +63,32 @@ const app = new Vue({
 					if (response.data.courseExercises.createTime !== response.data.courseExercises.updateTime) {
 						this.submitTime = response.data.courseExercises.updateTime;
 					}
-					this.singleChoiceList = response.data.courseExercises.singleChoiceExercisesList;
-					this.multipleChoiceList = response.data.courseExercises.multipleChoiceExercisesList;
-					this.blankList = response.data.courseExercises.blankExercisesList;
-					this.programList = response.data.courseExercises.programExercisesList;
+					if (!commonUtility.isEmptyList(response.data.courseExercises.singleChoiceExercisesList)) {
+						this.singleChoiceList = response.data.courseExercises.singleChoiceExercisesList;
+					}
+
+					if (!commonUtility.isEmptyList(response.data.courseExercises.multipleChoiceExercisesList)) {
+						this.multipleChoiceList = response.data.courseExercises.multipleChoiceExercisesList;
+					}
+
+					if (!commonUtility.isEmptyList(response.data.courseExercises.blankExercisesList)) {
+						this.blankList = response.data.courseExercises.blankExercisesList;
+					}
+
+					if (!commonUtility.isEmptyList(response.data.courseExercises.programExercisesList)) {
+						this.programList = response.data.courseExercises.programExercisesList;
+					}
+
 					this.isShow = true;
-					this.multipleChoiceList.forEach((data) => {
-						if (data.selectedOption.length > 0) {
-							data.selectedOptionList = data.selectedOption.split(',');
-						}
-					});
+					if (!commonUtility.isEmptyList(this.multipleChoiceList)) {
+						this.multipleChoiceList.forEach((data) => {
+							if (!commonUtility.isEmpty(data.selectedOption) && data.selectedOption.length > 0) {
+								data.selectedOptionList = data.selectedOption.split(',');
+							} else {
+								data.selectedOptionList = [];
+							}
+						});
+					}
 				})
 				.catch(err => {
 					message.error(localMessage.NETWORK_ERROR);
@@ -120,10 +136,12 @@ const app = new Vue({
 					if (commonUtility.isEmpty(data.sourceCodeUrl)) {
 						data.noAnswer = true;
 						checkResult = false;
+					} else {
+						if (!(data.sourceCodeUrl.indexOf('http://') >= 0 || data.sourceCodeUrl.indexOf('https://') >= 0)) {
+							checkResult = false;
+						}
 					}
-					if (!(data.sourceCodeUrl.indexOf('http://') >= 0 || data.sourceCodeUrl.indexOf('https://') >= 0)) {
-						checkResult = false;
-					}
+
 				});
 			}
 

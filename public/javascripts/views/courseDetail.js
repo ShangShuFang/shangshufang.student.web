@@ -136,7 +136,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(2);
+            commonUtility.setNavActive(1);
             if (!this.checkParameter()) {
                 message.error(localMessage.PARAMETER_ERROR);
                 return false;
@@ -462,6 +462,7 @@ const app = new Vue({
         },
         
         checkLoginUserIsAppliedCourse: function(loadExercisesCallback, pageNumber, dataStatus) {
+            let that = this;
             axios.get('/course/detail/check/applied'
                     .concat(`?studentID=${this.commonModel.loginUser.studentID}`)
                     .concat(`&universityCode=${this.commonModel.universityCode}`)
@@ -474,7 +475,6 @@ const app = new Vue({
                     }
                     this.commonModel.applied = res.data.result;
                     if (!res.data.result) {
-                        this.courseOtherExercisesModel.isShow = false;
                         return false;
                     }
                     loadExercisesCallback(pageNumber, dataStatus);

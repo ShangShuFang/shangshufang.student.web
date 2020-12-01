@@ -90,7 +90,7 @@
       <div class="kt-portlet__body">
         <div class="row">
           <div class="col-md-2" v-for="company in companyModel.dataList">
-            <img :src="company.brand" alt="">
+            <img :src="company.companyLogo" alt="">
           </div>
         </div>
       </div>
@@ -135,13 +135,7 @@
                 <span class="kt-align-center learning-processing">学习进度</span>
               </th>
               <th class="kt-datatable__cell kt-datatable__cell--sort">
-                <span class="kt-align-center kt-align-center exercises_count">完成练习数量</span>
-              </th>
-              <th class="kt-datatable__cell kt-datatable__cell--sort">
-                <span class="kt-align-center once-compilation-success-rate">一次性编译通过率</span>
-              </th>
-              <th class="kt-datatable__cell kt-datatable__cell--sort">
-                <span class="kt-align-center once-run-success-rate">一次性运行正确率</span>
+                <span class="kt-align-center kt-align-center exercises_count">排名</span>
               </th>
             </tr>
             </thead>
@@ -151,15 +145,15 @@
                 <span class="student-name">
                   <div class="kt-user-card-v2">
                     <div class="kt-user-card-v2__pic">
-                      <a href="javascript:" target="_blank">
+                      <a :href="'/ability/analysis/detail?s=o&universityCode=0&schoolID=0&studentID=' + data.studentID" target="_blank">
                         <img class="kt-badge kt-badge--xl" :src="data.studentPhoto" alt="">
                       </a>
                     </div>
                     <div class="kt-user-card-v2__details">
+                      <span class="kt-user-card-v2__name" v-text="data.studentName"></span>
                       <span class="kt-user-card-v2__desc"
                             :class="{'ability-level-1': data.abilityLevel == 'L1', 'ability-level-2': data.abilityLevel == 'L2', 'ability-level-3': data.abilityLevel == 'L3', 'ability-level-4': data.abilityLevel == 'L4', 'ability-level-5': data.abilityLevel == 'L5', 'ability-level-6': data.abilityLevel == 'L6', 'ability-level-7': data.abilityLevel == 'L7', 'ability-level-8': data.abilityLevel == 'L8'}"
                             v-text="data.abilityLevel"></span>
-                      <span class="kt-user-card-v2__name" v-text="data.studentName"></span>
                     </div>
                   </div>
                 </span>
@@ -174,20 +168,14 @@
               <td class="kt-datatable__cell">
                 <div class="kt-widget__progress learning-processing">
                   <div class="progress">
-                    <div role="progressbar" class="progress-bar kt-bg-success" :style="{'width': data.finishKnowledgePercent + '%'}">
+                    <div role="progressbar" class="progress-bar kt-bg-success" :style="{'width': data.finishedKnowledgePercent + '%'}">
                     </div>
-                    <span class="kt-block-center" v-text="data.finishKnowledgePercent + '%'"></span>
+                    <span class="kt-block-center" v-text="data.finishedKnowledgePercent + '%'"></span>
                   </div>
                 </div>
               </td>
               <td class="kt-datatable__cell">
-                <span class="kt-align-center exercises_count" v-text="data.finishKnowledgeCount"></span>
-              </td>
-              <td class="kt-datatable__cell">
-                <span class="kt-align-center  once-compilation-success-rate" v-text="data.onceCompilationSuccessRate + '%'"></span>
-              </td>
-              <td class="kt-datatable__cell">
-                <span class="kt-align-center  once-run-success-rate" v-text="data.onceRunSuccessRate + '%'"></span>
+                <span>超过站内<span class="kt-align-center" v-text="data.positionSite + '%'"></span>的同学</span>
               </td>
             </tr>
             </tbody>
@@ -222,7 +210,6 @@
               <th class="knowledge">知识点</th>
               <th class="phase">所属阶段</th>
               <th class="exercises-count">练习题数量</th>
-              <th class="using-count">使用企业</th>
             </tr>
           </thead>
           <tbody>
@@ -231,10 +218,7 @@
               <td class="knowledge" v-text="data.knowledgeName"></td>
               <td class="phase" v-text="data.learningPhaseName"></td>
               <td class="exercises-count">
-                共有<span v-text="data.knowledgeExercisesCount"></span>道练习题
-              </td>
-              <td class="using-count">
-                共有<span v-text="data.usingCompanyCount"></span>家企业使用该知识点
+                共有<span v-text="data.choiceExercisesCount + data.blankExercisesCount + data.programExercisesCount + data.customChoiceExercisesCount + data.customBlankExercisesCount + data.customProgramExercisesCount"></span>道练习题
               </td>
             </tr>
           </tbody>
