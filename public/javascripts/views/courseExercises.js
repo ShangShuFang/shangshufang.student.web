@@ -183,7 +183,7 @@ const app = new Vue({
 		getProgramAnswerJson: function () {
 			let programAnswerList = [];
 			this.programList.forEach((data) => {
-				if (data.sourceCodeUrl !== data.originalSourceCodeUrl) {
+				if (data.correctResult === 'W' || data.correctResult === 'R') {
 					programAnswerList.push({
 						courseExercisesDetailID: data.courseExercisesDetailID,
 						sourceCodeUrl: data.sourceCodeUrl,

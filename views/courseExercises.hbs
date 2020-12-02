@@ -212,7 +212,7 @@
 							</label>
 						</div>
             <div>
-              <a href="javascript:" v-if="program.correctResult == 'R' || program.correctResult == 'Y'" class="kt-link kt-link--brand" @click="showMarkHistoryDialog(program)">
+              <a href="javascript:" v-if="program.correctResult != 'P'" class="kt-link kt-link--brand" @click="showMarkHistoryDialog(program)">
                 <i class="fa fa-search"></i>
                 批改历史
               </a>
