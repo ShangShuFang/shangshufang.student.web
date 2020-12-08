@@ -104,7 +104,8 @@
       "companyUsingKnowledge": "/api/v1/customer/company/list/using/knowledge/client",
       "studentCourseExercises": "api/v1/course/exercises/any",
       "markCourseExercises": "api/v1/course/exercises/mark",
-      "programReviewList": "/api/v1/course/exercises/list/review/program"
+      "programReviewList": "/api/v1/course/exercises/list/review/program",
+      "addThirdPartyService": "/api/v1/thirdParty/service/add"
     }
   }
 }

@@ -3,6 +3,8 @@ let axios = require('axios');
 let dateUtils = require('../common/dateUtils');
 let buildUtils = require('../common/buildUtils');
 let customerMessage = require('../config/customerMessage');
+let smsUtils = require('../common/smsUtils');
+let sysConfig = require('../config/sysConfig.json');
 let router = express.Router();
 
 router.get('/university', (req, res, next) => {
@@ -133,29 +135,58 @@ router.get('/verificationCode/generate', (req, res, next) => {
 });
 
 router.post('/verificationCode/send', function (req, res, next) {
-  //TODO 调用阿里云，发送手机验证码
+  let cellphone = req.body.cellphone;
+  let code = req.body.verificationCode;
+  //发送短信验证码
+  smsUtils.sendVerificationCode(cellphone, code, (apiResponse) => {
+    //保存调用日志
+    let apiKey = 'addThirdPartyService';
+    let requestUri = buildUtils.buildRequestApiUri(apiKey);
+    axios.post(requestUri, {
+      serviceType: sysConfig.thirdPartyService.aliSms,
+      requestContent: JSON.stringify(apiResponse.reqContent),
+      responseContent: JSON.stringify(apiResponse.resContent),
+      result: apiResponse.result? 'Y' : 'N'
+    })
+    .then(response => {
+      if (apiResponse.result) {
+        //保存发送的验证码
+        let apiKey = 'saveVerificationCode';
+        let requestUri = buildUtils.buildRequestApiUri(apiKey);
 
-  //保存发送的手机验证码
-  let apiKey = 'saveVerificationCode';
-  let requestUri = buildUtils.buildRequestApiUri(apiKey);
-
-  axios.post(requestUri, {
-    systemFunction: req.body.systemFunction,
-    cellphone: req.body.cellphone,
-    code: req.body.verificationCode
-  })
-  .then(response => {
-    res.json({
-      err: !response.data.result,
-      code: response.data.responseCode,
-      msg: response.data.responseMessage
-    });
-  })
-  .catch(error => {
-    res.json({
-      err: true,
-      code: error.code,
-      msg: customerMessage[error.code]
+        axios.post(requestUri, {
+          systemFunction: req.body.systemFunction,
+          cellphone: req.body.cellphone,
+          code: req.body.verificationCode
+        })
+        .then(response => {
+          res.json({
+            err: !response.data.result,
+            code: response.data.responseCode,
+            msg: response.data.responseMessage
+          });
+        })
+        .catch(error => {
+          res.json({
+            err: true,
+            code: error.code,
+            msg: customerMessage[error.code]
+          });
+        });
+      } else {
+        res.json({
+          err: true,
+          code: '2C99',
+          msg: `验证码发送失败，原因：${apiResponse.resContent.message}`
+        });
+      }
+    })
+    .catch(error => {
+      res.json({
+        err: true,
+        code: error.code,
+        msg: customerMessage[error.code]
+      });
     });
   });
 });
