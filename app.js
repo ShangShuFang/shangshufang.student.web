@@ -17,8 +17,10 @@ let growingMapRouter = require('./routes/growingMap');
 let recruitStandardRouter = require('./routes/recruitStandard');
 let collectionRouter = require('./routes/collection');
 let comprehensiveExercisesRouter = require('./routes/comprehensiveExercises');
+let comprehensiveExercisesDetailRouter = require('./routes/comprehensiveExercisesDetail');
 let courseExercisesRouter = require('./routes/courseExercises');
 let comprehensiveCenterRouter = require('./routes/comprehensiveCenter');
+
 let projectCenterRouter = require('./routes/projectCenter');
 let qaCenterRouter = require('./routes/qaCenter');
 let myFollowRouter = require('./routes/myFollow');
@@ -57,6 +59,7 @@ app.use('/growing_map', growingMapRouter);
 app.use('/recruit_standard', recruitStandardRouter);
 app.use('/collection', collectionRouter);
 app.use('/exercises/comprehensive', comprehensiveExercisesRouter);
+app.use('/exercises/comprehensive/detail', comprehensiveExercisesDetailRouter);
 app.use('/course/exercises', courseExercisesRouter);
 app.use('/center/comprehensive', comprehensiveCenterRouter);
 app.use('/center/project', projectCenterRouter);

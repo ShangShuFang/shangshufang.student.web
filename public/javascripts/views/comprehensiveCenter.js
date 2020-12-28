@@ -2,16 +2,35 @@ const app = new Vue({
     el: '#app',
     data: {
         loginUser: commonUtility.getLoginUser(),
+        directionList: [
+            { directionCode: 1, directionName: '服务端' }
+            // { directionCode: 2, directionName: '前端' },
+            // { directionCode: 3, directionName: '数据库' },
+            // { directionCode: 4, directionName: '全栈' }
+        ],
+        selectedDirection: { directionCode: 0, directionName: '全部方向' },
 
-        directionList: [],
-        selectedDirection: { directionID: 0, directionName: '全部研发方向' },
-        categoryList: [],
-        selectedCategory: { technologyCategoryID: 0, technologyCategoryName: '全部技术分类' },
-        technologyList: [],
-        selectedTechnology: { technologyID: 0, technologyName: '全部研发技术' },
-        statusList: [],
+        programLanguageList: [
+            {languageCode: 1, languageName: 'Java'},
+            {languageCode: 2, languageName: 'Python'}
+        ],
+        selectedLanguage: {languageCode: 0, languageName: '全部语言'},
+
+        difficultyLevelList: [
+            { difficultyLevelCode: 1, difficultyLevelName: '入门' },
+            { difficultyLevelCode: 2, difficultyLevelName: '简单' },
+            { difficultyLevelCode: 3, difficultyLevelName: '中等' },
+            { difficultyLevelCode: 4, difficultyLevelName: '较难' },
+            { difficultyLevelCode: 5, difficultyLevelName: '困难' }
+        ],
+        selectedDifficultyLevel: { difficultyLevelCode: 0, difficultyLevelName: '全部级别' },
+
+        statusList: [
+            {statusCode: 'P', statusName: '待批改'},
+            {statusCode: 'Y', statusName: '正确'},
+            {statusCode: 'N', statusName: '错误'}
+        ],
         selectedStatus: { statusCode: 'NULL', statusName: '全部状态' },
-
 
         fromIndex: 0,
         toIndex: 0,
@@ -33,91 +52,88 @@ const app = new Vue({
     methods: {
         initPage: function() {
             commonUtility.setUserCenterActive();
-            this.loadDirectionList();
-            this.loadTechnologyCategoryList();
-            this.loadTechnologyList();
-            this.loadStatusList();
+            // this.loadDirectionList();
+            // this.loadTechnologyCategoryList();
+            // this.loadTechnologyList();
+            // this.loadStatusList();
             this.loadData();
         },
-        loadDirectionList: function() {
-            axios.get('/common/direction/list')
-                .then(res => {
-                    if (res.data.err) {
-                        message.error(localMessage.exception(res.data.code, res.data.msg));
-                        return false;
-                    }
-                    this.directionList = res.data.dataList;
-                })
-                .catch(err => {
-                    message.error(localMessage.NETWORK_ERROR);
-                });
-        },
-        loadTechnologyCategoryList: function() {
-            axios.get(`/common/technology/category/list?directionID=${this.selectedDirection.directionID}`)
-                .then(res => {
-                    if (res.data.err) {
-                        message.error(localMessage.exception(res.data.code, res.data.msg));
-                        return false;
-                    }
-                    this.categoryList = res.data.dataList;
-                })
-                .catch(err => {
-                    message.error(localMessage.NETWORK_ERROR);
-                });
-        },
-        loadTechnologyList: function() {
-            axios.get(`/common/technology/simple/list?directionID=${this.selectedDirection.directionID}&categoryID=${this.selectedCategory.technologyCategoryID}`)
-                .then(res => {
-                    if (res.data.err) {
-                        message.error(localMessage.exception(res.data.code, res.data.msg));
-                        return false;
-                    }
-                    this.technologyList = res.data.dataList;
-                })
-                .catch(err => {
-                    message.error(localMessage.NETWORK_ERROR);
-                });
-        },
-        loadStatusList: function() {
-            this.statusList.push({ statusCode: 'P', statusName: '未提交' });
-            this.statusList.push({ statusCode: 'A', statusName: '已提交' });
-        },
-        onFilterByDirection: function(direction) {
-            if ((direction === undefined && this.selectedDirection.directionID === 0) ||
-                (direction !== undefined && this.selectedDirection.directionID === direction.directionID)) {
+        //region delete code
+        // loadDirectionList: function() {
+        //     axios.get('/common/direction/list')
+        //         .then(res => {
+        //             if (res.data.err) {
+        //                 message.error(localMessage.exception(res.data.code, res.data.msg));
+        //                 return false;
+        //             }
+        //             this.directionList = res.data.dataList;
+        //         })
+        //         .catch(err => {
+        //             message.error(localMessage.NETWORK_ERROR);
+        //         });
+        // },
+        // loadTechnologyCategoryList: function() {
+        //     axios.get(`/common/technology/category/list?directionID=${this.selectedDirection.directionID}`)
+        //         .then(res => {
+        //             if (res.data.err) {
+        //                 message.error(localMessage.exception(res.data.code, res.data.msg));
+        //                 return false;
+        //             }
+        //             this.categoryList = res.data.dataList;
+        //         })
+        //         .catch(err => {
+        //             message.error(localMessage.NETWORK_ERROR);
+        //         });
+        // },
+        // loadTechnologyList: function() {
+        //     axios.get(`/common/technology/simple/list?directionID=${this.selectedDirection.directionID}&categoryID=${this.selectedCategory.technologyCategoryID}`)
+        //         .then(res => {
+        //             if (res.data.err) {
+        //                 message.error(localMessage.exception(res.data.code, res.data.msg));
+        //                 return false;
+        //             }
+        //             this.technologyList = res.data.dataList;
+        //         })
+        //         .catch(err => {
+        //             message.error(localMessage.NETWORK_ERROR);
+        //         });
+        // },
+        // loadStatusList: function() {
+        //     this.statusList.push({ statusCode: 'P', statusName: '未提交' });
+        //     this.statusList.push({ statusCode: 'A', statusName: '已提交' });
+        // },
+        //endregion
+
+        onFilterByDirection: function(code, name) {
+            if (this.selectedDirection.directionCode === code) {
                 return false;
             }
-            this.selectedDirection = direction === undefined ? { directionID: 0, directionName: '全部研发方向' } : { directionID: direction.directionID, directionName: direction.directionName };
-            this.selectedCategory = { technologyCategoryID: 0, technologyCategoryName: '全部技术分类' };
-            this.selectedTechnology = { technologyID: 0, technologyName: '全部研发方向' };
-            this.loadTechnologyCategoryList();
-            this.loadTechnologyList();
+            this.selectedDirection = { directionCode: code, directionName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
-        onFilterByCategory: function(category) {
-            if ((category === undefined && this.selectedCategory.technologyCategoryID === 0 ||
-                    (category !== undefined && this.selectedCategory.technologyCategoryID === category.technologyCategoryID))) {
+        onFilterByLanguage: function(code, name) {
+            if (this.selectedLanguage.languageCode === code) {
                 return false;
             }
-            this.selectedCategory = category === undefined ? { technologyCategoryID: 0, technologyCategoryName: '全部技术分类' } : { technologyCategoryID: category.technologyCategoryID, technologyCategoryName: category.technologyCategoryName };
-            this.selectedTechnology = { technologyID: 0, technologyName: '全部研发方向' };
-            this.loadTechnologyList();
+            this.selectedLanguage = { languageCode: code, languageName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
-        onFilterByTechnology: function(technology) {
-            if ((technology === undefined && this.selectedTechnology.technologyID === 0 ||
-                    (technology !== undefined && this.selectedTechnology.technologyID === technology.technologyID))) {
+        onFilterByDifficulty: function(code, name) {
+            if (this.selectedDifficultyLevel.difficultyLevelCode === code) {
                 return false;
             }
-            this.selectedTechnology = technology === undefined ? { technologyID: 0, technologyName: '全部研发方向' } : { technologyID: technology.technologyID, technologyName: technology.technologyName };
+            this.selectedDifficultyLevel = { difficultyLevelCode: code, difficultyLevelName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
-        onFilterByStatus: function(status) {
-            if ((status === undefined && this.selectedStatus.statusCode === 'NULL' ||
-                    (status !== undefined && this.selectedStatus.statusCode === status.statusCode))) {
+        onFilterByStatus: function(code, name) {
+            if (this.selectedStatus.statusCode === code) {
                 return false;
             }
-            this.selectedStatus = status === undefined ? { statusCode: 'NULL', statusName: '全部状态' } : { statusCode: status.statusCode, statusName: status.statusName };
+            this.selectedStatus = { statusCode: code, statusName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
         loadData: function() {
@@ -127,12 +143,12 @@ const app = new Vue({
                 state: 'primary',
                 message: '正在查询...'
             });
-            axios.get(`/center/comprehensive/list?`
-                    .concat(`pageNumber=${this.pageNumber}`)
+            axios.get(`/center/comprehensive/list`
+                    .concat(`?pageNumber=${this.pageNumber}`)
                     .concat(`&studentID=${this.loginUser.studentID}`)
-                    .concat(`&directionID=${this.selectedDirection.directionID}`)
-                    .concat(`&categoryID=${this.selectedCategory.technologyCategoryID}`)
-                    .concat(`&technologyID=${this.selectedTechnology.technologyID}`)
+                    .concat(`&directionCode=${this.selectedDirection.directionCode}`)
+                    .concat(`&programLanguage=${this.selectedLanguage.languageCode}`)
+                    .concat(`&difficultyLevelCode=${this.selectedDifficultyLevel.difficultyLevelCode}`)
                     .concat(`&dataStatus=${this.selectedStatus.statusCode}`))
                 .then(res => {
                     if (res.data.err) {
@@ -148,8 +164,8 @@ const app = new Vue({
                     this.paginationArray = res.data.dataContent.paginationArray;
                     this.prePageNum = res.data.dataContent.prePageNum === undefined ? -1 : res.data.dataContent.prePageNum;
                     this.nextPageNum = res.data.dataContent.nextPageNum === undefined ? -1 : res.data.dataContent.nextPageNum;
-                    this.fromIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_16 + 1;
-                    this.toIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_16 + res.data.dataContent.dataList.length;
+                    this.fromIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + 1;
+                    this.toIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + res.data.dataContent.dataList.length;
                     KTApp.unblockPage();
                 })
                 .catch(err => {

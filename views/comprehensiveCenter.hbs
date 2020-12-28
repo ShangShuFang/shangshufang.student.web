@@ -23,7 +23,7 @@
           <div class="kt-infobox">
             <div class="kt-infobox__body">
               <div class="row">
-                <div class="col-lg-2 border-right">
+                <div class="col-md-2 border-right">
                   <span class="kt-nav-title">能力中心</span>
                   <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v4">
                     <li class="kt-nav__item active">
@@ -78,7 +78,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="col-lg-10 kt-padding-l-15 kt-padding-r-15">
+                <div class="col-md-10 kt-padding-l-15 kt-padding-r-15">
                   <div class="row">
                     <div class="col-md-3">
                       <div class="dropdown form-dropdown">
@@ -87,9 +87,9 @@
                           <i class="flaticon2-down"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
-                          <a class="dropdown-item" href="javascript:;" @click="onFilterByDirection()">全部研发方向</a>
-                          <a v-for="data in directionList" class="dropdown-item" href="javascript:;"
-                            @click="onFilterByDirection(data)" v-text="data.directionName">
+                          <a class="dropdown-item" href="javascript:" @click="onFilterByDirection(0, '全部方向')">全部方向</a>
+                          <a v-for="data in directionList" class="dropdown-item" href="javascript:"
+                             @click="onFilterByDirection(data.directionCode, data.directionName)" v-text="data.directionName">
                           </a>
                         </div>
                       </div>
@@ -97,13 +97,13 @@
                     <div class="col-md-3">
                       <div class="dropdown form-dropdown">
                         <button type="button" class="btn btn-secondary" data-toggle="dropdown">
-                          <span v-text="selectedCategory.technologyCategoryName"></span>
+                          <span v-text="selectedLanguage.languageName"></span>
                           <i class="flaticon2-down"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
-                          <a class="dropdown-item" href="javascript:;" @click="onFilterByCategory()">全部技术分类</a>
-                          <a v-for="data in categoryList" class="dropdown-item" href="javascript:;"
-                            @click="onFilterByCategory(data)" v-text="data.technologyCategoryName">
+                          <a class="dropdown-item" href="javascript:" @click="onFilterByLanguage(0, '全部技术')">全部技术</a>
+                          <a v-for="language in programLanguageList" class="dropdown-item" href="javascript:"
+                             @click="onFilterByLanguage(language.languageCode, language.languageName)" v-text="language.languageName">
                           </a>
                         </div>
                       </div>
@@ -111,17 +111,18 @@
                     <div class="col-md-3">
                       <div class="dropdown form-dropdown">
                         <button type="button" class="btn btn-secondary" data-toggle="dropdown">
-                          <span v-text="selectedTechnology.technologyName"></span>
+                          <span v-text="selectedDifficultyLevel.difficultyLevelName"></span>
                           <i class="flaticon2-down"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
-                          <a class="dropdown-item" href="javascript:;" @click="onFilterByTechnology()">全部研发方向</a>
-                          <a v-for="data in technologyList" class="dropdown-item" href="javascript:;"
-                            @click="onFilterByTechnology(data)" v-text="data.technologyName">
+                          <a class="dropdown-item" href="javascript:" @click="onFilterByDifficulty(0, '全部级别')">全部级别</a>
+                          <a v-for="data in difficultyLevelList" class="dropdown-item" href="javascript:"
+                             @click="onFilterByDifficulty(data.difficultyLevelCode, data.difficultyLevelName)" v-text="data.difficultyLevelName">
                           </a>
                         </div>
                       </div>
                     </div>
+
                     <div class="col-md-3">
                       <div class="dropdown form-dropdown">
                         <button type="button" class="btn btn-secondary" data-toggle="dropdown">
@@ -129,113 +130,159 @@
                           <i class="flaticon2-down"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
-                          <a class="dropdown-item" href="javascript:;" @click="onFilterByStatus()">全部状态</a>
-                          <a v-for="data in statusList" class="dropdown-item" href="javascript:;"
-                            @click="onFilterByStatus(data)" v-text="data.statusName">
+                          <a class="dropdown-item" href="javascript:" @click="onFilterByStatus('NULL', '全部状态')">全部状态</a>
+                          <a v-for="data in statusList" class="dropdown-item" href="javascript:"
+                             @click="onFilterByStatus(data.statusCode, data.statusName)" v-text="data.statusName">
                           </a>
                         </div>
                       </div>
                     </div>
                   </div>
+
                   <div class="row kt-margin-t-25" v-if="totalCount == 0">
                     <div class="col-md-12 text-center">
                       未查询到满足条件的就业评测练习题
                     </div>
                   </div>
 
-                  <div class="row kt-margin-t-15" v-if="totalCount > 0">
-                    <div class="col-md-3" v-for="data in dataList">
-                      <div class="kt-portlet kt-portlet--height-fluid">
-                        <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">
-                          <img :src="data.technologyThumbnailRectangle" style="height: 90%; width: 100%" alt="">
-                        </div>
-                        <div class="kt-portlet__body kt-padding-15">
-                          <div class="kt-widget kt-widget--user-profile-2 ">
-                            <div class="kt-widget__body">
-                              <div class="kt-widget__item">
-                                <div class="kt-widget__contact">
-                                  <h6 :title="data.exercisesName" v-text="data.exercisesName" class="ellipsis"></h6>
-                                </div>
-                                <div class="kt-widget__contact">
-                                  <p :title="data.memo" class="kt-widget__data ellipsis-3" v-text="data.memo"></p>
-                                </div>
-                                <div class="kt-widget__contact kt-margin-b-10">
-                                  <div class="row width-full">
-                                    <div class="col-md-5">
-                                      <span class="kt-badge kt-badge--inline course-status "
-                                        :class="{'kt-badge--danger': data.dataStatus == 'P', 'kt-badge--success': data.dataStatus == 'A'}"
-                                        v-text="data.dataStatusText"></span>
-                                    </div>
-                                    <div class="col-md-7 kt-padding-0 kt-align-right">
-                                      <a :href="data.documentUrl" target="_blank">查看文档</a>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="kt-widget__contact">
-                                  <div
-                                    class="alert alert-solid-warning alert-bold kt-margin-b-0 kt-padding-5 width-full text-center"
-                                    role="alert">
-                                    <div class="alert-text">已被<span v-text="data.reviewCompanyCount"></span>家企业查看<span
-                                        v-text="data.reviewTotalCount"></span>次</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="kt-widget__footer kt-margin-t-5">
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <button type="button" class="btn btn-collect no-border" @click="onDelete(data)">
-                                    <i class="la la-trash"></i>
-                                    <span>删除</span></button>
-                                </div>
-                                <div class="col-md-7">
-                                  <button type="button" class="btn btn-primary" @click="onShowDialog(data)">
-                                    <i class="fab fa-github"></i>
-                                    提交作品
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                  <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded"
+                       style="margin: 0 auto" v-if="totalCount > 0">
+                    <table class="kt-datatable__table kt-datatable__row--hover table-hover" style="display: block;">
+                      <thead class="kt-datatable__head">
+                      <tr class="kt-datatable__row" style="left: 0;">
+                        <th class="kt-datatable__cell">
+                          <span style="width: 200px;">标题</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 180px;">考察点</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 100px;">就业方向</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 100px;">编程语言</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 100px;">难度</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 100px;">状态</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 100px;">操作</span>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody class="kt-datatable__body" style="">
+                      <tr class="kt-datatable__row" style="left: 0; height: 50px" v-for="data in dataList">
+                        <td class="kt-datatable__cell">
+                          <span style="width: 200px;" v-text="data.exercisesTitle"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 180px;" v-text="data.examKnowledge"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 100px;" v-text="data.examTypeText"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 100px;" v-text="data.programLanguageName"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 100px;" v-text="data.difficultyLevelText"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 100px">
+                            <span class="kt-badge kt-badge--inline kt-badge--pill"
+                                  :class="{'kt-badge--primary': data.dataStatus == 'P','kt-badge--success': data.dataStatus == 'Y','kt-badge--danger': data.dataStatus == 'N'}"
+                                  v-text="data.dataStatusText"></span>
+                          </span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 100px;">
+                            <a :href="'/exercises/comprehensive/detail?exercisesID='+data.exercisesID" target="_blank" class="kt-link kt-link--primary">
+                              <span v-if="data.dataStatus == 'P' || data.dataStatus == 'N'">修改</span>
+                              <span v-if="data.dataStatus == 'Y'">查看</span>
+                            </a>
+                          </span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                    <div class="kt-pagination kt-pagination--warning kt-pagination--circle kt-padding-25"
+                         v-if="totalCount > 0">
+                      <div class="kt-pagination__toolbar">
+                    <span class="pagination__desc">
+                      共有<span v-text="totalCount"></span>个满足条件的就业测评, 当前显示第<span
+                            v-text="fromIndex"></span>到第<span
+                            v-text="toIndex"></span>个测评
+                    </span>
                       </div>
+                      <ul class="kt-pagination__links">
+                        <li class="kt-pagination__link--first"
+                            :class="{'pagination-disabled': prePageNum == -1}">
+                          <a href="javascript:" @click="onFirstPage"><i
+                                  class="fa fa-angle-double-left kt-font-primary"></i></a>
+                        </li>
+                        <li class="kt-pagination__link--next"
+                            :class="{'pagination-disabled': prePageNum == -1}">
+                          <a href="javascript:" @click="onPrePage"><i
+                                  class="fa fa-angle-left kt-font-primary"></i></a>
+                        </li>
+
+                        <li v-for="pagination in paginationArray"
+                            :class="{'kt-pagination__link--active': pageNumber == pagination}">
+                          <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+                        </li>
+
+                        <li class="kt-pagination__link--prev"
+                            :class="{'pagination-disabled': nextPageNum == -1}">
+                          <a href="javascript:" @click="onNextPage"><i
+                                  class="fa fa-angle-right kt-font-primary"></i></a>
+                        </li>
+                        <li class="kt-pagination__link--last"
+                            :class="{'pagination-disabled': nextPageNum == -1}">
+                          <a href="javascript:" @click="onLastPage"><i
+                                  class="fa fa-angle-double-right kt-font-primary"></i></a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
 
-                  <div class="row" v-if="totalCount > 0">
-                    <div class="col-md-12">
-                      <div class="kt-pagination kt-pagination--warning kt-pagination--circle">
-                        <div class="kt-pagination__toolbar">
-                          <span class="pagination__desc">
-                            共收藏<span v-text="totalCount"></span>个就业测评，当前显示第<span v-text="fromIndex"></span>到第<span
-                              v-text="toIndex"></span>个测评习题
-                          </span>
-                        </div>
-                        <ul class="kt-pagination__links">
-                          <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">
-                            <a href="javascript:" @click="onFirstPage()">
-                              <i class="fa fa-angle-double-left kt-font-warning"></i>
-                            </a>
-                          </li>
-                          <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">
-                            <a href="javascript:" @click="onPrePage()">
-                              <i class="fa fa-angle-left kt-font-warning"></i>
-                            </a>
-                          </li>
-                          <li v-for="pagination in paginationArray"
-                            :class="{'kt-pagination__link--active': pageNumber == pagination}">
-                            <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
-                          </li>
-                          <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
-                            <a href="javascript:" @click="onNextPage()"><i class="fa fa-angle-right"></i></a>
-                          </li>
-                          <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
-                            <a href="javascript:" @click="onLastPage()"><i class="fa fa-angle-double-right"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+<!--                  <div class="row" v-if="totalCount > 0">-->
+<!--                    <div class="col-md-12">-->
+<!--                      <div class="kt-pagination kt-pagination--warning kt-pagination--circle">-->
+<!--                        <div class="kt-pagination__toolbar">-->
+<!--                          <span class="pagination__desc">-->
+<!--                            共收藏<span v-text="totalCount"></span>个就业测评，当前显示第<span v-text="fromIndex"></span>到第<span-->
+<!--                              v-text="toIndex"></span>个测评习题-->
+<!--                          </span>-->
+<!--                        </div>-->
+<!--                        <ul class="kt-pagination__links">-->
+<!--                          <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">-->
+<!--                            <a href="javascript:" @click="onFirstPage()">-->
+<!--                              <i class="fa fa-angle-double-left kt-font-warning"></i>-->
+<!--                            </a>-->
+<!--                          </li>-->
+<!--                          <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">-->
+<!--                            <a href="javascript:" @click="onPrePage()">-->
+<!--                              <i class="fa fa-angle-left kt-font-warning"></i>-->
+<!--                            </a>-->
+<!--                          </li>-->
+<!--                          <li v-for="pagination in paginationArray"-->
+<!--                            :class="{'kt-pagination__link--active': pageNumber == pagination}">-->
+<!--                            <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>-->
+<!--                          </li>-->
+<!--                          <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">-->
+<!--                            <a href="javascript:" @click="onNextPage()"><i class="fa fa-angle-right"></i></a>-->
+<!--                          </li>-->
+<!--                          <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">-->
+<!--                            <a href="javascript:" @click="onLastPage()"><i class="fa fa-angle-double-right"></i></a>-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
 
                 </div>
               </div>

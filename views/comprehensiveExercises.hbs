@@ -2,7 +2,6 @@
 <div id="app">
   <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid body-header">
     <div class="kt-container kt-grid__item kt-grid__item--fluid">
-
     </div>
   </div>
 
@@ -10,16 +9,16 @@
     <div class="kt-container kt-grid__item kt-grid__item--fluid">
       <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
         <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
-          <span class="filter-title">研发方向：</span>
+          <span class="filter-title">就业方向：</span>
           <ul class="kt-menu__nav ">
-            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedDirection.directionID == 0}">
-              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection()">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedDirection.directionCode == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection(0, '全部')">
                 <span class="kt-menu__link-text">全部</span>
               </a>
             </li>
             <li class="kt-menu__item" v-for="direction in directionList"
-              :class="{'kt-menu__item--here': selectedDirection.directionID == direction.directionID}">
-              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection(direction)">
+              :class="{'kt-menu__item--here': selectedDirection.directionCode == direction.directionCode}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDirection(direction.directionCode, direction.directionName)">
                 <span class="kt-menu__link-text" v-text="direction.directionName"></span>
               </a>
             </li>
@@ -32,39 +31,17 @@
     <div class="kt-container kt-grid__item kt-grid__item--fluid ">
       <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
         <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
-          <span class="filter-title">技术分类：</span>
+          <span class="filter-title">难度级别：</span>
           <ul class="kt-menu__nav ">
-            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedCategory.categoryID == 0}">
-              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory()">
+            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedDifficultyLevel.difficultyLevelCode == 0}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDifficulty(0, '全部')">
                 <span class="kt-menu__link-text">全部</span>
               </a>
             </li>
-            <li class="kt-menu__item" v-for="category in categoryList"
-              :class="{'kt-menu__item--here': selectedCategory.categoryID == category.technologyCategoryID}">
-              <a href="javascript:" class="kt-menu__link" @click="onFilterByCategory(category)">
-                <span class="kt-menu__link-text" v-text="category.technologyCategoryName"></span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kt-container--fluid kt-grid__item kt-grid__item--fluid category-3">
-    <div class="kt-container kt-grid__item kt-grid__item--fluid ">
-      <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" style="opacity: 1;">
-        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
-          <span class="filter-title">热点技术：</span>
-          <ul class="kt-menu__nav ">
-            <li class="kt-menu__item" :class="{'kt-menu__item--here': selectedTechnology.technologyID == 0}">
-              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology()">
-                <span class="kt-menu__link-text">全部</span>
-              </a>
-            </li>
-            <li class="kt-menu__item" v-for="technology in technologyList"
-              :class="{'kt-menu__item--here': selectedTechnology.technologyID == technology.technologyID}">
-              <a href="javascript:" class="kt-menu__link" @click="onFilterByTechnology(technology)">
-                <span class="kt-menu__link-text" v-text="technology.technologyName"></span>
+            <li class="kt-menu__item" v-for="level in difficultyLevelList"
+              :class="{'kt-menu__item--here': selectedDifficultyLevel.difficultyLevelCode == level.difficultyLevelCode}">
+              <a href="javascript:" class="kt-menu__link" @click="onFilterByDifficulty(level.difficultyLevelCode, level.difficultyLevelName)">
+                <span class="kt-menu__link-text" v-text="level.difficultyLevelName"></span>
               </a>
             </li>
           </ul>
@@ -85,75 +62,92 @@
 
     <div class="kt-margin-t-15">
       <div v-cloak class="text-center" v-if="totalCount == 0">未查询到满足条件的就业测评</div>
-      <div class="row" v-if="totalCount > 0">
-        <div class="col-md-3 col-sm-3 col-xl-3" v-for="data in dataList">
-          <div class="kt-portlet kt-portlet--height-fluid">
-            <div class="kt-portlet__head kt-portlet__head--noborder kt-padding-0">
-              <img :src="data.technologyThumbnailRectangle" alt="" style="width: 100%;">
-            </div>
-            <div class="kt-portlet__body kt-padding-10">
-              <div class="kt-widget kt-widget--user-profile-2 ">
-                <div class="kt-widget__body kt-margin-b-10">
-                  <div class="kt-widget__item">
-                    <div class="kt-widget__contact">
-                      <h5 class="ellipsis" :title="data.exercisesName" v-text="data.exercisesName"></h5>
-                    </div>
-                    <div class="kt-widget__contact">
-                      <span class="kt-widget__data ellipsis-4" :title="data.memo"
-                        v-text="data.memo"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="kt-widget__footer kt-margin-b-10">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <button type="button" class="btn btn-collect no-border" @click="onCollect(data)">
-                        <i class="la" :class="{'la-heart-o': !data.isCollected, 'la-heart kt-font-collect': data.isCollected}"></i> 
-                        <span v-if="data.isCollected" class="kt-font-collect">取消收藏</span>
-                        <span v-if="!data.isCollected">收藏</span>
-                      </button>
-                    </div>
-                    <div class="col-md-7">
-                      <a :href="data.documentUrl" target="_blank" class="btn btn-primary btn-lg btn-upper">
-                        <i class="fa fa-file-pdf"></i>
-                        查看文档
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+      <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded"
+           style="margin: 0 auto" v-if="totalCount > 0">
+        <table class="kt-datatable__table kt-datatable__row--hover table-hover" style="display: block;">
+          <thead class="kt-datatable__head">
+          <tr class="kt-datatable__row" style="left: 0;">
+            <th class="kt-datatable__cell">
+              <span style="width: 400px;">标题</span>
+            </th>
+            <th class="kt-datatable__cell">
+              <span style="width: 300px;">考察点</span>
+            </th>
+            <th class="kt-datatable__cell">
+              <span style="width: 150px;">就业方向</span>
+            </th>
+            <th class="kt-datatable__cell">
+              <span style="width: 150px;">难度</span>
+            </th>
+            <th class="kt-datatable__cell">
+              <span style="width: 200px;">操作</span>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="kt-datatable__body" style="">
+          <tr class="kt-datatable__row" style="left: 0; height: 50px" v-for="data in dataList">
+            <td class="kt-datatable__cell">
+              <span style="width: 400px;" v-text="data.exercisesTitle"></span>
+            </td>
+            <td class="kt-datatable__cell">
+              <span style="width: 300px;" v-text="data.examKnowledge"></span>
+            </td>
+            <td class="kt-datatable__cell">
+              <span style="width: 150px;" v-text="data.examTypeText"></span>
+            </td>
+            <td class="kt-datatable__cell">
+              <span style="width: 150px;" v-text="data.difficultyLevelText"></span>
+            </td>
+            <td class="kt-datatable__cell">
+              <span style="width: 200px;">
+                <a :href="'/exercises/comprehensive/detail?exercisesID='+data.exercisesID" target="_blank" class="kt-link kt-link--primary">去练习</a>
+              </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="kt-pagination kt-pagination--warning kt-pagination--circle kt-padding-25"
+             v-if="totalCount > 0">
+          <div class="kt-pagination__toolbar">
+                    <span class="pagination__desc">
+                      共有<span v-text="totalCount"></span>个满足条件的就业测评, 当前显示第<span
+                            v-text="fromIndex"></span>到第<span
+                            v-text="toIndex"></span>个测评
+                    </span>
           </div>
+          <ul class="kt-pagination__links">
+            <li class="kt-pagination__link--first"
+                :class="{'pagination-disabled': prePageNum == -1}">
+              <a href="javascript:" @click="onFirstPage"><i
+                      class="fa fa-angle-double-left kt-font-primary"></i></a>
+            </li>
+            <li class="kt-pagination__link--next"
+                :class="{'pagination-disabled': prePageNum == -1}">
+              <a href="javascript:" @click="onPrePage"><i
+                      class="fa fa-angle-left kt-font-primary"></i></a>
+            </li>
+
+            <li v-for="pagination in paginationArray"
+                :class="{'kt-pagination__link--active': pageNumber == pagination}">
+              <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+            </li>
+
+            <li class="kt-pagination__link--prev"
+                :class="{'pagination-disabled': nextPageNum == -1}">
+              <a href="javascript:" @click="onNextPage"><i
+                      class="fa fa-angle-right kt-font-primary"></i></a>
+            </li>
+            <li class="kt-pagination__link--last"
+                :class="{'pagination-disabled': nextPageNum == -1}">
+              <a href="javascript:" @click="onLastPage"><i
+                      class="fa fa-angle-double-right kt-font-primary"></i></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-
-    <div class="kt-pagination  kt-pagination--warning kt-pagination--circle" v-if="totalCount > 0">
-      <div class="kt-pagination__toolbar">
-        <span class="pagination__desc">
-          共查询到<span v-text="totalCount"></span>个满足条件的就业测评，当前显示第<span v-text="fromIndex"></span>到第<span
-                              v-text="toIndex"></span>个测评
-      </div>
-      <ul class="kt-pagination__links">
-        <li class="kt-pagination__link--first" :class="{'pagination-disabled': prePageNum == -1}">
-          <a href="javascript:" @click="onFirstPage"><i class="fa fa-angle-double-left kt-font-warning"></i></a>
-        </li>
-        <li class="kt-pagination__link--next" :class="{'pagination-disabled': prePageNum == -1}">
-          <a href="javascript:" @click="onPrePage"><i class="fa fa-angle-left kt-font-warning"></i></a>
-        </li>
-        <li v-for="pagination in paginationArray" :class="{'kt-pagination__link--active': pageNumber == pagination}">
-          <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
-        </li>
-        <li class="kt-pagination__link--prev" :class="{'pagination-disabled': nextPageNum == -1}">
-          <a href="javascript:" @click="onNextPage"><i class="fa fa-angle-right kt-font-warning"></i></a>
-        </li>
-        <li class="kt-pagination__link--last" :class="{'pagination-disabled': nextPageNum == -1}">
-          <a href="javascript:" @click="onLastPage"><i class="fa fa-angle-double-right kt-font-warning"></i></a>
-        </li>
-      </ul>
-    </div>
-
-
   </div>
 </div>
 <script>

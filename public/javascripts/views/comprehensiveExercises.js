@@ -1,17 +1,22 @@
 const app = new Vue({
     el: '#app',
     data: {
-        directionList: [],
-        selectedDirection: { directionID: 0, directionName: '全部' },
+        directionList: [
+            { directionCode: 1, directionName: '服务端' }
+            // { directionCode: 2, directionName: '前端' },
+            // { directionCode: 3, directionName: '数据库' },
+            // { directionCode: 4, directionName: '全栈' }
+        ],
+        selectedDirection: { directionCode: 0, directionName: '全部' },
 
-        categoryList: [],
-        selectedCategory: { categoryID: 0, categoryName: '全部' },
-
-        technologyList: [],
-        selectedTechnology: { technologyID: 0, technologyName: '全部' },
-
-        universityFilterList: [],
-        selectedUniversityFilter: { filterID: 0, filterName: '全部院校' },
+        difficultyLevelList: [
+            { difficultyLevelCode: 1, difficultyLevelName: '入门' },
+            { difficultyLevelCode: 2, difficultyLevelName: '简单' },
+            { difficultyLevelCode: 3, difficultyLevelName: '中等' },
+            { difficultyLevelCode: 4, difficultyLevelName: '较难' },
+            { difficultyLevelCode: 5, difficultyLevelName: '困难' }
+        ],
+        selectedDifficultyLevel: { difficultyLevelCode: 0, difficultyLevelName: '全部难度' },
 
         fromIndex: 0,
         toIndex: 0,
@@ -29,9 +34,6 @@ const app = new Vue({
     methods: {
         initPage: function() {
             commonUtility.setNavActive(5);
-            this.loadDirectionList();
-            this.loadTechnologyCategoryList();
-            this.loadTechnologyList();
             this.loadData();
         },
         loadDirectionList: function() {
@@ -84,9 +86,8 @@ const app = new Vue({
             let that = this;
             axios.get(`/exercises/comprehensive/list?`
                     .concat(`pageNumber=${this.pageNumber}`)
-                    .concat(`&directionID=${this.selectedDirection.directionID}`)
-                    .concat(`&categoryID=${this.selectedCategory.categoryID}`)
-                    .concat(`&technologyID=${this.selectedTechnology.technologyID}`))
+                    .concat(`&direction=${this.selectedDirection.directionCode}`)
+                    .concat(`&difficulty=${this.selectedDifficultyLevel.difficultyLevelCode}`))
                 .then(res => {
                     if (res.data.err) {
                         KTApp.unblockPage();
@@ -94,17 +95,17 @@ const app = new Vue({
                         return false;
                     }
 
-                    this.dataList = [];
+                    this.dataList = res.data.dataContent.dataList;
                     this.totalCount = res.data.dataContent.totalCount;
                     this.pageNumber = parseInt(res.data.dataContent.currentPageNum);
                     this.maxPageNumber = Math.ceil(res.data.dataContent.totalCount / res.data.dataContent.pageSize);
                     this.paginationArray = res.data.dataContent.paginationArray;
                     this.prePageNum = res.data.dataContent.prePageNum === undefined ? -1 : res.data.dataContent.prePageNum;
                     this.nextPageNum = res.data.dataContent.nextPageNum === undefined ? -1 : res.data.dataContent.nextPageNum;
-                    this.fromIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_16 + 1;
-                    this.toIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_16 + res.data.dataContent.dataList.length;
+                    this.fromIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + 1;
+                    this.toIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + res.data.dataContent.dataList.length;
 
-                    if (!commonUtility.isEmptyList(res.data.dataContent.dataList)) {
+                    if (!commonUtility.isEmpty(this.loginUser) && !commonUtility.isEmptyList(res.data.dataContent.dataList)) {
                         res.data.dataContent.dataList.forEach((data) => {
                             axios.get(`/exercises/comprehensive/check/collected?studentID=${this.loginUser.studentID}&exercisesID=${data.exercisesID}`)
                                 .then(checkRes => {
@@ -118,6 +119,7 @@ const app = new Vue({
                                 });
                         });
                     }
+
 
                     KTApp.unblockPage();
                 })
@@ -162,34 +164,28 @@ const app = new Vue({
             }
 
         },
-        onFilterByDirection: function(direction) {
-            if ((direction === undefined && this.selectedDirection.directionID === 0) ||
-                (direction !== undefined && this.selectedDirection.directionID === direction.directionID)) {
+        onFilterByDirection: function(code, name) {
+            if (this.selectedDirection.directionCode === code) {
                 return false;
             }
-            this.selectedDirection = direction === undefined ? { directionID: 0, directionName: '全部' } : { directionID: direction.directionID, directionName: direction.directionName };
-            this.selectedCategory = { categoryID: 0, categoryName: '全部' };
-            this.selectedTechnology = { technologyID: 0, technologyName: '全部' };
-            this.loadTechnologyCategoryList();
-            this.loadTechnologyList();
+            this.selectedDirection = { directionCode: code, directionName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
-        onFilterByCategory: function(category) {
-            if ((category === undefined && this.selectedCategory.categoryID === 0 ||
-                    (category !== undefined && this.selectedCategory.categoryID === category.technologyCategoryID))) {
+        onFilterByLanguage: function(code, name) {
+            if (this.programLanguage.languageCode === code) {
                 return false;
             }
-            this.selectedCategory = category === undefined ? { categoryID: 0, categoryName: '全部' } : { categoryID: category.technologyCategoryID, categoryName: category.technologyCategoryName };
-            this.selectedTechnology = { technologyID: 0, technologyName: '全部' };
-            this.loadTechnologyList();
+            this.programLanguage = { languageCode: code, languageName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
-        onFilterByTechnology: function(technology) {
-            if ((technology === undefined && this.selectedTechnology.technologyID === 0 ||
-                    (technology !== undefined && this.selectedTechnology.technologyID === technology.technologyID))) {
+        onFilterByDifficulty: function(code, name) {
+            if (this.selectedDifficultyLevel.difficultyLevelCode === code) {
                 return false;
             }
-            this.selectedTechnology = technology === undefined ? { technologyID: 0, technologyName: '全部' } : { technologyID: technology.technologyID, technologyName: technology.technologyName };
+            this.selectedDifficultyLevel = { difficultyLevelCode: code, difficultyLevelName: name };
+            this.pageNumber = 1;
             this.loadData();
         },
         onFirstPage: function() {
@@ -197,35 +193,35 @@ const app = new Vue({
                 return false;
             }
             this.pageNumber = 1;
-            this.loadStudentList();
+            this.loadData();
         },
         onPrePage: function() {
             if (this.pageNumber === 1) {
                 return false;
             }
             this.pageNumber--;
-            this.loadStudentList();
+            this.loadData();
         },
         onPagination: function(pageNumber) {
             if (this.pageNumber === pageNumber) {
                 return false;
             }
             this.pageNumber = pageNumber;
-            this.loadStudentList();
+            this.loadData();
         },
         onNextPage: function() {
             if (this.pageNumber === this.maxPageNumber) {
                 return false;
             }
             this.pageNumber++;
-            this.loadStudentList();
+            this.loadData();
         },
         onLastPage: function() {
             if (this.pageNumber === this.maxPageNumber) {
                 return false;
             }
             this.pageNumber = this.maxPageNumber;
-            this.loadStudentList();
+            this.loadData();
         }
     },
     mounted() {

@@ -12,15 +12,15 @@ router.get('/', function(req, res, next) {
 router.get('/list', (req, res, next) => {
     const apiKey = 'studentComprehensiveExercisesList';
     const pageNumber = req.query.pageNumber;
-    const pageSize = sysConfig.pageSize.sixteen;
+    const pageSize = sysConfig.pageSize.ten;
     const studentID = req.query.studentID;
-    const directionID = req.query.directionID;
-    const categoryID = req.query.categoryID;
-    const technologyID = req.query.technologyID;
+    const directionCode = req.query.directionCode;
+    const programLanguage = req.query.programLanguage;
+    const difficultyLevelCode = req.query.difficultyLevelCode;
     const dataStatus = req.query.dataStatus;
 
 
-    const parameters = [pageNumber, pageSize, studentID, directionID, categoryID, technologyID, dataStatus];
+    const parameters = [pageNumber, pageSize, studentID, directionCode, programLanguage, difficultyLevelCode, dataStatus];
     const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
     axios.get(requestUri)

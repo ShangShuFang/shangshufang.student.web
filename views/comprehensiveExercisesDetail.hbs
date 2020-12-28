@@ -1,0 +1,106 @@
+<div class="kt-container kt-grid__item kt-grid__item--fluid kt-margin-t-15" id="app">
+  <div class="kt-container kt-grid__item kt-grid__item--fluid ">
+    <div class="row">
+      <div class="col-md-6 kt-portlet">
+        <h4 class="text-center kt-margin-t-15" v-text="exercises.exercisesTitle"></h4>
+        <form class="kt-form kt-form--label-right">
+          <div class="kt-portlet__body">
+            <div class="form-group row">
+              <label class="col-md-2- col-form-label" style="width: 80px">考察方向：</label>
+              <div class="col-md-10">
+                <label v-text="exercises.examTypeText" class="col-form-label"></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2- col-form-label" style="width: 80px">考察点：</label>
+              <div class="col-md-10">
+                <label v-text="exercises.examKnowledge" class="col-form-label"></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2- col-form-label" style="width: 80px">难度级别：</label>
+              <div class="col-md-10">
+                <label v-text="exercises.difficultyLevelText" class="col-form-label"></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2- col-form-label" style="width: 80px">习题要求：</label>
+              <div class="col-md-10">
+                <p v-text="exercises.exercisesDescription" class="col-form-label kt-align-left pre-wrap"></p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6 kt-portlet">
+        <h4 class="text-center kt-margin-t-15">作品提交</h4>
+        <form class="kt-form kt-form--label-right">
+          <div class="kt-portlet__body">
+            <div class="form-group row">
+              <label class="col-md-2- col-form-label" style="width: 80px">开发语言：</label>
+              <div class="col-md-10">
+                <div class="kt-radio-inline">
+                  <label class="kt-radio">
+                    <input type="radio" name="lan" value="1" v-model="programLanguage"> Java
+                    <span></span>
+                  </label>
+                  <label class="kt-radio">
+                    <input type="radio" name="lan" value="2" v-model="programLanguage"> Python
+                    <span></span>
+                  </label>
+                </div>
+                <div v-cloak class="invalid-feedback" v-if="lanIsValid == true">请选择开发语言</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2- col-form-label" style="width: 80px">代码地址：</label>
+              <div class="col-md-10">
+                <input class="form-control" type="url" v-model="gitUrl" maxlength="500" placeholder="请填写代码所在的Git地址">
+                <div v-cloak class="invalid-feedback" v-if="gitUrlIsValid == true">请填写代码所在的Git地址</div>
+              </div>
+            </div>
+            <div class="form-group row" v-if="isShowResult == true">
+              <label class="col-md-2- col-form-label" style="width: 80px">批改结果：</label>
+              <div class="col-md-10">
+                <span class="kt-badge kt-badge--inline kt-badge--pill"
+                      :class="{'kt-badge--primary': correctResult == 'P','kt-badge--success': correctResult == 'Y','kt-badge--danger': correctResult == 'N'}"
+                      style="margin-top: 8px;" v-text="correctResultText"></span>
+              </div>
+            </div>
+            <div class="form-group row" v-if="isShowMemo == true">
+              <label class="col-md-2- col-form-label" style="width: 80px">批改评语：</label>
+              <div class="col-md-10">
+                <p class="col-form-label kt-align-left pre-wrap" v-text="correctMemo"></p>
+              </div>
+            </div>
+            <div class="kt-form__actions">
+              <div class="row">
+                <div class="col-form-label" style="width: 80px">
+                </div>
+                <div class="col-md-10">
+                  <button type="button" class="btn btn-wide btn-success" id="btnSubmit" @click="onSubmit()" :disabled="submitDisabled">
+                    <span v-text="submitText"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+</div>
+
+<input type="hidden" value="{{exercisesID}}" id="hidden_exercisesID"/>
+<script>
+  $(document).ready(function () {
+    commonUtility.appendScript('/javascripts/views/comprehensiveExercisesDetail.js');
+  });
+</script>

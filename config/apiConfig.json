@@ -65,8 +65,14 @@
       "addStudentCollection": "api/v1/student/collection/add",
       "deleteStudentCollection": "api/v1/student/collection/delete",
       "comprehensiveExercisesList": "api/v1/exercises/comprehensive/list",
-      "studentComprehensiveExercisesList": "api/v1/student/exercises/comprehensive/list",
+      "comprehensiveExercises": "api/v1/exercises/comprehensive/any",
+
+
+      "studentComprehensiveExercisesList": "api/v1/student/exercises/comprehensive/list/choose",
       "checkComprehensiveExercisesCollected": "api/v1/student/exercises/comprehensive/check/collected",
+
+      "getStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/any",
+
       "addStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/add",
       "changeStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/change",
       "deleteStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/delete",

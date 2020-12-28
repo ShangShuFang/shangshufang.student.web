@@ -13,13 +13,10 @@ router.get('/list', (req, res, next) => {
     const apiKey = 'comprehensiveExercisesList';
     const pageNumber = req.query.pageNumber;
     const pageSize = sysConfig.pageSize.ten;
-    const directionID = req.query.directionID;
-    const categoryID = req.query.categoryID;
-    const technologyID = req.query.technologyID;
+    const direction = req.query.direction;
+    const difficulty = req.query.difficulty;
     const dataStatus = 'A';
-
-
-    const parameters = [pageNumber, pageSize, directionID, categoryID, technologyID, dataStatus];
+    const parameters = [pageNumber, pageSize, direction, difficulty, dataStatus];
     const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
 
     axios.get(requestUri)
