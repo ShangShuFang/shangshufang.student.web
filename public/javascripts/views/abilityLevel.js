@@ -6,6 +6,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.levelStandard);
             this.setAbilityLevel();
         },
         setAbilityLevel: function() {

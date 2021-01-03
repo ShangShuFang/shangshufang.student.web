@@ -26,6 +26,7 @@ const app = new Vue({
         location.href = `/login??backUrl=/exercises/comprehensive/detail?exercisesID=${this.exercisesID}`;
         return false;
       }
+      tracking.view(trackingSetting.view.jobEvaluationDetail);
       commonUtility.setNavActive(5);
       this.loadData();
       this.loadResult();

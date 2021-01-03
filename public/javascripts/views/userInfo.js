@@ -43,6 +43,7 @@ const register = new Vue({
                 location.href = '/login';
                 return false;
             }
+            tracking.view(trackingSetting.view.myInformation);
             commonUtility.setUserCenterActive();
             this.studentName = this.loginUser.fullName;
             this.photo = commonUtility.isEmpty(this.loginUser.photo) ? this.defaultPhoto : this.loginUser.photo;

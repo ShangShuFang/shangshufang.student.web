@@ -49,6 +49,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.technologyDetail);
             commonUtility.setNavActive(1);
             if (!this.checkParameter()) {
                 message.error(localMessage.PARAMETER_ERROR_TECHNOLOGY_ID);

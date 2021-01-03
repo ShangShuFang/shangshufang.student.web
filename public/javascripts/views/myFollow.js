@@ -9,6 +9,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.myConcern);
             commonUtility.setUserCenterActive();
             this.loadCollectionList();
         },

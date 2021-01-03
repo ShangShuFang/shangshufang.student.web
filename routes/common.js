@@ -362,4 +362,34 @@ router.get('/company/list/top', (req, res, next) => {
     });
 });
 
+router.post('/tracking', (req, res, next) => {
+  let apiKey = 'addUserTracking';
+  let requestUri = buildUtils.buildRequestApiUri(apiKey);
+
+  axios.post(requestUri, {
+    cityIP: req.body.cityIP,
+    cityID: req.body.cityID,
+    cityName: req.body.cityName,
+    customer: req.body.customer,
+    device: req.body.device,
+    browser: req.body.browser,
+    systemID: req.body.systemID,
+    viewID: req.body.viewID
+  })
+  .then(response => {
+    res.json({
+      err: !response.data.result,
+      code: response.data.responseCode,
+      msg: response.data.responseMessage
+    });
+  })
+  .catch(error => {
+    res.json({
+      err: true,
+      code: error.code,
+      msg: customerMessage[error.code]
+    });
+  });
+});
+
 module.exports = router;

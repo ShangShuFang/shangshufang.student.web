@@ -14,8 +14,9 @@ const register = new Vue({
     },
     methods: {
         initPage: function() {
-            commonUtility.setNavActive(6);
-            this.loadCompany();
+          tracking.view(trackingSetting.view.wantStandard);
+          commonUtility.setNavActive(6);
+          this.loadCompany();
         },
         loadCompany: function() {
             let that = this;

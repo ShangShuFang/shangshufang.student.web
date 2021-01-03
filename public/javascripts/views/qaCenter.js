@@ -22,6 +22,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.myQuestion);
             commonUtility.setUserCenterActive();
             this.loadQuestionList();
             this.loadAnswerList();

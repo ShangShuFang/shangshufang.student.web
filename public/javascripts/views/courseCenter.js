@@ -11,10 +11,8 @@ const app = new Vue({
     selectedTechnology: {technologyID: 0, technologyName: '全部'},
     universityFilterList: [],
     selectedUniversityFilter: {filterID: 0, filterName: '全部院校'},
-
     courseFilterList: [],
     selectedCourseFilter: {filterID: 0, filterName: '全部课程'},
-
     fromIndex : 0,
     toIndex: 0,
     pageNumber: 1,
@@ -27,6 +25,7 @@ const app = new Vue({
   },
   methods: {
     initPage: function () {
+      tracking.view(trackingSetting.view.courseCenter);
       commonUtility.setNavActive(1);
       this.loadDirectionList();
       this.loadTechnologyCategoryList();

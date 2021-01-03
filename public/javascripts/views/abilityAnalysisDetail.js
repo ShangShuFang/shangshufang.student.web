@@ -87,6 +87,7 @@ $(document).ready(function () {
     }
     switch (model.source) {
       case SOURCE_MY:
+        tracking.view(trackingSetting.view.myGrade);
         model.isLogin = commonUtility.isLogin();
         if (!model.isLogin) {
           $('.kt-login-alert').removeClass('kt-hidden');
@@ -98,6 +99,7 @@ $(document).ready(function () {
         model.studentID = model.loginUser.studentID;
         break;
       case SOURCE_OTHER:
+        tracking.view(trackingSetting.view.gradeInfo);
         model.universityCode = commonUtility.getUriParameter('universityCode');
         model.schoolID = commonUtility.getUriParameter('schoolID');
         model.studentID = commonUtility.getUriParameter('studentID');

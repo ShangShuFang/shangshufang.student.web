@@ -29,6 +29,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.otherGrade);
             commonUtility.setNavActive(4);
             this.loadDirectionList();
             this.loadTechnologyCategoryList();

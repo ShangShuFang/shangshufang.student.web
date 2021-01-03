@@ -132,7 +132,7 @@ commonUtility.getUriParameter = function(name) {
     return value;
 };
 
-commonUtility.getIpAddress = function() {
+commonUtility.getClientObject = function() {
     return {
         city_ip: returnCitySN["cip"],
         city_id: returnCitySN["cid"],

@@ -7,6 +7,7 @@ const app = new Vue({
   },
   methods: {
     initPage: function () {
+      tracking.view(trackingSetting.view.growthMap);
       commonUtility.setNavActive(2);
       this.loadGrowingList();
     },

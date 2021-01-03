@@ -51,6 +51,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.myJobEvaluation);
             commonUtility.setUserCenterActive();
             // this.loadDirectionList();
             // this.loadTechnologyCategoryList();

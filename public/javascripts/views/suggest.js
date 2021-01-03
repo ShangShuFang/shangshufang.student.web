@@ -11,6 +11,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.feedback);
             if (commonUtility.isLogin()) {
                 this.loginUserID = commonUtility.getLoginUser().studentID;
             }

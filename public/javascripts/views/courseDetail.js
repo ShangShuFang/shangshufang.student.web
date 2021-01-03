@@ -136,6 +136,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.courseDetail);
             commonUtility.setNavActive(1);
             if (!this.checkParameter()) {
                 message.error(localMessage.PARAMETER_ERROR);

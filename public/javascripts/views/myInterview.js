@@ -5,6 +5,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.myInterview);
             commonUtility.setUserCenterActive();
         }
     },

@@ -33,6 +33,7 @@ const app = new Vue({
     },
     methods: {
         initPage: function() {
+            tracking.view(trackingSetting.view.jobEvaluation);
             commonUtility.setNavActive(5);
             this.loadData();
         },
@@ -105,20 +106,20 @@ const app = new Vue({
                     this.fromIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + 1;
                     this.toIndex = res.data.dataContent.dataList === null ? 0 : (this.pageNumber - 1) * Constants.PAGE_SIZE.PAGE_SIZE_10 + res.data.dataContent.dataList.length;
 
-                    if (!commonUtility.isEmpty(this.loginUser) && !commonUtility.isEmptyList(res.data.dataContent.dataList)) {
-                        res.data.dataContent.dataList.forEach((data) => {
-                            axios.get(`/exercises/comprehensive/check/collected?studentID=${this.loginUser.studentID}&exercisesID=${data.exercisesID}`)
-                                .then(checkRes => {
-                                    if (!checkRes.data.err) {
-                                        data.isCollected = checkRes.data.isCollected;
-                                        that.dataList.push(data);
-                                    }
-                                })
-                                .catch(err => {
-                                    message.error(localMessage.NETWORK_ERROR);
-                                });
-                        });
-                    }
+                    // if (!commonUtility.isEmpty(this.loginUser) && !commonUtility.isEmptyList(res.data.dataContent.dataList)) {
+                    //     res.data.dataContent.dataList.forEach((data) => {
+                    //         axios.get(`/exercises/comprehensive/check/collected?studentID=${this.loginUser.studentID}&exercisesID=${data.exercisesID}`)
+                    //             .then(checkRes => {
+                    //                 if (!checkRes.data.err) {
+                    //                     data.isCollected = checkRes.data.isCollected;
+                    //                     that.dataList.push(data);
+                    //                 }
+                    //             })
+                    //             .catch(err => {
+                    //                 message.error(localMessage.NETWORK_ERROR);
+                    //             });
+                    //     });
+                    // }
 
 
                     KTApp.unblockPage();

@@ -41,21 +41,16 @@
       "codeStandard": "api/v1/code_standard/list",
       "addClassExercisesReview": "api/v1/course/exercises/review/add",
       "courseExercises": "api/v1/knowledge/exercises/list/assigned",
-
       "studentAbilityList": "/api/v1/analysis/ability/student/list",
-
       "studentAbilityResultSummary": "api/v1/analysis/ability/student/summary",
       "studentLearningTechnology": "api/v1/analysis/ability/student/list/technology",
       "studentAbility4knowledge": "api/v1/analysis/ability/student//any/technology",
       "studentAbility4codeStandard": "api/v1/analysis/ability/student/any/guideline",
       "exerciseAnalysis": "api/v1/analysis/ability/student/list/exercise_number",
       "exercisePercentAnalysis": "api/v1/analysis/ability/student/list/exercise_percent",
-
       "finishKnowledgeList": "/api/v1/analysis/ability/student/list/knowledge/learned",
       "weaknessKnowledgeList": "/api/v1/analysis/ability/student/list/knowledge/weakness",
       "noLearningKnowledgeList": "/api/v1/analysis/ability/student/list/knowledge/nolearn",
-
-
       "studentExercisesList": "api/v1/course/exercises/list/student/technology",
       "growingMapList": "api/v1/growing_map/list/map",
       "growingMap": "api/v1/growing_map/any/map",
@@ -66,13 +61,9 @@
       "deleteStudentCollection": "api/v1/student/collection/delete",
       "comprehensiveExercisesList": "api/v1/exercises/comprehensive/list",
       "comprehensiveExercises": "api/v1/exercises/comprehensive/any",
-
-
       "studentComprehensiveExercisesList": "api/v1/student/exercises/comprehensive/list/choose",
       "checkComprehensiveExercisesCollected": "api/v1/student/exercises/comprehensive/check/collected",
-
       "getStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/any",
-
       "addStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/add",
       "changeStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/change",
       "deleteStudentComprehensiveExercises": "api/v1/student/exercises/comprehensive/delete",
@@ -111,7 +102,8 @@
       "studentCourseExercises": "api/v1/course/exercises/any",
       "markCourseExercises": "api/v1/course/exercises/mark",
       "programReviewList": "/api/v1/course/exercises/list/review/program",
-      "addThirdPartyService": "/api/v1/thirdParty/service/add"
+      "addThirdPartyService": "/api/v1/thirdParty/service/add",
+      "addUserTracking": "api/v1/tracking/add"
     }
   }
 }

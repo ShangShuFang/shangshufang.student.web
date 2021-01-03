@@ -21,6 +21,7 @@ const register = new Vue({
                 location.href = '/login';
                 return false;
             }
+            tracking.view(trackingSetting.view.changePassword);
             commonUtility.setUserCenterActive();
         },
         checkPreChange: function() {

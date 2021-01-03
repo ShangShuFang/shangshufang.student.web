@@ -14,7 +14,7 @@ bizLogger.OPERATION_TYPE = {
 };
 
 bizLogger.logInfo = function (pageName, operationName, operationType, operationResult, memo) {
-  let ipAddress = commonUtility.getIpAddress();
+  let clientInfo = commonUtility.getClientObject();
   let browser = commonUtility.getBrowserName();
   let device = commonUtility.getDeviceName();
   let portal = 'T';
@@ -22,9 +22,9 @@ bizLogger.logInfo = function (pageName, operationName, operationType, operationR
 
   $.post('common/businessAnalyseLog',
     {
-      cityIP: ipAddress.city_ip,
-      cityID: ipAddress.city_id,
-      cityName: ipAddress.city_name,
+      cityIP: clientInfo.city_ip,
+      cityID: clientInfo.city_id,
+      cityName: clientInfo.city_name,
       browser: browser,
       portal: portal,
       device: device,
