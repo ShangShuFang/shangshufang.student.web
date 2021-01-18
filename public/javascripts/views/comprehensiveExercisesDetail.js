@@ -77,7 +77,7 @@ const app = new Vue({
             that.gitUrl = res.data.detail.gitUrl;
             that.correctResult = res.data.detail.dataStatus;
             that.correctResultText = res.data.detail.dataStatusText;
-            that.correctMemo = res.data.detail.memo;
+            that.correctMemo = res.data.detail.reviewMemo;
             that.isShowResult = true;
             that.isShowMemo = res.data.detail.dataStatus !== 'P';
             that.optionType = 'upd';
