@@ -41,14 +41,14 @@ const app = new Vue({
       let that = this;
       this.exercisesID = $('#hidden_exercisesID').val();
       axios.get(`/exercises/comprehensive/detail/data?`
-          .concat(`exercisesID=${this.exercisesID}`))
+          .concat(`exercisesID=${that.exercisesID}`))
           .then(res => {
             if (res.data.err) {
               KTApp.unblockPage();
               message.error(localMessage.exception(res.data.code, res.data.msg));
               return false;
             }
-            this.exercises = res.data.detail;
+            that.exercises = res.data.detail;
             KTApp.unblockPage();
           })
           .catch(err => {

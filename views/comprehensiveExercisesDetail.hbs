@@ -29,6 +29,17 @@
                 <p v-text="exercises.exercisesDescription" class="col-form-label kt-align-left pre-wrap"></p>
               </div>
             </div>
+            <div class="form-group row" v-if="exercises.documentUrl !== undefined && exercises.documentUrl.length > 0">
+              <label class="col-md-2- col-form-label" style="width: 80px">详细文档：</label>
+              <div class="col-md-10" >
+                <a :href="exercises.documentUrl"
+                   class="kt-link kt-link--danger"
+                   style="margin-top: 10px"
+                   target="_blank"
+                   v-text="exercises.documentUrl.substr(exercises.documentUrl.lastIndexOf('/')+1)"></a>
+              </div>
+            </div>
+
           </div>
         </form>
       </div>
@@ -104,16 +115,10 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </form>
       </div>
     </div>
-
-
-
-
   </div>
 
 </div>
