@@ -38,3 +38,42 @@
 .learning-percent-text{
   font-size: 1rem !important;
 }
+.comprehensive-total-count {
+  color: #2a2a3c;
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
+.comprehensive-submit-count {
+  /*color: #3d93fa;*/
+  font-weight: bolder;
+}
+.comprehensive-correct-count {
+  /*color: #0ec170;*/
+  font-weight: bolder;
+}
+.comprehensive-error-count {
+  /*color: #ca1010;*/
+  font-weight: bolder;
+}
+.comprehensive-not-submit-count {
+  /*color: #fd27eb;*/
+  font-weight: bolder;
+}
+.group-list {
+  margin-top: 15px;
+  border-bottom: 1px dashed #e6e6e6
+}
+.course_title {
+  font-size: 22px;
+  font-weight: bolder;
+  text-align: center;
+  margin: -8px auto 5px;
+}
+.alert.alert-solid-warning {
+  background: #ffb8221a !important;
+  border-color: #0000 !important;
+  color: #ffb822 !important;
+}
+.alert.alert-solid-warning .alert-text {
+  color: #ffb822 !important;
+}

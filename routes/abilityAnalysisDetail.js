@@ -321,4 +321,73 @@ router.get('/exercisePercentAnalysis', (req, res, next) => {
       });
 });
 
+router.get('/comprehensiveExercisesAnalysis', (req, res, next) => {
+  const apiKey = 'comprehensiveExercisesAnalysisList';
+  const parameters = [req.query.studentID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+router.get('/comprehensiveExercisesSubmitList', (req, res, next) => {
+  const apiKey = 'comprehensiveExercisesSubmitList';
+  const parameters = [req.query.studentID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
+router.get('/comprehensiveExercisesKnowledgeAnalysisList', (req, res, next) => {
+  const apiKey = 'comprehensiveExercisesKnowledgeAnalysisList';
+  const parameters = [req.query.studentID, req.query.technologyID];
+  const requestUri = buildUtils.buildRequestApiUri(apiKey, parameters);
+
+  axios.get(requestUri)
+      .then(result => {
+        res.json({
+          err: !result.data.result,
+          code: result.data.responseCode,
+          msg: result.data.responseMessage,
+          list: result.data.responseData
+        });
+      })
+      .catch(error => {
+        res.json({
+          err: true,
+          code: error.code,
+          msg: customerMessage[error.code]
+        });
+      });
+});
+
 module.exports = router;

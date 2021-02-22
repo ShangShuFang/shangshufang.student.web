@@ -61,7 +61,7 @@ $(document).ready(function () {
     }
     setMenuActive();
     loadStudentAbilitySummary();
-    loadLearningTechnologyList();
+    //loadLearningTechnologyList();
   }
 
   function setMenuActive() {
@@ -187,13 +187,15 @@ $(document).ready(function () {
         }
 
         $('.learning-technology-count').text(result.list.length);
+
         result.list.forEach(function (data) {
           $('div.technology-analysis-detail').append(
               `<div class="kt-portlet kt-portlet--collapse" data-technology-id="${data.technologyID}" data-language-id="${data.languageID}" data-ktportlet="true">
                 <div class="kt-portlet__head">
                   <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                      ${data.technologyName}
+                      ${data.technologyName} 
+                      （专业级别：<span style="font-size: 1.5rem !important; font-weight: bold !important; margin-left: 0.5rem; color: #e71e61;" class="technology${data.technologyID}-level">${data.abilityLevel}</span>, <span>超过站内<span class="position-site technology${data.technologyID}-position">${data.positionSite}%</span>的同学</span>）
                     </h3>
                   </div>
                   <div class="kt-portlet__head-toolbar">
@@ -206,15 +208,9 @@ $(document).ready(function () {
                 </div>
                 <div class="kt-portlet__body" kt-hidden-height="240" style="display: none; overflow: hidden; padding-top: 0px; padding-bottom: 0px;">
                   <div class="kt-widget12">
-                    <div class="kt-widget12__content">
+                    <div class="kt-widget12__content border-bottom">
+                      <h3 class="text-center">日常课程学习分析</h3>
                       <div class="kt-widget12__item">
-                        <div class="kt-widget12__info">
-                          <span class="kt-widget12__desc">专业能力</span>
-                          <span class="kt-widget12__value">
-                            <span class="ability-level technology${data.technologyID}-level">${data.abilityLevel}</span>
-                            <span>超过站内<span class="position-site technology${data.technologyID}-position">${data.positionSite}%</span>的同学</span>
-                          </span>
-                        </div>
                         <div class="kt-widget12__info">
                           <span class="kt-widget12__desc">学习完成度</span>
                           <div class="kt-widget12__progress">
@@ -242,12 +238,6 @@ $(document).ready(function () {
                           <div id="codeStandardAnalysis${data.technologyID}" style="height: 280px;"></div>
                         </div>
                       </div>
-                      <div class="kt-widget12__item">
-                        <div class="kt-widget12__info">
-                          <span class="kt-widget12__desc text-center">已完成综合练习累计数量</span>
-                          <div id="onlineAnswerAnalysis${data.technologyID}" style="max-height:300px;"></div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -264,6 +254,7 @@ $(document).ready(function () {
               if ($(rootElement).find(`#knowledgeAnalysis${model.technologyID}`).children().length === 0) {
                 loadKnowledgeAnalysis(model.technologyID);
                 loadCodeStandardAnalysis(model.languageID, model.technologyID);
+                // loadComprehensiveExercisesAnalysis();
               }
             } else {
               $(rootElement).addClass('kt-portlet--collapse');
@@ -421,7 +412,7 @@ $(document).ready(function () {
           message.error(localMessage.exception(result.code, result.msg));
           return false;
         }
-        $('#pending_knowledge_title').text(commonUtility.isEmptyList(result.list) ? `未掌握的知识点（0）` : `未掌握的知识点（${result.list.length}）`)
+        $('#pending_knowledge_title').text(commonUtility.isEmptyList(result.list) ? `未练习的知识点（0）` : `未练习的知识点（${result.list.length}）`)
         if (commonUtility.isEmptyList(result.list)) {
           if (noLearningKnowledgeModel.totalCount > 0) {
             $('.noLearning-knowledge-more').addClass('kt-hidden');
@@ -818,7 +809,7 @@ $(document).ready(function () {
           return false;
         }
         let data = [
-          {label: "未掌握", data: result.detail.noLearnKnowledgeCount, color: KTApp.getStateColor("brand")},
+          {label: "未练习", data: result.detail.noLearnKnowledgeCount, color: KTApp.getStateColor("brand")},
           {label: "已掌握", data: result.detail.finishedKnowledgePercent, color: KTApp.getStateColor("success")},
           {label: "练习中", data: result.detail.weaknessKnowledgeCount, color: KTApp.getStateColor("danger")}
         ];
