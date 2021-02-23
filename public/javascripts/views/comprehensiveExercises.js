@@ -2,10 +2,10 @@ const app = new Vue({
     el: '#app',
     data: {
         directionList: [
-            { directionCode: 1, directionName: '服务端' },
-            { directionCode: 2, directionName: '前端' },
+            { directionCode: 2, directionName: '服务端' },
+            { directionCode: 1, directionName: '前端' },
             // { directionCode: 3, directionName: '数据库' },
-            { directionCode: 4, directionName: '全栈' }
+            { directionCode: 10, directionName: '全栈' }
         ],
         selectedDirection: { directionCode: 0, directionName: '全部' },
 
