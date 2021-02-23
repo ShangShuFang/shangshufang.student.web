@@ -110,8 +110,8 @@ const app = new Vue({
 
                     if (!commonUtility.isEmptyList(res.data.dataContent.dataList)) {
                         res.data.dataContent.dataList.forEach((data) => {
-                            if (commonUtility.isEmpty(data.studentPhoto)) {
-                                data.studentPhoto = '/media/users/user_default.png';
+                            if (commonUtility.isEmpty(data.photo)) {
+                                data.photo = '/media/users/user_default.png';
                             }
                         });
                     }
