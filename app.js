@@ -75,7 +75,6 @@ app.use('/common', commonRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    collectionRouter
     next(createError(404));
 });
 
