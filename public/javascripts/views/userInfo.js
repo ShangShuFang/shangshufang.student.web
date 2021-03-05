@@ -55,6 +55,12 @@ const register = new Vue({
             }
             tracking.view(trackingSetting.view.myInformation);
             commonUtility.setUserCenterActive();
+            this.graduationDate = this.loginUser.graduationDate;
+            this.selfIntroductionUrl = this.loginUser.selfIntroductionUrl;
+            let level = this.educationLevelList.find((level) => level.levelID === this.loginUser.educationLevel);
+            if (!commonUtility.isEmpty(level)) {
+                this.selectEducationLevel = level;
+            }
             this.studentName = this.loginUser.fullName;
             this.photo = commonUtility.isEmpty(this.loginUser.photo) ? this.defaultPhoto : this.loginUser.photo;
             this.sex = this.loginUser.sex;
@@ -285,6 +291,12 @@ const register = new Vue({
             $('#form-control-video').trigger('click');
         },
         onVideoChange: function (e) {
+            KTApp.block('#portlet_content', {
+                overlayColor: '#000000',
+                type: 'v2',
+                state: 'primary',
+                message: '上传中...'
+            });
             let that = this;
             let uploadDir = { "dir1": "university", "dir2": this.loginUser.universityCode, "dir3": "student", "dir4": this.loginUser.studentID };
             let uploadUrl = commonUtility.buildSystemRemoteUri(Constants.UPLOAD_SERVICE_URI, uploadDir);
@@ -295,9 +307,11 @@ const register = new Vue({
             axios.post(uploadUrl, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                 .then(res => {
                     that.selfIntroductionUrl = res.data.fileUrlList[0];
+                    KTApp.unblock('#portlet_content');
                 })
                 .catch(err => {
                     message.error(localMessage.UPLOAD_FAILED);
+                    KTApp.unblock('#portlet_content');
                 });
         }
     },
