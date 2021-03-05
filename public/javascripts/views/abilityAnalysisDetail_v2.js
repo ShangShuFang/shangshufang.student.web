@@ -20,6 +20,7 @@ const app = new Vue({
     onlineQuestionCount: 0,
     onlineAnswerCount: 0,
     joinProjectCount: 0,
+    browseCount: 0,
     learningTechnologyList: [],
     learningAnalysisDetail: {},
     isShowCourseAnalysisDetail: false,
@@ -128,6 +129,7 @@ const app = new Vue({
           that.onlineQuestionCount = res.data.studentInfo.onlineQuestionCount
           that.onlineAnswerCount = res.data.studentInfo.onlineAnswerCount
           that.joinProjectCount = res.data.studentInfo.joinProjectCount
+          that.browseCount = res.data.studentInfo.browseCount
         }
       })
       .catch(err => {

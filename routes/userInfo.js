@@ -14,18 +14,21 @@ router.put('/change', (req, res, next) => {
     let requestUri = buildUtils.buildRequestApiUri(apiKey);
 
     axios.put(requestUri, {
-            studentID: req.body.studentID,
-            universityCode: req.body.universityCode,
-            schoolID: req.body.schoolID,
-            majorID: req.body.majorID,
-            fullName: req.body.fullName,
-            sex: req.body.sex,
-            birth: req.body.birth,
-            enrollmentYear: req.body.enrollmentYear,
-            cellphone: req.body.cellphone,
-            email: req.body.email,
-            photo: req.body.photo,
-            loginUser: req.body.loginUser
+          studentID: req.body.studentID,
+          universityCode: req.body.universityCode,
+          schoolID: req.body.schoolID,
+          majorID: req.body.majorID,
+          educationLevel: req.body.educationLevel,
+          fullName: req.body.fullName,
+          sex: req.body.sex,
+          birth: req.body.birth,
+          enrollmentYear: req.body.enrollmentYear,
+          graduationDate: req.body.graduationDate,
+          cellphone: req.body.cellphone,
+          email: req.body.email,
+          photo: req.body.photo,
+          selfIntroductionUrl: req.body.selfIntroductionUrl,
+          loginUser: req.body.loginUser
         })
         .then(response => {
             res.json({

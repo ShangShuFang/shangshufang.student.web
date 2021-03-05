@@ -11,7 +11,6 @@
         </div>
       </div>
     </div>
-
     <!-- end:: Hero -->
     <div class="kt-negative-spacing--8"></div>
 
@@ -79,9 +78,106 @@
 
                 </div>
                 <div class="col-lg-10 kt-padding-l-20 kt-padding-r-15">
-                  <div class="text-center">
-                    <h4>你还没有接到任何面试邀请</h4> 
-                    <p>多练、多问、多答疑，坚定目标，努力不懈，你一定行！</p> 
+                  <div class="text-center" v-if="totalCount === 0">
+                    <h4>你还没有接到任何面试邀请</h4>
+                    <p>多练、多问、多答疑，坚定目标，努力不懈，你一定行！</p>
+                  </div>
+                  <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded"
+                       style="margin: 0 auto" v-if="totalCount > 0">
+                    <table class="kt-datatable__table kt-datatable__row--hover table-hover" style="display: block;">
+                      <thead class="kt-datatable__head">
+                      <tr class="kt-datatable__row" style="left: 0;">
+                        <th class="kt-datatable__cell">
+                          <span style="width: 200px;">企业</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 140px;">面试时间</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 150px;">面试岗位</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 120px;">状态</span>
+                        </th>
+                        <th class="kt-datatable__cell">
+                          <span style="width: 200px;">操作</span>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody class="kt-datatable__body" style="">
+                      <tr class="kt-datatable__row" style="left: 0; height: 50px" v-for="data in dataList">
+                        <td class="kt-datatable__cell">
+                          <span style="width: 200px;" v-text="data.companyName"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 140px;" v-text="data.interviewTime"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 150px;" v-text="data.interviewJob"></span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                          <span style="width: 120px;">
+                            <span class="kt-badge kt-badge--inline"
+                                  :class="{'kt-badge--light': data.dataStatus == '1',
+                                            'kt-badge--primary': data.dataStatus == '2' || data.dataStatus == '7',
+                                            'kt-badge--brand': data.dataStatus == '3' || data.dataStatus == '4',
+                                            'kt-badge--danger': data.dataStatus == '5',
+                                            'kt-badge--success': data.dataStatus == '6' || data.dataStatus == '8',
+                                            'kt-badge--warning': data.dataStatus == '9'}"
+                                  v-text="data.dataStatusText">
+                            </span>
+                          </span>
+                        </td>
+                        <td class="kt-datatable__cell">
+                            <span style="width: 200px;">
+                              <button type="button" class="btn btn-default btn-sm"
+                                      @click="onShowDetail(data)">明细</button>
+                              <button type="button" class="btn btn-sm btn-success" @click="onAccept(data)" v-if="data.dataStatus == '2'">接受</button>
+                              <button type="button" class="btn btn-sm btn-danger" @click="onReject(data)" v-if="data.dataStatus == '2'">拒绝</button>
+                            </span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                    <div class="kt-pagination kt-pagination--warning kt-pagination--circle kt-padding-25"
+                         v-if="totalCount > 0">
+                      <div class="kt-pagination__toolbar">
+                        <span class="pagination__desc">
+                          共有<span v-text="totalCount"></span>条满足条件的数据, 当前显示第<span
+                                v-text="fromIndex"></span>到第<span
+                                v-text="toIndex"></span>条数据
+                        </span>
+                      </div>
+                      <ul class="kt-pagination__links">
+                        <li class="kt-pagination__link--first"
+                            :class="{'pagination-disabled': prePageNum == -1}">
+                          <a href="javascript:" @click="onFirstPage()"><i
+                                  class="fa fa-angle-double-left kt-font-primary"></i></a>
+                        </li>
+                        <li class="kt-pagination__link--next"
+                            :class="{'pagination-disabled': prePageNum == -1}">
+                          <a href="javascript:" @click="onPrePage()"><i
+                                  class="fa fa-angle-left kt-font-primary"></i></a>
+                        </li>
+
+                        <li v-for="pagination in paginationArray"
+                            :class="{'kt-pagination__link--active': pageNumber == pagination}">
+                          <a href="javascript:" v-text="pagination" @click="onPagination(pagination)"></a>
+                        </li>
+
+                        <li class="kt-pagination__link--prev"
+                            :class="{'pagination-disabled': nextPageNum == -1}">
+                          <a href="javascript:" @click="onNextPage()"><i
+                                  class="fa fa-angle-right kt-font-primary"></i></a>
+                        </li>
+                        <li class="kt-pagination__link--last"
+                            :class="{'pagination-disabled': nextPageNum == -1}">
+                          <a href="javascript:" @click="onLastPage()"><i
+                                  class="fa fa-angle-double-right kt-font-primary"></i></a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -90,11 +186,68 @@
         </div>
       </div>
     </div>
-
     <!-- end:: Section -->
 
     <!-- end:: Content -->
   </div>
+
+  <div class="modal fade" id="modal_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">面试通知</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="kt-form kt-form--label-right">
+            <div class="kt-portlet__body">
+              <div class="form-group row" style="margin-bottom: 0.5rem;">
+                <label class="col-2 col-form-label">公司名称</label>
+                <div class="col-10">
+                  <label class="col-10 col-form-label text-left" v-text="detailData.companyName"></label>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-bottom: 0.5rem;">
+                <label class="col-2 col-form-label">面试时间</label>
+                <div class="col-10">
+                  <label class="col-10 col-form-label text-left" v-text="detailData.interviewTime"></label>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-bottom: 0.5rem;">
+                <label class="col-2 col-form-label">面试岗位</label>
+                <div class="col-10">
+                  <label class="col-10 col-form-label text-left" v-text="detailData.interviewJob"></label>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-bottom: 0.5rem;">
+                <label class="col-2 col-form-label">面试地点</label>
+                <div class="col-10">
+                  <label class="col-10 col-form-label text-left" v-text="detailData.interviewAddress"></label>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-bottom: 0.5rem;">
+                <label class="col-2 col-form-label">备注信息</label>
+                <div class="col-10">
+                  <p class="col-10 col-form-label text-left pre-wrap" style="font-size: 1rem" v-text="detailData.memo"></p>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-bottom: 0.5rem;">
+                <label class="col-2 col-form-label">当前状态</label>
+                <div class="col-10">
+                  <label class="col-10 col-form-label text-left" v-text="detailData.dataStatusText">当前状态</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>

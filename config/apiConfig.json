@@ -109,6 +109,11 @@
       "studentCourseExercises": "api/v1/course/exercises/any",
       "markCourseExercises": "api/v1/course/exercises/mark",
       "programReviewList": "/api/v1/course/exercises/list/review/program",
+
+      "interviewList": "/api/v1/customer/talent/list/company",
+      "changeCompanyTalentStatus": "api/v1/customer/talent/change/status",
+
+
       "addThirdPartyService": "/api/v1/thirdParty/service/add",
       "addUserTracking": "api/v1/tracking/add"
     }

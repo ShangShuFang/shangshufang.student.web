@@ -16,6 +16,14 @@ const register = new Vue({
         showMajorAlert: false,
         majorAlertMessage: localMessage.NO_SELECT_MAJOR,
 
+        educationLevelList: [
+            {levelID: 1, levelName: '大专'},
+            {levelID: 2, levelName: '本科'},
+            {levelID: 3, levelName: '硕士'},
+            {levelID: 4, levelName: '博士'},
+        ],
+        selectEducationLevel: {levelID: 0, levelName: localMessage.NO_SELECT_EDUCATION_LEVEL},
+
         studentName: '',
         showStudentNameAlert: false,
         studentNameAlertMessage: localMessage.STUDENT_NAME_EMPTY,
@@ -30,10 +38,12 @@ const register = new Vue({
 
         birth: '',
         enrollmentYear: '',
+        graduationDate: '',
 
         email: '',
         showEmailAlert: false,
         emailAlertMessage: localMessage.EMAIL_INVALID,
+        selfIntroductionUrl: '',
 
         loginUser: commonUtility.getLoginUser()
     },
@@ -134,6 +144,9 @@ const register = new Vue({
             this.showMajorAlert = id === 0;
             this.selectedMajor = { majorID: id, majorName: name }
         },
+        onEducationLevelChange: function(id, name) {
+            this.selectEducationLevel = { levelID: id, levelName: name }
+        },
         checkPreChange: function() {
             let checkPass = true;
             this.showUniversityAlert = this.selectedUniversity.universityCode === 0;
@@ -176,13 +189,16 @@ const register = new Vue({
                 schoolName: this.selectedSchool.schoolName,
                 majorID: this.selectedMajor.majorID,
                 majorName: this.selectedMajor.majorName,
+                educationLevel: this.selectEducationLevel.levelID,
                 fullName: this.studentName,
                 sex: this.sex,
                 birth: this.birth,
                 enrollmentYear: this.enrollmentYear,
+                graduationDate: this.graduationDate,
                 cellphone: this.cellphone,
                 email: this.email,
                 photo: this.photo === this.defaultPhoto ? '' : this.photo,
+                selfIntroductionUrl: this.selfIntroductionUrl,
                 loginUser: this.loginUser.studentID
             };
             axios.put('/center/my/info/change', userInfo)
@@ -260,6 +276,25 @@ const register = new Vue({
             axios.post(uploadUrl, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                 .then(res => {
                     that.photo = res.data.fileUrlList[0];
+                })
+                .catch(err => {
+                    message.error(localMessage.UPLOAD_FAILED);
+                });
+        },
+        onUploadVideo: function () {
+            $('#form-control-video').trigger('click');
+        },
+        onVideoChange: function (e) {
+            let that = this;
+            let uploadDir = { "dir1": "university", "dir2": this.loginUser.universityCode, "dir3": "student", "dir4": this.loginUser.studentID };
+            let uploadUrl = commonUtility.buildSystemRemoteUri(Constants.UPLOAD_SERVICE_URI, uploadDir);
+
+            let file = e.target.files[0];
+            let formData = new FormData();
+            formData.append('file', file);
+            axios.post(uploadUrl, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                .then(res => {
+                    that.selfIntroductionUrl = res.data.fileUrlList[0];
                 })
                 .catch(err => {
                     message.error(localMessage.UPLOAD_FAILED);

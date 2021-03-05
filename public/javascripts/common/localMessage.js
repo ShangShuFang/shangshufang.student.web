@@ -8,6 +8,7 @@ localMessage.NO_ACCOUNT = '您输入的账号和密码不匹配';
 localMessage.NO_SELECT_UNIVERSITY = '请选择就读高校';
 localMessage.NO_SELECT_SCHOOL = '请选择所在二级学院';
 localMessage.NO_SELECT_MAJOR = '请选择所学专业';
+localMessage.NO_SELECT_EDUCATION_LEVEL = '请选择学历';
 localMessage.STUDENT_NAME_EMPTY = '请输入姓名';
 localMessage.CELLPHONE_EMPTY = '请输入手机号码';
 localMessage.CELLPHONE_INVALID = '请输入的内容不是正确的手机号码';
