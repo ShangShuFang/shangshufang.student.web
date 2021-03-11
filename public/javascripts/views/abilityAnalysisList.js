@@ -107,7 +107,7 @@ const app = new Vue({
                         message.error(localMessage.exception(res.data.code, res.data.msg));
                         return false;
                     }
-
+					//如果没有照片，则使用默认图片
                     if (!commonUtility.isEmptyList(res.data.dataContent.dataList)) {
                         res.data.dataContent.dataList.forEach((data) => {
                             if (commonUtility.isEmpty(data.photo)) {
